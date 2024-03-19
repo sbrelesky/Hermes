@@ -79,14 +79,14 @@ class EditInfoController: UIViewController, TextFieldValidation {
         }
         
         firstNameTextField.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+            make.top.equalToSuperview().offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(Constants.WidthMultipliers.textField)
             make.height.equalTo(Constants.Heights.textField)
         }
       
         phoneTextField.snp.makeConstraints { make in
-            make.top.equalTo(firstNameTextField.snp.bottom).offset(40)
+            make.top.equalTo(firstNameTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(firstNameTextField)
         }

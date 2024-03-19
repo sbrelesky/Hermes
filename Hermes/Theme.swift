@@ -27,7 +27,7 @@ struct ThemeManager {
         
 // let mainFont = Font.Style.main.font // Default size
 // let secondaryFont = Font.Style.secondary(weight: .bold).font // Default size
-// let customSizeFont = Font.Style.main.font.withSize(20) // Custom size
+// let customSizeFont = Font.Style.main.font.withDynamicSize(20) // Custom size
         
         static let defaultFontSize: CGFloat = 16
         static let placeholderFontSize: CGFloat = 33.0
@@ -79,5 +79,20 @@ struct ThemeManager {
             case bold
             case heavy
         }
+    }
+}
+
+extension UIFont {
+    func withDynamicSize(_ fontSize: CGFloat) -> UIFont {
+        guard let screenHeight = UIScreen.current?.bounds.height else {
+            return withSize(fontSize)
+        }
+        
+        let min = fontSize - (fontSize * 0.25)
+        
+        let adjustedSize = max(screenHeight * 0.00118 * fontSize, min)
+        
+        print("(\(fontSize) --- Adjusted Size: ", adjustedSize)
+        return withSize(adjustedSize)
     }
 }

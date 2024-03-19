@@ -13,7 +13,7 @@ class DateCheckoutCell: CheckoutCell {
     
     let timeLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(28.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(28.0)
         l.textColor = ThemeManager.Color.text
         l.text = "\(Constants.Text.operatingHours)"
         l.textAlignment = .left

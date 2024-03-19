@@ -20,7 +20,7 @@ class ButtonsCell: CompleteFillUpCell {
         let b = HermesButton(frame: .zero)
         b.setTitle("Calculate", for: .normal)
         b.addTarget(self, action: #selector(calculatePressed), for: .touchUpInside)
-        b.backgroundColor = ThemeManager.Color.yellow.withAlphaComponent(0.1)
+        b.backgroundColor = UIColor(hex: "#FEF8EB")
         b.setTitleColor(ThemeManager.Color.yellow, for: .normal)
         b.layer.borderWidth = 1
         b.layer.borderColor = ThemeManager.Color.yellow.cgColor

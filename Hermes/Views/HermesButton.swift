@@ -50,7 +50,7 @@ class HermesButton: UIButton {
     
     func commonInit() {
         backgroundColor = ThemeManager.Color.yellow
-        titleLabel?.font = ThemeManager.Font.Style.main.font.withSize(24.0)
+        titleLabel?.font = ThemeManager.Font.Style.main.font.withDynamicSize(24.0)
         setTitleColor(.white, for: .normal)
         layer.cornerRadius = cornerRadius
     }
@@ -88,6 +88,7 @@ class HermesButton: UIButton {
             layoutIfNeeded()
             self.originalWidth = bounds.width
             self.title = self.titleLabel?.text ?? ""
+            
         }
     }
 }

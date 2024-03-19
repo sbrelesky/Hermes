@@ -24,6 +24,8 @@ class MapViewController: BaseViewController {
     let date: Date
     var fillUps: [FillUp]?
     
+    var didInitialLoad = false
+    
     init(date: Date) {
         self.date = date
         super.init(nibName: nil, bundle: nil)
@@ -42,11 +44,18 @@ class MapViewController: BaseViewController {
         title =  "\(weekday) \(date.monthName()) \(day), \(year)"
         
         setupViews()
+        setFillUps()
+        
+        didInitialLoad = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setFillUps()
+        
+        if didInitialLoad {
+            setFillUps()
+        }
+        
     }
 
     func setupViews() {
@@ -64,19 +73,22 @@ class MapViewController: BaseViewController {
     private func setFillUps() {
         mapView.removeAnnotations(mapView.annotations)
         
-        fillUps = AdminManager.shared.groupedOpenFillUpsByDate[date]
+        fillUps = AdminManager.shared.getOpenFillUpsForDate(date)
+             
+        let dispatchGroup = DispatchGroup()
         
         fillUps?.enumerated().forEach { idx, fillUp in
+            dispatchGroup.enter()
             fillUp.address.convertToPlacemark { placemark in
                 guard let placemark = placemark else { return }
                 self.setMapLocation(placemark: placemark, fillUp: fillUp)
+                dispatchGroup.leave()
             }
         }
         
         
-        guard !mapView.annotations.isEmpty else { return }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        dispatchGroup.notify(queue: .main) {
+            guard !self.mapView.annotations.isEmpty else { return }
             self.mapView.fitAllAnnotations()
         }
     }

@@ -118,40 +118,40 @@ class SignUpController: UIViewController, TextFieldValidation {
         }
         
         firstNameTextField.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+            make.top.equalToSuperview().offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(Constants.WidthMultipliers.textField)
             make.height.equalTo(Constants.Heights.textField)
         }
         
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(firstNameTextField.snp.bottom).offset(40)
+            make.top.equalTo(firstNameTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(firstNameTextField)
         }
         
         phoneTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(40)
+            make.top.equalTo(emailTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(firstNameTextField)
         }
         
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(phoneTextField.snp.bottom).offset(40)
+            make.top.equalTo(phoneTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(firstNameTextField)
         }
         
         confirmPasswordTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(firstNameTextField)
         }
         
         createAccountButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.greaterThanOrEqualToSuperview().offset(-40)
-            make.top.greaterThanOrEqualTo(confirmPasswordTextField.snp.bottom).offset(40)
+            make.bottom.greaterThanOrEqualToSuperview().offset(-Constants.Padding.Vertical.textFieldSpacing)
+            make.top.greaterThanOrEqualTo(confirmPasswordTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
         }
         
         errorMessageLabel.snp.makeConstraints { make in

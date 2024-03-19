@@ -16,7 +16,7 @@ class TotalCheckoutView: UIView {
     
     let feeLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(28.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(28.0)
         l.textColor = ThemeManager.Color.text
         l.text = "Fill Up Fee"
         l.textAlignment = .left
@@ -26,7 +26,7 @@ class TotalCheckoutView: UIView {
     
     let totalLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(16.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(16.0)
         l.textColor = ThemeManager.Color.gray
         l.text = "Gas Estimate"
         l.textAlignment = .left
@@ -37,7 +37,7 @@ class TotalCheckoutView: UIView {
     
     let totalAmountLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(16.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(16.0)
         l.textColor = ThemeManager.Color.gray
         l.textAlignment = .left
         
@@ -46,7 +46,7 @@ class TotalCheckoutView: UIView {
     
     let feeAmountLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(28.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(28.0)
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .left
         

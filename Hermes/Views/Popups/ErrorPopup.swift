@@ -25,7 +25,7 @@ class ErrorPopup: PopupController {
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .center
         l.text = "Something went wrong"
-        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(22.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(22.0)
 
         return l
     }()

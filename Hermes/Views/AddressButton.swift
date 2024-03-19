@@ -23,7 +23,7 @@ class AddressButton: UIButton {
     
     let streetLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(22.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(22.0)
         l.textColor = ThemeManager.Color.text
         l.text = "Please Add an Address"
         l.textAlignment = .left
@@ -33,7 +33,7 @@ class AddressButton: UIButton {
     
     let subAddressLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(14.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(14.0)
         l.textColor = ThemeManager.Color.gray
         l.text = ""
         l.textAlignment = .left

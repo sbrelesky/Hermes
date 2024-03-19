@@ -43,7 +43,7 @@ class CompleteFillUpController: BaseViewController, TextFieldValidation {
     let nameLabel: UILabel = {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.text
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(18.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(18.0)
         l.textAlignment = .center
         
         return l
@@ -194,7 +194,6 @@ extension CompleteFillUpController: UITableViewDelegate, UITableViewDataSource {
             return screenHeight * 0.18
         case .buttons:
             return screenHeight * 0.25
-            
         default: return 0
         }
     }
@@ -258,8 +257,11 @@ extension CompleteFillUpController: ButtonCellDelegate, Calculations {
         // let weightOfGasUsed = (values.leftoverContainerStartWeight - values.leftoverContainerEndWeight).truncate(places: 2)
         // let gallonsUsed = (poundPerGallon / weightOfGasUsed).truncate(places: 2)
         
+        
+        // 2 * 3.52 *
         let pricePerContainer = Constants.gallonsPerContainer * values.pricePerGallon
         let weightUsed = (1.0 - (values.leftoverContainerEndWeight / values.leftoverContainerStartWeight)).truncate(places: 2)
+        
         let allFullContainerPrice = ((values.numberOfFullContainers * Constants.gallonsPerContainer) * values.pricePerGallon)
         let totalCost = (weightUsed * pricePerContainer) + allFullContainerPrice
         

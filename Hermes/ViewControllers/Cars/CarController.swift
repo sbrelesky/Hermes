@@ -24,7 +24,7 @@ class CarController: BaseViewController {
         tv.backgroundColor = ThemeManager.Color.gray.withAlphaComponent(0.4)
         tv.separatorStyle = .singleLine
         tv.allowsMultipleSelection = true
-        tv.clipsToBounds = false
+        tv.clipsToBounds = true
         
         return tv
     }()
@@ -51,7 +51,7 @@ class CarController: BaseViewController {
     
     let selectCarsLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(18.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(18.0)
         l.textColor = ThemeManager.Color.gray
         l.text = "Select the cars you'd like fill up"
         l.textAlignment = .left
@@ -121,6 +121,7 @@ class CarController: BaseViewController {
         
         tableView.register(CarTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = UITableView.automaticDimension
+        
         tableView.estimatedRowHeight = 120 // Set an estimated row height for better performance
         
         selectCarsLabel.snp.makeConstraints { make in
@@ -129,30 +130,31 @@ class CarController: BaseViewController {
             make.width.lessThanOrEqualToSuperview().multipliedBy(0.7)
         }
         
+        scheduleButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.greaterThanOrEqualToSuperview().offset(-Constants.Padding.Vertical.bottomSpacing)
+            make.top.greaterThanOrEqualTo(addNewCarLabel.snp.bottom).offset(-Constants.Padding.Vertical.bottomSpacing).priority(.required)
+        }
+        
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(selectCarsLabel.snp.bottom).offset(20)
             self.tableViewHeightConstraint = make.height.equalTo(0).constraint // Initially set height to 0
-            make.height.lessThanOrEqualToSuperview().multipliedBy(0.65)
+            make.height.lessThanOrEqualToSuperview().multipliedBy(0.6)
+            make.bottom.lessThanOrEqualTo(scheduleButton.snp.top).offset(-60)
         }
         
         addNewCarButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            //make.width.equalToSuperview().multipliedBy(0.25)
-            //make.height.equalTo(addNewCarButton.snp.width)
-            make.top.equalTo(tableView.snp.bottom).offset(40)
+            make.top.equalTo(tableView.snp.bottom).offset(20)
         }
         
         addNewCarLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(addNewCarButton.snp.bottom).offset(5)
+            make.bottom.lessThanOrEqualTo(scheduleButton.snp.top).offset(-20).priority(.required)
         }
-        
-        scheduleButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.greaterThanOrEqualToSuperview().offset(-40)
-            make.top.greaterThanOrEqualTo(addNewCarLabel.snp.bottom).offset(40)
-        }
+       
     }
     
     // Function to calculate and update the table view's height

@@ -28,6 +28,7 @@
 		3464D6A82BA6169200AAE7AD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464D6A72BA6169200AAE7AD /* MapViewController.swift */; };
 		3464D6AA2BA8975300AAE7AD /* AdminSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464D6A92BA8975300AAE7AD /* AdminSettingsController.swift */; };
 		3464D6AC2BA9013000AAE7AD /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464D6AB2BA9013000AAE7AD /* Calculations.swift */; };
+		3464D6AE2BAA0DDB00AAE7AD /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */; };
 		348D876B2B90F25D00F98745 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D876A2B90F25D00F98745 /* AppDelegate.swift */; };
 		348D876D2B90F25D00F98745 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D876C2B90F25D00F98745 /* SceneDelegate.swift */; };
 		348D87742B90F25E00F98745 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 348D87732B90F25E00F98745 /* Assets.xcassets */; };
@@ -153,6 +154,7 @@
 		3464D6A72BA6169200AAE7AD /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3464D6A92BA8975300AAE7AD /* AdminSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSettingsController.swift; sourceTree = "<group>"; };
 		3464D6AB2BA9013000AAE7AD /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
+		3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		348D87672B90F25D00F98745 /* Hermes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hermes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		348D876A2B90F25D00F98745 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		348D876C2B90F25D00F98745 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 				34BEA21F2B9F7C840038698A /* Double.swift */,
 				34BEA2272B9FB6ED0038698A /* Date.swift */,
 				34BEA26B2BA24C540038698A /* UserDefaults.swift */,
+				3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				34E3EFFF2B913F760085A239 /* LoginController.swift in Sources */,
 				348D876B2B90F25D00F98745 /* AppDelegate.swift in Sources */,
 				34E3F0922B96198D0085A239 /* DesertEmptyView.swift in Sources */,
+				3464D6AE2BAA0DDB00AAE7AD /* UIWindow.swift in Sources */,
 				340339B72B992DDB00044E77 /* SelectDateController.swift in Sources */,
 				3464D6A32BA4B3FB00AAE7AD /* ButtonsCell.swift in Sources */,
 				34BEA26C2BA24C540038698A /* UserDefaults.swift in Sources */,
@@ -930,6 +934,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -962,6 +967,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

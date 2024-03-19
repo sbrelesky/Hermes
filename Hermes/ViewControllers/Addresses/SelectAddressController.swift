@@ -84,7 +84,7 @@ class SelectAddressController: BaseViewController {
         
         scheduleButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.greaterThanOrEqualToSuperview().offset(-40)
+            make.bottom.greaterThanOrEqualToSuperview().offset(-Constants.Padding.Vertical.bottomSpacing)
         }
         
                 

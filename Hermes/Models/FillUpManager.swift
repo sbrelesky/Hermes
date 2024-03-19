@@ -66,10 +66,21 @@ class FillUpManager {
             case .success(let dates):
                 self.disabledFillUpDates = dates
                 
-//                let today = Date()
-//                if !self.disabledFillUpDates.contains(today){
-//                    self.disabledFillUpDates.append(today)
-//                }
+                // Get the current date and time
+                let currentDate = Date()
+
+                // Create a Calendar instance
+                let calendar = Calendar.current
+
+                // Get the current hour using the calendar
+                let currentHour = calendar.component(.hour, from: currentDate)
+
+                // Check if the current hour is after 10 PM (22:00)
+                if currentHour >= Constants.dateCutoffHour, let tomorrowDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
+                    if !self.disabledFillUpDates.contains(tomorrowDate){
+                        self.disabledFillUpDates.append(tomorrowDate)
+                    }
+                }
                 
                 completion(nil)
             case .failure(let error):

@@ -29,7 +29,7 @@ class CheckoutCell: UITableViewCell {
     
     let mainLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(31.0) //.secondary(weight: .demiBold).font.withSize(28.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(31.0) //.secondary(weight: .demiBold).font.withDynamicSize(28.0)
         l.textColor = ThemeManager.Color.text
         l.text = ""
         l.textAlignment = .left
@@ -39,7 +39,7 @@ class CheckoutCell: UITableViewCell {
     
     let subLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(21.0) //.secondary(weight: .demiBold).font.withSize(16.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(21.0) //.secondary(weight: .demiBold).font.withDynamicSize(16.0)
         l.textColor = ThemeManager.Color.gray
         l.text = ""
         l.textAlignment = .left

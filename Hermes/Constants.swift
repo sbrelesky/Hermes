@@ -13,6 +13,7 @@ struct Constants {
     static let availableZips = ["89002", "89011", "89012", "89014", "89015", "89044", "89052", "89074"]
     static let maxFillUpsPerDate: Int = 8
     static let gallonsPerContainer = 14.0
+    static let dateCutoffHour = 22 // 10 PM
     
     struct Text {
         static let operatingHours = "12am - 4am"
@@ -31,9 +32,16 @@ struct Constants {
         static let addressesSubCollection = "Addresses"
     }
     
+    struct Padding {
+        struct Vertical {
+            static var textFieldSpacing = 30.0
+            static var bottomSpacing = 40.0
+        }
+    }
+    
     struct Heights {
-        static let textField: CGFloat = 65.0
-        static let button: CGFloat = 60.0
+        static var textField: CGFloat = 65.0
+        static var button: CGFloat = 60.0
     }
     
     struct WidthMultipliers {

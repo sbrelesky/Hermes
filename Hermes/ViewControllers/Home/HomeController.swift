@@ -19,7 +19,7 @@ class HomeController: BaseViewController {
     
     let helloLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(20.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(20.0)
         l.textColor = ThemeManager.Color.text
         l.text = ""
         l.textAlignment = .left
@@ -36,7 +36,7 @@ class HomeController: BaseViewController {
     
     let orderInProgressLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(24.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(24.0)
         l.textColor = ThemeManager.Color.text
         l.text = "Fill Up Schedule"
         l.textAlignment = .left
@@ -69,7 +69,7 @@ class HomeController: BaseViewController {
     lazy var viewOrderButton: HermesButton = {
         let b = HermesButton(frame: .zero)
         b.setTitle("View Orders", for: .normal)
-        b.backgroundColor = ThemeManager.Color.yellow.withAlphaComponent(0.1)
+        b.backgroundColor = UIColor(hex: "#FEF8EB")
         b.setTitleColor(ThemeManager.Color.yellow, for: .normal)
         b.layer.borderWidth = 1
         b.layer.borderColor = ThemeManager.Color.yellow.cgColor
@@ -121,7 +121,7 @@ class HomeController: BaseViewController {
         
         scheduleButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-40)
+            make.bottom.equalToSuperview().offset(-Constants.Padding.Vertical.bottomSpacing)
         }
         
         viewOrderButton.snp.makeConstraints { make in
@@ -146,9 +146,9 @@ class HomeController: BaseViewController {
     private func setupTableView() {
         view.addSubview(orderInProgressLabel)
         view.addSubview(tableView)
-        
+                
         orderInProgressLabel.snp.makeConstraints { make in
-            make.top.equalTo(helloLabel.snp.bottom).offset(60)
+            make.top.equalTo(helloLabel.snp.bottom).offset(Constants.Padding.Vertical.bottomSpacing)
             make.leading.trailing.equalTo(scheduleButton)
         }
         
@@ -162,12 +162,12 @@ class HomeController: BaseViewController {
     private func setNameLabel() {
         guard let name = UserManager.shared.currentUser?.name else { return }
         let attributedGreeting = NSAttributedString(string: "\(!UserDefaults.standard.bool(forKey: Constants.UserDefaults.userFirstLogin) ? "Welcome Back" : "Hello")", attributes: [
-            .font: ThemeManager.Font.Style.secondary(weight: .regular).font.withSize(20.0),
+            .font: ThemeManager.Font.Style.secondary(weight: .regular).font.withDynamicSize(20.0),
             .foregroundColor: ThemeManager.Color.text
         ])
         
         let attributedName = NSAttributedString(string: ", \(name)!", attributes: [
-            .font: ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(20.0),
+            .font: ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(20.0),
             .foregroundColor: ThemeManager.Color.text
         ])
         
@@ -257,9 +257,7 @@ class HomeController: BaseViewController {
             }
         } else {
             mode = .default
-        }
-        
-        mode = .inProgress
+        }        
     }
 }
 

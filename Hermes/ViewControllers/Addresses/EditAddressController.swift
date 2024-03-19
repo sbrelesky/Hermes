@@ -25,7 +25,7 @@ class EditAddressController: BaseViewController, TextFieldValidation {
     
     let addressLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(22.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(22.0)
         l.textColor = ThemeManager.Color.text
         l.text = ""
         l.textAlignment = .left
@@ -35,7 +35,7 @@ class EditAddressController: BaseViewController, TextFieldValidation {
     
     let subAddressLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(14.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(14.0)
         l.textColor = ThemeManager.Color.gray
         l.text = ""
         l.textAlignment = .left
@@ -135,20 +135,20 @@ class EditAddressController: BaseViewController, TextFieldValidation {
         }
         
         apartmentTextField.snp.makeConstraints { make in
-            make.top.equalTo(line.snp.bottom).offset(30)
+            make.top.equalTo(line.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(mapView)
             make.width.equalToSuperview().multipliedBy(Constants.WidthMultipliers.textField)
             make.height.equalTo(Constants.Heights.textField)
         }
         
         entryCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(apartmentTextField.snp.bottom).offset(30)
+            make.top.equalTo(apartmentTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(mapView)
             make.height.width.equalTo(apartmentTextField)
         }
         
         buildingNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(entryCodeTextField.snp.bottom).offset(30)
+            make.top.equalTo(entryCodeTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(mapView)
             make.height.width.equalTo(apartmentTextField)
         }
