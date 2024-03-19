@@ -91,7 +91,7 @@ class CheckoutController: BaseViewController {
 
         checkoutButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.greaterThanOrEqualToSuperview().offset(-40)
+            make.bottom.greaterThanOrEqualToSuperview().offset(-Constants.Padding.Vertical.bottomSpacing)
         }
         
         totalView.snp.makeConstraints { make in

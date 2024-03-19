@@ -135,20 +135,20 @@ class EditAddressController: BaseViewController, TextFieldValidation {
         }
         
         apartmentTextField.snp.makeConstraints { make in
-            make.top.equalTo(line.snp.bottom).offset(30)
+            make.top.equalTo(line.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(mapView)
             make.width.equalToSuperview().multipliedBy(Constants.WidthMultipliers.textField)
             make.height.equalTo(Constants.Heights.textField)
         }
         
         entryCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(apartmentTextField.snp.bottom).offset(30)
+            make.top.equalTo(apartmentTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(mapView)
             make.height.width.equalTo(apartmentTextField)
         }
         
         buildingNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(entryCodeTextField.snp.bottom).offset(30)
+            make.top.equalTo(entryCodeTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(mapView)
             make.height.width.equalTo(apartmentTextField)
         }

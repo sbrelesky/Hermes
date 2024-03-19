@@ -81,3 +81,18 @@ struct ThemeManager {
         }
     }
 }
+
+extension UIFont {
+    func withDynamicSize(_ fontSize: CGFloat) -> UIFont {
+        guard let screenHeight = UIScreen.current?.bounds.height else {
+            return withSize(fontSize)
+        }
+        
+        let min = fontSize - 4.0
+        
+        let adjustedSize = max(screenHeight * 0.00118 * fontSize, min)
+        
+        print("(\(fontSize) --- Adjusted Size: ", adjustedSize)
+        return withSize(adjustedSize)
+    }
+}

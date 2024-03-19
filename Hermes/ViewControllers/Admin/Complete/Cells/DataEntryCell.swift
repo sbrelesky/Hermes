@@ -84,25 +84,25 @@ class DataEntryCell: CompleteFillUpCell, TextFieldValidation {
         }
         
         pricePerGallonTextField.snp.makeConstraints { make in
-            make.top.equalTo(fullContainersUsedTextField.snp.bottom).offset(30)
+            make.top.equalTo(fullContainersUsedTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(fullContainersUsedTextField)
             make.height.width.equalTo(fullContainersUsedTextField)
         }
                 
         leftoverGallonsStartTextField.snp.makeConstraints { make in
-            make.top.equalTo(pricePerGallonTextField.snp.bottom).offset(30)
+            make.top.equalTo(pricePerGallonTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(fullContainersUsedTextField)
             make.height.width.equalTo(fullContainersUsedTextField)
         }
         
         leftoverStartWeightTextField.snp.makeConstraints { make in
-            make.top.equalTo(leftoverGallonsStartTextField.snp.bottom).offset(30)
+            make.top.equalTo(leftoverGallonsStartTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(fullContainersUsedTextField)
             make.height.width.equalTo(fullContainersUsedTextField)
         }
         
         leftoverEndWeightTextField.snp.makeConstraints { make in
-            make.top.equalTo(leftoverStartWeightTextField.snp.bottom).offset(30)
+            make.top.equalTo(leftoverStartWeightTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.leading.equalTo(fullContainersUsedTextField)
             make.height.width.equalTo(fullContainersUsedTextField)
         }

@@ -24,7 +24,7 @@ class HomeFillUpCell: UITableViewCell {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.yellow
         l.textAlignment = .center
-        l.font = ThemeManager.Font.Style.main.font.withSize(20.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(20.0)
         l.text = "\(Constants.Text.operatingHours)"
         l.adjustsFontSizeToFitWidth = true
         
@@ -35,7 +35,7 @@ class HomeFillUpCell: UITableViewCell {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.yellow
         l.textAlignment = .center
-        l.font = ThemeManager.Font.Style.main.font.withSize(16.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(16.0)
         
         return l
     }()
@@ -44,7 +44,7 @@ class HomeFillUpCell: UITableViewCell {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.yellow
         l.textAlignment = .center
-        l.font = ThemeManager.Font.Style.main.font.withSize(16.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(16.0)
         
         return l
     }()
@@ -53,7 +53,7 @@ class HomeFillUpCell: UITableViewCell {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.yellow
         l.textAlignment = .center
-        l.font = ThemeManager.Font.Style.main.font.withSize(40.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(40.0)
         
         return l
     }()
@@ -148,7 +148,7 @@ class HomeFillUpCell: UITableViewCell {
                 let l = UILabel(frame: .zero)
                 l.textColor = ThemeManager.Color.text
                 l.textAlignment = .left
-                l.font = ThemeManager.Font.Style.main.font.withSize(40.0)
+                l.font = ThemeManager.Font.Style.main.font.withDynamicSize(40.0)
 
                 return l
             }()
@@ -157,7 +157,7 @@ class HomeFillUpCell: UITableViewCell {
                 let l = UILabel(frame: .zero)
                 l.textColor = ThemeManager.Color.gray
                 l.textAlignment = .left
-                l.font = ThemeManager.Font.Style.main.font.withSize(20.0)
+                l.font = ThemeManager.Font.Style.main.font.withDynamicSize(20.0)
                 
                 return l
             }()

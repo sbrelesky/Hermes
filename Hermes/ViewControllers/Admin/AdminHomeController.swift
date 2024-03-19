@@ -25,6 +25,7 @@ class AdminHomeController: BaseViewController {
        tv.dataSource = self
        tv.register(AdminFillUpCell.self, forCellReuseIdentifier: "cell")
        tv.separatorStyle = .singleLine
+       tv.showsVerticalScrollIndicator = false
        
        return tv
    }()
@@ -59,7 +60,7 @@ class AdminHomeController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+                
         tableView.reloadData()
     }
     
@@ -98,18 +99,13 @@ class AdminHomeController: BaseViewController {
 extension AdminHomeController: UITableViewDelegate, UITableViewDataSource, AdminHomeHeaderDelegate {
   
     func numberOfSections(in tableView: UITableView) -> Int {
-        return mode == .open ? AdminManager.shared.groupedOpenFillUpsByDate.keys.count : AdminManager.shared.groupedCompleteFillUpsByDate.keys.count
+        return mode == .open ? AdminManager.shared.openOrders.count : AdminManager.shared.completeOrders.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if mode == .open {
-            let key = Array(AdminManager.shared.groupedOpenFillUpsByDate.keys)[section]
-            return AdminManager.shared.groupedOpenFillUpsByDate[key]?.count ?? 0
-        } else {
-            let key = Array(AdminManager.shared.groupedCompleteFillUpsByDate.keys)[section]
-            return AdminManager.shared.groupedCompleteFillUpsByDate[key]?.count ?? 0
-        }
+        let order = mode == .open ? AdminManager.shared.openOrders[section] : AdminManager.shared.completeOrders[section]
+        return order.fillUps.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,39 +115,20 @@ extension AdminHomeController: UITableViewDelegate, UITableViewDataSource, Admin
             $0 + tableView.numberOfRows(inSection: $1)
         } + 1
         
-        if mode == .open {
-            
-            let key = Array(AdminManager.shared.groupedOpenFillUpsByDate.keys)[indexPath.section]
-            if let fillUp = AdminManager.shared.groupedOpenFillUpsByDate[key]?[indexPath.row] {
-                cell.fillUp = fillUp
-                cell.numberLabel.text = "\(rowNumber)"
-            }
-        } else {
-            
-            let key = Array(AdminManager.shared.groupedCompleteFillUpsByDate.keys)[indexPath.section]
-            if let fillUp = AdminManager.shared.groupedCompleteFillUpsByDate[key]?[indexPath.row] {
-                cell.fillUp = fillUp
-                cell.numberLabel.text = "\(rowNumber)"
-            }
-        }
+        let order = mode == .open ? AdminManager.shared.openOrders[indexPath.section] : AdminManager.shared.completeOrders[indexPath.section]
+        let fillUp = order.fillUps[indexPath.row]
+        
+        cell.fillUp = fillUp
+        cell.numberLabel.text = "\(rowNumber)"
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mode == .open {
-            let key = Array(AdminManager.shared.groupedOpenFillUpsByDate.keys)[indexPath.section]
-            if let fillUp = AdminManager.shared.groupedOpenFillUpsByDate[key]?[indexPath.row] {
-                let vc = CompleteFillUpController(fillUp: fillUp)
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        } else {
-            let key = Array(AdminManager.shared.groupedCompleteFillUpsByDate.keys)[indexPath.section]
-            if let fillUp = AdminManager.shared.groupedCompleteFillUpsByDate[key]?[indexPath.row] {
-                let vc = CompleteFillUpController(fillUp: fillUp)
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        
+        let order = mode == .open ? AdminManager.shared.openOrders[indexPath.section] : AdminManager.shared.completeOrders[indexPath.section]
+        let vc = CompleteFillUpController(fillUp: order.fillUps[indexPath.row])
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -162,16 +139,9 @@ extension AdminHomeController: UITableViewDelegate, UITableViewDataSource, Admin
         let headerView = AdminHomeHeader(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: headerHeight))
         headerView.delegate = self
 
-        if mode == .open {
-            let date = Array(AdminManager.shared.groupedOpenFillUpsByDate.keys)[section]
-            headerView.date = date
-            headerView.mapIcon.isHidden = false
-        } else {
-            let date = Array(AdminManager.shared.groupedCompleteFillUpsByDate.keys)[section]
-            headerView.date = date
-            headerView.mapIcon.isHidden = true
-        }
-        
+        let order = mode == .open ? AdminManager.shared.openOrders[section] : AdminManager.shared.completeOrders[section]
+        headerView.date = order.date
+        headerView.mapIcon.isHidden = mode == .complete
         
         return headerView
     }

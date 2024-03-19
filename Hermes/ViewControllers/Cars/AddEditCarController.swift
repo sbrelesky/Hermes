@@ -149,9 +149,10 @@ class AddEditCarController: UIViewController, TextFieldValidation {
             make.leading.trailing.bottom.equalToSuperview()
         }
         
+        scrollView.addSubview(yearTextField)
         scrollView.addSubview(makeTextField)
         scrollView.addSubview(modelTextField)
-        scrollView.addSubview(yearTextField)
+        
         scrollView.addSubview(licenseTextField)
         scrollView.addSubview(gasTypeTextField)
         scrollView.addSubview(gasCapUnlockTextField)
@@ -159,45 +160,43 @@ class AddEditCarController: UIViewController, TextFieldValidation {
         
         makeTextField.hermesDelegate = self
         
-        makeTextField.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+        yearTextField.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(Constants.WidthMultipliers.textField)
             make.height.equalTo(Constants.Heights.textField)
         }
         
+        makeTextField.snp.makeConstraints { make in
+            make.top.equalTo(yearTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
+            make.centerX.height.width.equalTo(yearTextField)
+        }
+        
         modelTextField.snp.makeConstraints { make in
-            make.top.equalTo(makeTextField.snp.bottom).offset(30)
+            make.top.equalTo(makeTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.height.width.equalTo(makeTextField)
         }
-        
-        yearTextField.snp.makeConstraints { make in
-            make.top.equalTo(modelTextField.snp.bottom).offset(30)
-            make.centerX.height.width.equalTo(makeTextField)
-        }
-        
+                
         licenseTextField.snp.makeConstraints { make in
-            make.top.equalTo(yearTextField.snp.bottom).offset(30)
+            make.top.equalTo(modelTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.height.width.equalTo(makeTextField)
         }
         
         gasTypeTextField.snp.makeConstraints { make in
-            make.top.equalTo(licenseTextField.snp.bottom).offset(30)
+            make.top.equalTo(licenseTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.height.width.equalTo(makeTextField)
         }
         
         gasCapUnlockTextField.snp.makeConstraints { make in
-            make.top.equalTo(gasTypeTextField.snp.bottom).offset(30)
+            make.top.equalTo(gasTypeTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.height.width.equalTo(makeTextField)
         }
         
         addEditButton.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(gasCapUnlockTextField.snp.bottom).offset(30)
+            make.top.greaterThanOrEqualTo(gasCapUnlockTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.bottom.equalToSuperview().offset(-20)
             make.centerX.equalToSuperview()
-        }
-        
-        
+        }        
     }
     
     private func setCarValues() {
@@ -253,7 +252,7 @@ class AddEditCarController: UIViewController, TextFieldValidation {
             
             switch result {
             case .success(let mileage):
-                print("Successfully fetched milage for model: \(model.name) - \(mileage)")
+                print("Successfully fetched milage for model: \(model.name)")
                 print(mileage)
                 guard let fuelCapacity = (mileage.first?.fuelCapacity as? NSString)?.doubleValue else { return }
                 
@@ -272,17 +271,20 @@ class AddEditCarController: UIViewController, TextFieldValidation {
                 self.saveCar()
 
             case .failure(let error):
-                self.presentError(error: error)
+                DispatchQueue.main.async {
+                    self.presentError(error: error)
+                }
             }
         }
     }
     
     private func fetchModelsForMake(completion: ((Bool) -> Void)? = nil) {
-        guard let make = makeTextField.selectedData as? CarMake else { return }
+        guard let make = makeTextField.selectedData as? CarMake, let year = yearTextField.text else { return }
+        
         
         print("Running fetch models for make...")
         
-        CarApiManager.shared.fetchModelForMake(make.name) { result in
+        CarApiManager.shared.fetchModelForMake(make.name, year: year) { result in
             switch result {
             case .success(let models):
                 
@@ -293,7 +295,11 @@ class AddEditCarController: UIViewController, TextFieldValidation {
                 }
                 
             case .failure(let error):
-                self.presentError(error: error)
+                
+                DispatchQueue.main.async {
+                    self.presentError(error: error)
+                }
+                
                 completion?(false)
             }
         }
@@ -303,7 +309,9 @@ class AddEditCarController: UIViewController, TextFieldValidation {
         guard let car = car else { return }
         UserManager.shared.saveCar(car) { error in
             if let error = error {
-                self.presentError(error: error)
+                DispatchQueue.main.async {
+                    self.presentError(error: error)
+                }
             } else {
                 print("Successfully saved car")
                 self.navigationController?.popViewController(animated: true)

@@ -93,6 +93,8 @@ class LoginController: UIViewController, TextFieldValidation {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         
+        guard let screenHeight = UIScreen.current?.bounds.height else { return }
+        
         logoImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
@@ -101,20 +103,20 @@ class LoginController: UIViewController, TextFieldValidation {
         }
         
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(100)
+            make.top.equalTo(logoImageView.snp.bottom).offset(screenHeight * 0.12)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(Constants.WidthMultipliers.textField)
             make.height.equalTo(Constants.Heights.textField)
         }
         
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(30)
+            make.top.equalTo(emailTextField.snp.bottom).offset(Constants.Padding.Vertical.textFieldSpacing)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(emailTextField)
         }
         
         signUpButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-40)
+            make.bottom.equalToSuperview().offset(-Constants.Padding.Vertical.bottomSpacing)
             make.centerX.equalToSuperview()
         }
         

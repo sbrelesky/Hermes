@@ -23,8 +23,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
-        
+                
+        if let screenHeight = UIScreen.current?.bounds.height {
+            print("Screen Height: ", screenHeight)
+            Constants.Heights.button = screenHeight * 0.070
+            Constants.Heights.textField = screenHeight * 0.076
+            Constants.Padding.Vertical.textFieldSpacing = screenHeight * 0.035
+            Constants.Padding.Vertical.bottomSpacing = screenHeight * 0.0469
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

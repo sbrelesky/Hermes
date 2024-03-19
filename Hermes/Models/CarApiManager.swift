@@ -42,29 +42,17 @@ class CarApiManager {
     }
     
     // Fetch list of models for a specific make
-    func fetchModelForMake(_ make: String, completion: @escaping (Result<[CarModel], Error>) -> Void) {
+    func fetchModelForMake(_ make: String, year: String, completion: @escaping (Result<[CarModel], Error>) -> Void) {
         
         if fetchedModels.keys.contains(where: { $0.lowercased() == make.lowercased() }), let modelsForMake = fetchedModels[make] {
             // We already fetched the models for this make
             completion(.success(modelsForMake))
             return
         }
-               
-        CarAPI.fetchData(from: .models(make: make)) { (result: Result<CarModelsResponse, Error>) in
+        CarAPI.fetchData(from: .models(make: make, year: year)) { (result: Result<CarModelsResponse, Error>) in
             switch result {
-            case .success(let response):
-                let inputString = "This is a (hidden) message."
-                let regexPattern = #"\(hidden\)"#
-                let regex = try! NSRegularExpression(pattern: regexPattern)
-
-                let filteredData = response.data.filter { model in
-                    let range = NSRange(location: 0, length: model.name.count)
-                    return regex.firstMatch(in: model.name , options: [], range: range) == nil
-                }
-                
-                //let filteredData = response.data.filter({ $0.name != "** (hidden)"})
-                
-                self.fetchedModels[make] = filteredData
+            case .success(let response):                
+                self.fetchedModels[make] = response.data
                 completion(.success(response.data))
             case .failure(let error):
                 completion(.failure(error))
@@ -73,6 +61,7 @@ class CarApiManager {
     }
     
     func fetchFuelCapacity(model: CarModel, year: String, completion: @escaping (Result<[CarMileage], Error>) -> ()) {
+        print("\n\nMaking api call to: \(CarAPI.Endpoint.fuelCapacity(modelId: model.id, year: year).path)) ------\n")
         CarAPI.fetchData(from: .fuelCapacity(modelId: model.id, year: year)) { (result: Result<CarMileageResponse, Error>) in
             switch result {
             case .success(let response):
@@ -99,15 +88,15 @@ struct CarAPI {
     
     enum Endpoint {
         case makes
-        case models(make: String)
+        case models(make: String, year: String)
         case fuelCapacity(modelId: Int, year: String)
         
         var path: String {
             switch self {
             case .makes:
                 return "\(CarAPI.baseUrl)/makes?direction=asc&sort=name"
-            case .models(let make):
-                return "\(CarAPI.baseUrl)/models?make=\(make)&sort=id&direction=asc&verbose=no"
+            case .models(let make, let year):
+                return "\(CarAPI.baseUrl)/models?make=\(make)&sort=id&year=\(year)&direction=asc&verbose=no"
             case .fuelCapacity(let modelId, let year):
                 return "\(CarAPI.baseUrl)/mileages?direction=asc&verbose=no&sort=id&year=\(year)&make_model_id=\(modelId)"
             }
@@ -191,7 +180,7 @@ struct CarMileageResponse: Codable {
 }
 
 struct CarMileage: Codable {
-    let fuelCapacity: String
+    let fuelCapacity: String?
     
     enum CodingKeys: String, CodingKey {
         case fuelCapacity = "fuel_tank_capacity"

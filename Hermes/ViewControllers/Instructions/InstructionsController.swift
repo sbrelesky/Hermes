@@ -105,7 +105,7 @@ class InstructionsController: BaseViewController {
         
         nextButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-40)
+            make.bottom.equalToSuperview().offset(-Constants.Padding.Vertical.bottomSpacing)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -122,7 +122,7 @@ class InstructionsController: BaseViewController {
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(40)
+            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.Padding.Vertical.bottomSpacing)
             make.bottom.equalTo(pageControl.snp.top).offset(-10)
             make.leading.trailing.equalToSuperview()
         }

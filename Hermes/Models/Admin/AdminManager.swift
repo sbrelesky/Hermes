@@ -12,11 +12,11 @@ import FirebaseFirestore
 class AdminManager {
     static let shared = AdminManager()
     
-    private var openFillUps: [FillUp] = []
-    private var completeFillUps: [FillUp] = []
+    private var _openFillUps: [FillUp] = []
+    private var _completeFillUps: [FillUp] = []
     
-    var groupedOpenFillUpsByDate: [Date: [FillUp]] = [:]
-    var groupedCompleteFillUpsByDate: [Date: [FillUp]] = [:]
+    var openOrders: [Order] = []
+    var completeOrders: [Order] = []
    
     // MARK: - Fill Up Methods
     
@@ -26,8 +26,8 @@ class AdminManager {
         FirestoreManager.shared.fetchAllFillUps { result in
             switch result {
             case .success(let fillUps):
-                self.openFillUps = fillUps.filter({ $0.status == .open }).sorted(by: { $0.date < $1.date })
-                self.completeFillUps = fillUps.filter({ $0.status == .complete }).sorted(by: { $0.date < $1.date })
+                self._openFillUps = fillUps.filter({ $0.status == .open }).sorted(by: { $0.date < $1.date })
+                self._completeFillUps = fillUps.filter({ $0.status == .complete }).sorted(by: { $0.date > $1.date })
                 self.groupFillUpsByDate()
                 completion(nil)
             case .failure(let error):
@@ -97,11 +97,11 @@ class AdminManager {
             if let error = error {
                 completion(error)
             } else {
-                if let idx = self.openFillUps.firstIndex(where: { $0.id == fillUp.id }) {
+                if let idx = self._openFillUps.firstIndex(where: { $0.id == fillUp.id }) {
                     fillUp.status = .complete
                     
-                    self.openFillUps.remove(at: idx)
-                    self.completeFillUps.append(fillUp)
+                    self._openFillUps.remove(at: idx)
+                    self._completeFillUps.append(fillUp)
                     self.groupFillUpsByDate()
                 }
                 
@@ -134,51 +134,55 @@ class AdminManager {
     }
     
     private func groupOpenFillUps() {
-        var groupedFillUps: [Date: [FillUp]] = [:]
-        groupedOpenFillUpsByDate = [:]
+        openOrders = []
+        var orders: [Order] = []
         
-        for fillUp in openFillUps {
+        for fillUp in _openFillUps {
             let date = Calendar.current.startOfDay(for: fillUp.date)
-            
-            if var array = groupedFillUps[date] {
-                array.append(fillUp)
-                groupedFillUps[date] = array
+                        
+            if let _ = orders.first(where: { $0.date == date }) {
+                orders.first(where: { $0.date == date })?.fillUps.append(fillUp)
             } else {
-                groupedFillUps[date] = [fillUp]
+                orders.append(Order(date: date, fillUps: [fillUp]))
             }
         }
-        
-        let sortedGroups = groupedFillUps.sorted { $0.key < $1.key }
-        sortedGroups.forEach { item in
-            print("Date: ", item.key)
-            groupedOpenFillUpsByDate[item.key] = item.value
-        }
-        
-        print("After sorting")
-        groupedOpenFillUpsByDate.forEach { item in
-            print("Date: ", item.key)
-        }
+
+        openOrders = orders
     }
     
     private func groupCompleteFillUps() {
-        var groupedFillUps: [Date: [FillUp]] = [:]
-        groupedCompleteFillUpsByDate = [:]
+        completeOrders = []
+        var orders: [Order] = []
 
-        for fillUp in completeFillUps {
+        for fillUp in _completeFillUps {
             let date = Calendar.current.startOfDay(for: fillUp.date)
-            if var array = groupedFillUps[date] {
-                array.append(fillUp)
-                groupedFillUps[date] = array
+            
+            if let _ = orders.first(where: { $0.date == date }) {
+                orders.first(where: { $0.date == date })?.fillUps.append(fillUp)
             } else {
-                groupedFillUps[date] = [fillUp]
+                orders.append(Order(date: date, fillUps: [fillUp]))
             }
         }
         
-        let sortedGroups = groupedFillUps.sorted { $0.key < $1.key }
-        sortedGroups.forEach { item in
-            groupedCompleteFillUpsByDate[item.key] = item.value
-        }
+        completeOrders = orders
     }
     
+    func getOpenFillUpsForDate(_ date: Date) -> [FillUp] {
+        return openOrders.first(where: { $0.date == date})?.fillUps ?? []
+    }
+    
+    func getCompleteFillUpsForDate(_ date: Date) -> [FillUp] {
+        return completeOrders.first(where: { $0.date == date})?.fillUps ?? []
+    }
+}
+
+class Order {
+    let date: Date
+    var fillUps: [FillUp]
+    
+    init(date: Date, fillUps: [FillUp]) {
+        self.date = date
+        self.fillUps = fillUps
+    }
     
 }

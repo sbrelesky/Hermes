@@ -88,6 +88,7 @@ class HermesButton: UIButton {
             layoutIfNeeded()
             self.originalWidth = bounds.width
             self.title = self.titleLabel?.text ?? ""
+            
         }
     }
 }

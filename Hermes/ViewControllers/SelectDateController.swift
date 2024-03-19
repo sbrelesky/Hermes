@@ -52,15 +52,7 @@ class SelectDateController: BaseViewController {
         
         cv.appearance = appearance
         
-        var calendar = Calendar.current
-        // Use the following line if you want midnight UTC instead of local time
-        //calendar.timeZone = TimeZone(secondsFromGMT: 0)
-        let today = Date()
-        let midnight = calendar.startOfDay(for: today)
-        let tomorrow = calendar.date(byAdding: .day, value: 1, to: midnight)!
-        
-        cv.presentedDate = CVDate(date: tomorrow)
-        
+        cv.presentedDate = CVDate(date: getFirstSelectedDate())
                  
         cv.delegate = self
         cv.calendarDelegate = self
@@ -195,6 +187,24 @@ class SelectDateController: BaseViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    private func getFirstSelectedDate() -> Date {
+        var calendar = Calendar.current
+        // Use the following line if you want midnight UTC instead of local time
+        //calendar.timeZone = TimeZone(secondsFromGMT: 0)
+        let today = Date()
+        let midnight = calendar.startOfDay(for: today)
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: midnight)!
+        
+        // Get the current hour using the calendar
+        let currentHour = calendar.component(.hour, from: today)
+
+        // Check if the current hour is after 10 PM (22:00)
+        if currentHour >= Constants.dateCutoffHour, let selectedDate = calendar.date(byAdding: .day, value: 1, to: tomorrow) {
+            return selectedDate
+        } else {
+            return tomorrow
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -228,14 +238,7 @@ extension SelectDateController: CVCalendarViewDelegate {
     }
     
     func earliestSelectableDate() -> Date {
-        var calendar = Calendar.current
-        // Use the following line if you want midnight UTC instead of local time
-        //calendar.timeZone = TimeZone(secondsFromGMT: 0)
-        let today = Date()
-        let midnight = calendar.startOfDay(for: today)
-        let tomorrow = calendar.date(byAdding: .day, value: 1, to: midnight)!
-                
-        return tomorrow
+        return getFirstSelectedDate()
     }
 }
 
@@ -253,6 +256,4 @@ extension SelectDateController: CVCalendarViewAppearanceDelegate {
         default: return nil
         }
     }
-    
-    
 }
