@@ -23,7 +23,7 @@ class SpeedbumpPopup: PopupController {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .center
-        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(22.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(22.0)
 
         return l
     }()

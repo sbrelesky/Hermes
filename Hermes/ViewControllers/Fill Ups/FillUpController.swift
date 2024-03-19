@@ -86,7 +86,7 @@ extension FillUpsController: UITableViewDelegate, UITableViewDataSource {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: headerHeight))
         
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.bounds.width, height: headerHeight))
-        label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(18.0)
+        label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(18.0)
         label.textColor = ThemeManager.Color.text
         label.text = section == 0 ? "Open Fill Ups": "Completed Fill Ups"
         label.textAlignment = .left

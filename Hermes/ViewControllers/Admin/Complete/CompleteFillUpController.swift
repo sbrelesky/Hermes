@@ -43,7 +43,7 @@ class CompleteFillUpController: BaseViewController, TextFieldValidation {
     let nameLabel: UILabel = {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.text
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(18.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(18.0)
         l.textAlignment = .center
         
         return l

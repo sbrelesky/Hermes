@@ -154,7 +154,7 @@ class CheckoutController: BaseViewController {
         var appearance = PaymentSheet.Appearance()
         appearance.colors.primary = ThemeManager.Color.yellow
         appearance.colors.componentText = ThemeManager.Color.text
-        appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withSize(16.0)
+        appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(16.0)
         appearance.primaryButton.textColor = .white
         
         configuration.appearance = appearance

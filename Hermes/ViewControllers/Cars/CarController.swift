@@ -51,7 +51,7 @@ class CarController: BaseViewController {
     
     let selectCarsLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(18.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(18.0)
         l.textColor = ThemeManager.Color.gray
         l.text = "Select the cars you'd like fill up"
         l.textAlignment = .left

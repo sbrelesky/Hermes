@@ -24,7 +24,7 @@ class AdminFillUpCell: UITableViewCell {
     let nameLabel: UILabel = {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.text
-        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(20.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(20.0)
         l.textAlignment = .left
         
         return l
@@ -40,7 +40,7 @@ class AdminFillUpCell: UITableViewCell {
     
     let addressLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(18.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(18.0)
         l.textColor = ThemeManager.Color.text
         l.text = ""
         l.textAlignment = .left
@@ -50,7 +50,7 @@ class AdminFillUpCell: UITableViewCell {
     
     let subAddressLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(14.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(14.0)
         l.textColor = ThemeManager.Color.gray
         l.text = ""
         l.textAlignment = .left
@@ -144,7 +144,7 @@ class AdminFillUpCell: UITableViewCell {
                 let l = UILabel(frame: .zero)
                 l.textColor = ThemeManager.Color.text
                 l.textAlignment = .left
-                l.font = ThemeManager.Font.Style.main.font.withSize(40.0)
+                l.font = ThemeManager.Font.Style.main.font.withDynamicSize(40.0)
 
                 return l
             }()
@@ -153,7 +153,7 @@ class AdminFillUpCell: UITableViewCell {
                 let l = UILabel(frame: .zero)
                 l.textColor = ThemeManager.Color.gray
                 l.textAlignment = .left
-                l.font = ThemeManager.Font.Style.main.font.withSize(20.0)
+                l.font = ThemeManager.Font.Style.main.font.withDynamicSize(20.0)
                 
                 return l
             }()

@@ -100,7 +100,7 @@ extension AccountController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         cell.textLabel?.text = AccountType.allCases[indexPath.row].rawValue
-        cell.textLabel?.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withSize(18.0)
+        cell.textLabel?.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
         cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         
@@ -181,10 +181,10 @@ extension AccountController {
 //        configuration.primaryButtonColor = ThemeManager.Color.yellow
 //        configuration.primaryButtonLabel = "Pay"
         configuration.style = .alwaysLight
-        appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withSize(18.0)
+        appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
         appearance.primaryButton.textColor = .white
         appearance.primaryButton.backgroundColor = ThemeManager.Color.yellow
-        appearance.primaryButton.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withSize(18.0)
+        appearance.primaryButton.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
         appearance.primaryButton.successTextColor = .white
         appearance.primaryButton.successBackgroundColor = ThemeManager.Color.green
         appearance.colors.primary = ThemeManager.Color.yellow

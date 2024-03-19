@@ -27,7 +27,7 @@ class AddressCell: UITableViewCell {
     
     let streetLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(22.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(22.0)
         l.textColor = ThemeManager.Color.text
         l.text = ""
         l.textAlignment = .left
@@ -37,7 +37,7 @@ class AddressCell: UITableViewCell {
     
     let subAddressLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(14.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(14.0)
         l.textColor = ThemeManager.Color.gray
         l.text = ""
         l.textAlignment = .left
