@@ -89,10 +89,7 @@ extension UIFont {
         }
         
         let min = fontSize - (fontSize * 0.25)
-        
         let adjustedSize = max(screenHeight * 0.00118 * fontSize, min)
-        
-        print("(\(fontSize) --- Adjusted Size: ", adjustedSize)
         return withSize(adjustedSize)
     }
 }
