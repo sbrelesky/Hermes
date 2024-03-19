@@ -60,7 +60,7 @@ class HermesTextField: UITextField {
     
     private func setupStyle() {
         backgroundColor = ThemeManager.Color.textFieldBackground
-        font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(ThemeManager.Font.placeholderFontSize)
+        font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(ThemeManager.Font.placeholderFontSize)
         textColor = ThemeManager.Color.text
         layer.cornerRadius = 10
         tintColor = ThemeManager.Color.text
@@ -105,7 +105,7 @@ class HermesTextField: UITextField {
         } else {
             // If text field is empty, move the floating placeholder back to its original position
             floatingPlaceholderTopConstraint?.update(offset: 0)
-            floatingPlaceholderLabel.font = ThemeManager.Font.Style.main.font.withSize(ThemeManager.Font.placeholderFontSize)
+            floatingPlaceholderLabel.font = ThemeManager.Font.Style.main.font.withDynamicSize(ThemeManager.Font.placeholderFontSize)
             floatingPlaceholderLabel.textColor = ThemeManager.Color.placeholder
             
             floatingPlaceholderLabel.isHidden = false

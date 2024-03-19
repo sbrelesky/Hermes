@@ -25,7 +25,7 @@ class CarTableViewCell: UITableViewCell {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .left
-        l.font = ThemeManager.Font.Style.main.font.withSize(43.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(43.0)
 
         return l
     }()
@@ -43,7 +43,7 @@ class CarTableViewCell: UITableViewCell {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.gray
         l.textAlignment = .right
-        l.font = ThemeManager.Font.Style.main.font.withSize(43.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(43.0)
 
         return l
     }()

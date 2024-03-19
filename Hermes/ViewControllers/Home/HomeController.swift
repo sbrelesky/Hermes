@@ -19,7 +19,7 @@ class HomeController: BaseViewController {
     
     let helloLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(20.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(20.0)
         l.textColor = ThemeManager.Color.text
         l.text = ""
         l.textAlignment = .left
@@ -162,12 +162,12 @@ class HomeController: BaseViewController {
     private func setNameLabel() {
         guard let name = UserManager.shared.currentUser?.name else { return }
         let attributedGreeting = NSAttributedString(string: "\(!UserDefaults.standard.bool(forKey: Constants.UserDefaults.userFirstLogin) ? "Welcome Back" : "Hello")", attributes: [
-            .font: ThemeManager.Font.Style.secondary(weight: .regular).font.withSize(20.0),
+            .font: ThemeManager.Font.Style.secondary(weight: .regular).font.withDynamicSize(20.0),
             .foregroundColor: ThemeManager.Color.text
         ])
         
         let attributedName = NSAttributedString(string: ", \(name)!", attributes: [
-            .font: ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(20.0),
+            .font: ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(20.0),
             .foregroundColor: ThemeManager.Color.text
         ])
         
@@ -257,9 +257,7 @@ class HomeController: BaseViewController {
             }
         } else {
             mode = .default
-        }
-        
-        mode = .tonight
+        }        
     }
 }
 

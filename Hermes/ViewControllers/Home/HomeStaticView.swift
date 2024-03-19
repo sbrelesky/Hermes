@@ -24,7 +24,7 @@ class HomeStaticView: UIView {
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .left
         l.text = "Overnight Gas Fillup"
-        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(22.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(22.0)
 
         return l
     }()

@@ -62,7 +62,7 @@ class LoginController: UIViewController, TextFieldValidation {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = ThemeManager.Color.yellow
         navigationController?.navigationBar.titleTextAttributes = [
-            .font: ThemeManager.Font.Style.main.font.withSize(29.0),
+            .font: ThemeManager.Font.Style.main.font.withDynamicSize(29.0),
             .foregroundColor: ThemeManager.Color.text
         ]
         

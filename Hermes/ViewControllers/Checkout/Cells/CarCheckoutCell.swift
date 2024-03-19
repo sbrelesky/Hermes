@@ -64,7 +64,7 @@ class CarCheckoutCell: UITableViewCell {
                 let l = UILabel(frame: .zero)
                 l.textColor = ThemeManager.Color.text
                 l.textAlignment = .left
-                l.font = ThemeManager.Font.Style.main.font.withSize(31.0)
+                l.font = ThemeManager.Font.Style.main.font.withDynamicSize(31.0)
 
                 return l
             }()
@@ -73,7 +73,7 @@ class CarCheckoutCell: UITableViewCell {
                 let l = UILabel(frame: .zero)
                 l.textColor = ThemeManager.Color.gray
                 l.textAlignment = .left
-                l.font = ThemeManager.Font.Style.main.font.withSize(21.0)
+                l.font = ThemeManager.Font.Style.main.font.withDynamicSize(21.0)
                 
                 return l
             }()

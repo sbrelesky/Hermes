@@ -20,7 +20,7 @@ class DesertEmptyView: UIView {
     
     let titleLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(22.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(22.0)
         l.textColor = ThemeManager.Color.text
         l.text = "Oops!"
         l.textAlignment = .center

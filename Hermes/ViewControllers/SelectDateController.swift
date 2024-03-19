@@ -16,7 +16,7 @@ class SelectDateController: BaseViewController {
     
     let monthLabel: UILabel = {
         let l = UILabel(frame: .zero)
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(18.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(18.0)
         l.textColor = ThemeManager.Color.gray
         l.text = ""
         l.textAlignment = .center
@@ -27,7 +27,7 @@ class SelectDateController: BaseViewController {
     
     let selectDateLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(18.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(18.0)
         l.textColor = ThemeManager.Color.gray
         l.text = "Select date for overnight fill up (\(Constants.Text.operatingHours))"
         l.textAlignment = .left
@@ -65,7 +65,7 @@ class SelectDateController: BaseViewController {
        let cmv = CVCalendarMenuView(frame: .zero)
        
        cmv.firstWeekday = .monday
-       cmv.dayOfWeekFont = ThemeManager.Font.Style.main.font.withSize(10.0)
+       cmv.dayOfWeekFont = ThemeManager.Font.Style.main.font.withDynamicSize(10.0)
        cmv.dayOfWeekTextColor = ThemeManager.Color.gray
 
        cmv.menuViewDelegate = self

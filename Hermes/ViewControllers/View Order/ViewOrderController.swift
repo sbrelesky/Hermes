@@ -174,7 +174,7 @@ extension ViewOrderController: UITableViewDelegate, UITableViewDataSource {
             let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: footerHeight))
             
             let label = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.bounds.width, height: footerHeight - 20))
-            label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(24.0)
+            label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(24.0)
             label.textColor = ThemeManager.Color.text
             label.text = "Order Details"
             label.textAlignment = .left

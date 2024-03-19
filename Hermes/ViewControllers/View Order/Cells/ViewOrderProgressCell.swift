@@ -34,7 +34,7 @@ class ViewOrderProgressCell: UITableViewCell {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .left
-        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(24.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(24.0)
         l.adjustsFontSizeToFitWidth = true
         
         return l
@@ -44,7 +44,7 @@ class ViewOrderProgressCell: UITableViewCell {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .left
-        l.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withSize(16.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(16.0)
         l.numberOfLines = 0
         
         return l

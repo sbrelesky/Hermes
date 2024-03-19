@@ -164,7 +164,7 @@ class AdminHomeHeader: UIView {
     
     let label: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withSize(24.0)
+        label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(24.0)
         label.textColor = ThemeManager.Color.text
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left

@@ -13,7 +13,7 @@ class CalculationsCell: CompleteFillUpCell, Calculations {
     
     let gasLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(20.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(20.0)
         l.textColor = ThemeManager.Color.text
         l.text = "Gas Cost"
         l.textAlignment = .left
@@ -23,7 +23,7 @@ class CalculationsCell: CompleteFillUpCell, Calculations {
     
     let feeLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(16.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(16.0)
         l.textColor = ThemeManager.Color.gray
         l.text = "Processing Fee"
         l.textAlignment = .left
@@ -34,7 +34,7 @@ class CalculationsCell: CompleteFillUpCell, Calculations {
     
     let totalLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(28.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(28.0)
         l.textColor = ThemeManager.Color.text
         l.text = "Total"
         l.textAlignment = .left
@@ -44,7 +44,7 @@ class CalculationsCell: CompleteFillUpCell, Calculations {
     
     let feeAmountLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withSize(16.0)
+        l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(16.0)
         l.textColor = ThemeManager.Color.gray
         l.textAlignment = .left
         
@@ -53,7 +53,7 @@ class CalculationsCell: CompleteFillUpCell, Calculations {
     
     let gasAmountLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(20.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(20.0)
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .left
         
@@ -62,7 +62,7 @@ class CalculationsCell: CompleteFillUpCell, Calculations {
     
     let totalAmountLabel: UILabel = {
         let l = UILabel()
-        l.font = ThemeManager.Font.Style.main.font.withSize(28.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(28.0)
         l.textColor = ThemeManager.Color.text
         l.textAlignment = .left
         
