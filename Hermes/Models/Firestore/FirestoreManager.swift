@@ -16,9 +16,17 @@ struct FirestoreManager {
     
     let db = Firestore.firestore()
     
-    func fetchSettings(completion: @escaping (Result<Settings, Error>)->()) {
-        db.collection("Settings").document("Nevada").getDocument(as: Settings.self, completion: completion)
-    }    
+    func fetchSettings(completion: @escaping (Result<AppSettings, Error>)->()) {
+        db.collection("Settings").document("Nevada").getDocument(as: AppSettings.self, completion: completion)
+    }
+    
+    func updateSettings(completion: @escaping (Error?)->()) {
+        do {
+            try db.collection("Settings").document("Nevada").setData(from: SettingsManager.shared.settings, completion: completion)
+        } catch let error {
+            completion(error)
+        }
+    }
     
 }
 
@@ -451,11 +459,5 @@ extension FirestoreManager {
             ], completion: completion)
     }
     
-    func updateSettings(completion: @escaping (Error?)->()) {
-        do {
-            try db.collection("Settings").document("Nevada").setData(from: Settings.shared, completion: completion)
-        } catch let error {
-            completion(error)
-        }
-    }
+    
 }

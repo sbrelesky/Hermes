@@ -116,11 +116,11 @@ class AdminSettingsController: BaseViewController, TextFieldValidation {
     }
     
     private func setTextFieldValues() {
-        regularPriceTextField.text = "\(Settings.shared.prices.regular)"
-        midgradePriceTextField.text = "\(Settings.shared.prices.midgrade)"
-        premiumPriceTextField.text = "\(Settings.shared.prices.premium)"
-        dieselPriceTextField.text = "\(Settings.shared.prices.diesel)"
-        serviceFeeTextField.text = "\(Settings.shared.serviceFee)"
+        regularPriceTextField.text = "\(SettingsManager.shared.settings.prices.regular)"
+        midgradePriceTextField.text = "\(SettingsManager.shared.settings.prices.midgrade)"
+        premiumPriceTextField.text = "\(SettingsManager.shared.settings.prices.premium)"
+        dieselPriceTextField.text = "\(SettingsManager.shared.settings.prices.diesel)"
+        serviceFeeTextField.text = "\(SettingsManager.shared.settings.serviceFee)"
     }
     
     @objc func saveButtonPressed() {
@@ -132,17 +132,16 @@ class AdminSettingsController: BaseViewController, TextFieldValidation {
         
         saveButton.setLoading(true)
         
-        Settings.shared.prices = Prices(regular: regular, midgrade: mid, premium: premium, diesel: diesel)
-        Settings.shared.serviceFee = serviceFee
-        
-        AdminManager.shared.updateSettings { error in
-            self.saveButton.setLoading(false)
-            
-            if let error = error {
-                self.presentError(error: error)
-            } else {
-                self.navigationController?.popViewController(animated: true)
+        AdminManager.shared.updateSettings(
+            prices: Prices(regular: regular, midgrade: mid, premium: premium, diesel: diesel),
+            serviceFee: serviceFee) { error in
+                self.saveButton.setLoading(false)
+                
+                if let error = error {
+                    self.presentError(error: error)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
-        }
     }
 }

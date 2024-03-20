@@ -73,12 +73,9 @@ class CheckZipController: UIViewController {
     }
     
     @objc func checkZip() {
-        guard let zip = zipTextField.text, validateZipCode(zip) else { return }
-            
-        if Constants.availableZips.contains(zip) {
-            
+        guard let zip = zipTextField.text, validateZipCode(zip) else { return }        
+        if SettingsManager.shared.settings.availableZips.contains(zip) {
             presentSuccess(title: "Woohoo!", message: "We currently operate in your area!") {
-                print("Available Zip!")
                 let vc = SignUpController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }

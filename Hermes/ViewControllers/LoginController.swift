@@ -68,6 +68,12 @@ class LoginController: UIViewController, TextFieldValidation {
         
         view.backgroundColor = .white
         
+        SettingsManager.shared.fetch { error in
+            if let error = error {
+                self.presentError(error: error)
+            }
+        }
+        
         setupForKeyboard()
         setupViews()
     }
@@ -156,53 +162,26 @@ class LoginController: UIViewController, TextFieldValidation {
         }
     }
     
-    func fetchSettings(completion: @escaping (Error?) -> ()) {
-        FirestoreManager.shared.fetchSettings { result in
-            switch result {
-            case .success(let settings):
-                Settings.shared.update(with: settings)
-                completion(nil)
-            case .failure(let error):
-                completion(error)
-            }
-        }
-    }
-    
     // MARK: - Helper Methods
     
     private func handleLoginSuccess() {
-        
-        let dispatchGroup = DispatchGroup()
-        
-        
-        // Fetch Settings
-        dispatchGroup.enter()
-        fetchSettings { _ in
-            dispatchGroup.leave()
-        }
-        
-        
+                
         // Fetch user
-        dispatchGroup.enter()
         UserManager.shared.fetch { error in
             if let error = error {
                 self.handleError(error)
             } else {
-                dispatchGroup.leave()
-            }
-        }
-        
-        dispatchGroup.notify(queue: .main) {
-            
-            self.loginButton.setLoading(false) { success in
-                // Go to home screen
-                let vc = UINavigationController(rootViewController: HomeController())
-                vc.modalPresentationStyle = .overFullScreen
-                self.present(vc, animated: true)
                 
-                
-                self.emailTextField.text = nil
-                self.passwordTextField.text = nil
+                self.loginButton.setLoading(false) { success in
+                    // Go to home screen
+                    let vc = UINavigationController(rootViewController: HomeController())
+                    vc.modalPresentationStyle = .overFullScreen
+                    self.present(vc, animated: true)
+                    
+                    
+                    self.emailTextField.text = nil
+                    self.passwordTextField.text = nil
+                }
             }
         }
     }

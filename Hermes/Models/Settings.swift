@@ -7,30 +7,60 @@
 
 import Foundation
 
-class Settings: Codable {
+class SettingsManager {
+  
+    static let shared = SettingsManager()
+    
+    var `settings`: AppSettings = AppSettings(prices: Prices(), serviceFee: 0.0, availableZips: [])
+    
+    // MARK: - Fetch Data
+    
+    func fetch(completion: @escaping (Error?) -> ()) {
+        FirestoreManager.shared.fetchSettings { result in
+            switch result {
+            case .success(let settings):
+                self.settings = settings
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
+    }
+    
+    // MARK: - Update Data
+    
+    func update(prices: Prices, serviceFee: Double, completion: @escaping (Error?) -> ()) {
+        self.settings.prices = prices
+        self.settings.serviceFee = serviceFee
+        
+        FirestoreManager.shared.updateSettings(completion: completion)
+    }
+}
+
+class AppSettings: Codable {
+    
     var prices: Prices
     var serviceFee: Double
+    var availableZips: [String]
     
-    static let shared = Settings()
-    
-    // Private initializer to prevent external instantiation
-    private init() {
-        // Initialize your properties here
-        prices = Prices(regular: 0, midgrade: 0, premium: 0, diesel: 0)
-        serviceFee = 0.0
+    init(prices: Prices, serviceFee: Double, availableZips: [String]) {
+        self.prices = prices
+        self.serviceFee = serviceFee
+        self.availableZips = availableZips
     }
-
     
     // Custom decoding initializer
     private enum CodingKeys: String, CodingKey {
         case prices
         case serviceFee
+        case availableZips
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         prices = try container.decode(Prices.self, forKey: .prices)
         serviceFee = try container.decode(Double.self, forKey: .serviceFee)
+        availableZips = try container.decode([String].self, forKey: .availableZips)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -38,20 +68,14 @@ class Settings: Codable {
         
         try container.encode(prices, forKey: .prices)
         try container.encode(serviceFee, forKey: .serviceFee)
-    }
-    
-    // Method to update the singleton instance
-    func update(with newData: Settings) {
-        prices = newData.prices
-        serviceFee = newData.serviceFee
+        try container.encode(availableZips, forKey: .availableZips)
     }
 }
 
 struct Prices: Codable {
     
-    let regular: Double
-    let midgrade: Double
-    let premium: Double
-    let diesel: Double
-    
+    var regular: Double = 0.0
+    var midgrade: Double = 0.0
+    var premium: Double = 0.0
+    var diesel: Double = 0.0
 }

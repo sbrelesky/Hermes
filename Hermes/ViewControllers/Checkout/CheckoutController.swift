@@ -84,7 +84,7 @@ class CheckoutController: BaseViewController {
             totalView.totalAmountLabel.text = "\(price)"
         }
         
-        if let serviceFee = Settings.shared.serviceFee.formatCurrency() {
+        if let serviceFee = SettingsManager.shared.settings.serviceFee.formatCurrency() {
             totalView.feeAmountLabel.text = "\(serviceFee)"
         }
         
@@ -130,7 +130,7 @@ class CheckoutController: BaseViewController {
     }
     
     private func createPaymentIntent() {
-        let amount = Int(Settings.shared.serviceFee * 100.0)
+        let amount = Int(SettingsManager.shared.settings.serviceFee * 100.0)
         
         FirebaseFunctionManager.shared.createPaymentIntent(amount: amount) { result in
             self.checkoutButton.setLoading(false)
@@ -201,10 +201,10 @@ class CheckoutController: BaseViewController {
 
         for car in fillUp.cars {
             var gasPrice = switch car.fuel {
-                case .regular: Settings.shared.prices.regular
-                case .midgrade: Settings.shared.prices.midgrade
-                case .premium: Settings.shared.prices.premium
-                case .diesel: Settings.shared.prices.diesel
+                case .regular: SettingsManager.shared.settings.prices.regular
+                case .midgrade: SettingsManager.shared.settings.prices.midgrade
+                case .premium: SettingsManager.shared.settings.prices.premium
+                case .diesel: SettingsManager.shared.settings.prices.diesel
             }
             
             if car.fuelCapacity == 0.0 {

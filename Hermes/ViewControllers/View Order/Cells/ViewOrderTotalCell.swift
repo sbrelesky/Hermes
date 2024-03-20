@@ -59,7 +59,7 @@ class ViewOrderTotalCell: UITableViewCell {
                 totalAmountLabel.text = "\(price)"
             }
             
-            if let serviceFee = Settings.shared.serviceFee.formatCurrency() {
+            if let serviceFee = SettingsManager.shared.settings.serviceFee.formatCurrency() {
                 feeAmountLabel.text = "\(serviceFee)"
             }
         }
@@ -111,10 +111,10 @@ class ViewOrderTotalCell: UITableViewCell {
 
         fillUp?.cars.forEach({ car in
             var gasPrice = switch car.fuel {
-                case .regular: Settings.shared.prices.regular
-                case .midgrade: Settings.shared.prices.midgrade
-                case .premium: Settings.shared.prices.premium
-                case .diesel: Settings.shared.prices.diesel
+                case .regular: SettingsManager.shared.settings.prices.regular
+                case .midgrade: SettingsManager.shared.settings.prices.midgrade
+                case .premium: SettingsManager.shared.settings.prices.premium
+                case .diesel: SettingsManager.shared.settings.prices.diesel
             }
             
             if car.fuelCapacity == 0.0 {
@@ -125,7 +125,7 @@ class ViewOrderTotalCell: UITableViewCell {
             }
         })
         
-        price += Settings.shared.serviceFee
+        price += SettingsManager.shared.settings.serviceFee
     
         return price
     }

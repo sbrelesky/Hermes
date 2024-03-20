@@ -75,10 +75,10 @@ class ViewOrderController: BaseViewController {
 
         for car in fillUp.cars {
             let gasPrice = switch car.fuel {
-                case .regular: Settings.shared.prices.regular
-                case .midgrade: Settings.shared.prices.midgrade
-                case .premium: Settings.shared.prices.premium
-                case .diesel: Settings.shared.prices.diesel
+                case .regular: SettingsManager.shared.settings.prices.regular
+                case .midgrade: SettingsManager.shared.settings.prices.midgrade
+                case .premium: SettingsManager.shared.settings.prices.premium
+                case .diesel: SettingsManager.shared.settings.prices.diesel
             }
             
             if car.fuelCapacity == 0.0 {
@@ -89,7 +89,7 @@ class ViewOrderController: BaseViewController {
             }
         }
         
-        price += Settings.shared.serviceFee
+        price += SettingsManager.shared.settings.serviceFee
     
         return price
     }

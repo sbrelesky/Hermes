@@ -114,14 +114,10 @@ class AdminManager {
     
     // MARK: - Settings Methods
     
-    func updateSettings(completion: @escaping (Error?) -> ()) {
-        FirestoreManager.shared.updateSettings { error in
-            if let error = error {
-                completion(error)
-            } else {
-                completion(nil)
-            }
-        }
+    func updateSettings(prices: Prices, serviceFee: Double, completion: @escaping (Error?) -> ()) {
+        guard UserManager.shared.currentUser?.type == .admin else { return }
+        
+        SettingsManager.shared.update(prices: prices, serviceFee: serviceFee, completion: completion)
     }
     
     

@@ -10,7 +10,6 @@ import UIKit
 
 struct Constants {
     
-    static let availableZips = ["89002", "89011", "89012", "89014", "89015", "89044", "89052", "89074"]
     static let maxFillUpsPerDate: Int = 8
     static let gallonsPerContainer = 14.0
     static let dateCutoffHour = 22 // 10 PM

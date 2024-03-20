@@ -116,7 +116,7 @@ class SelectAddressController: BaseViewController {
             return
         }
         
-        let addressIsAvailable = Constants.availableZips.contains(address.zip)
+        let addressIsAvailable = SettingsManager.shared.settings.availableZips.contains(address.zip)
         
         emptyDesertView.isHidden = addressIsAvailable
         // addressButton.isHidden = !addressIsAvailable
