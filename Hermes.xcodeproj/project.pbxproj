@@ -46,6 +46,11 @@
 		34B754932BABBAE0001459BD /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754922BABBAE0001459BD /* Notice.swift */; };
 		34B754962BABBCCF001459BD /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754952BABBCCF001459BD /* NoticeController.swift */; };
 		34B754982BABBECA001459BD /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754972BABBECA001459BD /* NoticeCell.swift */; };
+		34B7549C2BAC9991001459BD /* Firestore+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B7549B2BAC9991001459BD /* Firestore+User.swift */; };
+		34B7549E2BAC99C3001459BD /* Firestore+Cars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B7549D2BAC99C3001459BD /* Firestore+Cars.swift */; };
+		34B754A02BAC99E5001459BD /* Firestore+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B7549F2BAC99E5001459BD /* Firestore+Address.swift */; };
+		34B754A22BAC9A09001459BD /* Firestore+FillUps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754A12BAC9A09001459BD /* Firestore+FillUps.swift */; };
+		34B754A42BAC9A2F001459BD /* Firestore+Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754A32BAC9A2F001459BD /* Firestore+Admin.swift */; };
 		34BDC8952B96848D00B17351 /* CheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8942B96848D00B17351 /* CheckoutController.swift */; };
 		34BDC8972B96A2A800B17351 /* AddressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8962B96A2A800B17351 /* AddressButton.swift */; };
 		34BDC8992B96C51C00B17351 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8982B96C51C00B17351 /* Calendar.swift */; };
@@ -176,6 +181,11 @@
 		34B754922BABBAE0001459BD /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		34B754952BABBCCF001459BD /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		34B754972BABBECA001459BD /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
+		34B7549B2BAC9991001459BD /* Firestore+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+User.swift"; sourceTree = "<group>"; };
+		34B7549D2BAC99C3001459BD /* Firestore+Cars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Cars.swift"; sourceTree = "<group>"; };
+		34B7549F2BAC99E5001459BD /* Firestore+Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Address.swift"; sourceTree = "<group>"; };
+		34B754A12BAC9A09001459BD /* Firestore+FillUps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+FillUps.swift"; sourceTree = "<group>"; };
+		34B754A32BAC9A2F001459BD /* Firestore+Admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Admin.swift"; sourceTree = "<group>"; };
 		34BDC8942B96848D00B17351 /* CheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutController.swift; sourceTree = "<group>"; };
 		34BDC8962B96A2A800B17351 /* AddressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressButton.swift; sourceTree = "<group>"; };
 		34BDC8982B96C51C00B17351 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -298,6 +308,11 @@
 			isa = PBXGroup;
 			children = (
 				348D87BA2B90F39800F98745 /* FirestoreManager.swift */,
+				34B7549B2BAC9991001459BD /* Firestore+User.swift */,
+				34B7549D2BAC99C3001459BD /* Firestore+Cars.swift */,
+				34B7549F2BAC99E5001459BD /* Firestore+Address.swift */,
+				34B754A12BAC9A09001459BD /* Firestore+FillUps.swift */,
+				34B754A32BAC9A2F001459BD /* Firestore+Admin.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -437,6 +452,25 @@
 			path = Notices;
 			sourceTree = "<group>";
 		};
+		34B754992BAC9963001459BD /* Fill Ups */ = {
+			isa = PBXGroup;
+			children = (
+				34E3F08C2B9617E50085A239 /* FillUp.swift */,
+				34BEA2252B9FB6C50038698A /* FillUpManager.swift */,
+			);
+			path = "Fill Ups";
+			sourceTree = "<group>";
+		};
+		34B7549A2BAC9971001459BD /* User */ = {
+			isa = PBXGroup;
+			children = (
+				34BDC8AB2B9772AE00B17351 /* UserManager+Stripe.swift */,
+				34E3EFFA2B913C1B0085A239 /* User.swift */,
+				34E3EFFC2B913C300085A239 /* UserManager.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		34BDC8FC2B97814900B17351 /* Stripe */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,20 +561,17 @@
 		34E3EFF92B913C130085A239 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				34B7549A2BAC9971001459BD /* User */,
+				34B754992BAC9963001459BD /* Fill Ups */,
 				34BEA2752BA2D05F0038698A /* Admin */,
 				343F43092B9CCAB000AF9F5D /* Firebase Functions */,
 				343F42FF2B9AC61100AF9F5D /* Firestore */,
 				34BDC8FC2B97814900B17351 /* Stripe */,
 				343F42FD2B9AC50B00AF9F5D /* Settings.swift */,
-				34E3EFFA2B913C1B0085A239 /* User.swift */,
-				34E3EFFC2B913C300085A239 /* UserManager.swift */,
-				34BDC8AB2B9772AE00B17351 /* UserManager+Stripe.swift */,
 				34E3F05A2B9182460085A239 /* Car.swift */,
 				34E3F0642B924AF40085A239 /* CarApiManager.swift */,
 				34E3F07B2B93BAC60085A239 /* Location.swift */,
 				34E3F07D2B93DFE70085A239 /* Address.swift */,
-				34E3F08C2B9617E50085A239 /* FillUp.swift */,
-				34BEA2252B9FB6C50038698A /* FillUpManager.swift */,
 				34B754922BABBAE0001459BD /* Notice.swift */,
 			);
 			path = Models;
@@ -718,10 +749,12 @@
 				340339BC2B995D5400044E77 /* CheckoutCell.swift in Sources */,
 				34BEA2182B9D7C800038698A /* HomeStaticView.swift in Sources */,
 				3464D6AA2BA8975300AAE7AD /* AdminSettingsController.swift in Sources */,
+				34B754A02BAC99E5001459BD /* Firestore+Address.swift in Sources */,
 				34E3F0692B9280640085A239 /* UIViewController+Popups.swift in Sources */,
 				34BEA2282B9FB6ED0038698A /* Date.swift in Sources */,
 				34E3F07C2B93BAC60085A239 /* Location.swift in Sources */,
 				34E3F05D2B9228C60085A239 /* AddEditCarController.swift in Sources */,
+				34B754A22BAC9A09001459BD /* Firestore+FillUps.swift in Sources */,
 				34E3F0562B915BF10085A239 /* Popup.swift in Sources */,
 				343F430D2B9CCAED00AF9F5D /* FirebaseFunctions+PaymentMethods.swift in Sources */,
 				34BEA27D2BA3E1BE0038698A /* SuccessPopup.swift in Sources */,
@@ -764,12 +797,14 @@
 				34BEA26C2BA24C540038698A /* UserDefaults.swift in Sources */,
 				348D876D2B90F25D00F98745 /* SceneDelegate.swift in Sources */,
 				34E3F0762B9399C00085A239 /* AddressController.swift in Sources */,
+				34B7549E2BAC99C3001459BD /* Firestore+Cars.swift in Sources */,
 				34BEA22C2B9FBC540038698A /* ViewOrderCancelCell.swift in Sources */,
 				34BEA2822BA4AFBD0038698A /* MapAddressCell.swift in Sources */,
 				348D87D12B91091E00F98745 /* HermesButton.swift in Sources */,
 				343F43042B9ADF5000AF9F5D /* AccountController.swift in Sources */,
 				343F42FC2B9A909200AF9F5D /* InstructionCell.swift in Sources */,
 				343F42FA2B9A84DF00AF9F5D /* InstructionsController.swift in Sources */,
+				34B754A42BAC9A2F001459BD /* Firestore+Admin.swift in Sources */,
 				348D87BB2B90F39800F98745 /* FirestoreManager.swift in Sources */,
 				34E3EFF82B9125840085A239 /* UIViewController+Keyboard.swift in Sources */,
 				34E3F0812B94ED760085A239 /* AddressSuggestionCell.swift in Sources */,
@@ -800,6 +835,7 @@
 				34B754982BABBECA001459BD /* NoticeCell.swift in Sources */,
 				34E3F0742B9398FD0085A239 /* BaseViewController.swift in Sources */,
 				34E3F08A2B9579560085A239 /* CarController.swift in Sources */,
+				34B7549C2BAC9991001459BD /* Firestore+User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

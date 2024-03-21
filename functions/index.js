@@ -489,3 +489,14 @@ async function fetchPaymentMethods(customerId) {
         throw error;
     }
 }
+
+
+// Speacializing .... TK-5 age group
+
+// Geena James - Experienced elementary teacher/tutor in San Diego. Empowering Students to Succeed in Reading, Writing, and Math.
+
+// Elementary student engaged in reading practice with a tutor. Excited student learning to read with focused instruction. Reading session aimed at improving literacy skills.
+
+// Elementary student attending a remote session from home using a laptop or tablet. Engaged student participating in online learning with enthusiasm. Adapting to remote education with the help of digital technology.
+
+// Elementary students engaged in collaborative learning activities in a learning pod. Group of students working together on a project in a supportive environment. Active participation and teamwork.
