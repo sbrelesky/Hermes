@@ -458,6 +458,25 @@ extension FirestoreManager {
                 "totalPaymentIntentId": fillUp.totalPaymentIntentId
             ], completion: completion)
     }
+}
+
+
+// MARK: - Notice Methods
+
+extension FirestoreManager {
     
-    
+    func fetchNotices(completion: @escaping (Result<[Notice],Error>)->()) {
+        db.collection(Constants.FirestoreKeys.notices).getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                do {
+                    let notices  = try snapshot?.documents.compactMap({ try $0.data(as: Notice.self )})
+                    completion(.success(notices ?? []))
+                } catch (let error) {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }

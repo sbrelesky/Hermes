@@ -9,6 +9,8 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    static var shared: SceneDelegate? // Shared instance
+
     var window: UIWindow?
 
 
@@ -18,18 +20,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-                
-        let navigationController = UINavigationController(rootViewController: LoginController())
         
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
-                
-        if let screenHeight = UIScreen.current?.bounds.height {
-            print("Screen Height: ", screenHeight)
-            Constants.Heights.button = screenHeight * 0.070
-            Constants.Heights.textField = screenHeight * 0.076
-            Constants.Padding.Vertical.textFieldSpacing = screenHeight * 0.035
-            Constants.Padding.Vertical.bottomSpacing = screenHeight * 0.0469
+        SceneDelegate.shared = self
+        
+        FirestoreManager.shared.fetchNotices { result in
+            switch result {
+            case .success(let notices):
+                if notices.isEmpty {
+                    let navigationController = UINavigationController(rootViewController: LoginController())
+                    self.setCurrentWindow(controller: navigationController)
+                } else {
+                    let noticesController = NoticeController(notices: notices)
+                    self.setCurrentWindow(controller: noticesController)
+                }
+            case .failure(let error):
+                print("Error loading notices: ", error)
+                let navigationController = UINavigationController(rootViewController: LoginController())
+                self.setCurrentWindow(controller: navigationController)
+            }
         }
     }
 
@@ -61,6 +69,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
+    func setCurrentWindow(controller: UIViewController) {
+        window?.rootViewController = controller
+        window?.makeKeyAndVisible()
+        
+        if let screenHeight = UIScreen.current?.bounds.height {
+            Constants.Heights.button = screenHeight * 0.070
+            Constants.Heights.textField = screenHeight * 0.076
+            Constants.Padding.Vertical.textFieldSpacing = screenHeight * 0.035
+            Constants.Padding.Vertical.bottomSpacing = screenHeight * 0.0469
+        }
+    }
 }
 

@@ -43,6 +43,9 @@
 		348D87D12B91091E00F98745 /* HermesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87D02B91091E00F98745 /* HermesButton.swift */; };
 		348D87D32B9109BE00F98745 /* CheckZipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87D22B9109BE00F98745 /* CheckZipController.swift */; };
 		348D87D62B9114F300F98745 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87D42B9113E700F98745 /* Constants.swift */; };
+		34B754932BABBAE0001459BD /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754922BABBAE0001459BD /* Notice.swift */; };
+		34B754962BABBCCF001459BD /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754952BABBCCF001459BD /* NoticeController.swift */; };
+		34B754982BABBECA001459BD /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754972BABBECA001459BD /* NoticeCell.swift */; };
 		34BDC8952B96848D00B17351 /* CheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8942B96848D00B17351 /* CheckoutController.swift */; };
 		34BDC8972B96A2A800B17351 /* AddressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8962B96A2A800B17351 /* AddressButton.swift */; };
 		34BDC8992B96C51C00B17351 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8982B96C51C00B17351 /* Calendar.swift */; };
@@ -170,6 +173,9 @@
 		348D87D02B91091E00F98745 /* HermesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HermesButton.swift; sourceTree = "<group>"; };
 		348D87D22B9109BE00F98745 /* CheckZipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckZipController.swift; sourceTree = "<group>"; };
 		348D87D42B9113E700F98745 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		34B754922BABBAE0001459BD /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		34B754952BABBCCF001459BD /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
+		34B754972BABBECA001459BD /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
 		34BDC8942B96848D00B17351 /* CheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutController.swift; sourceTree = "<group>"; };
 		34BDC8962B96A2A800B17351 /* AddressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressButton.swift; sourceTree = "<group>"; };
 		34BDC8982B96C51C00B17351 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -365,6 +371,7 @@
 		348D87BC2B90F5BF00F98745 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				34B754942BABBCC5001459BD /* Notices */,
 				34BEA2722BA2D0430038698A /* Admin */,
 				34E3F0732B9398FD0085A239 /* BaseViewController.swift */,
 				34BEA26F2BA2908E0038698A /* Fill Ups */,
@@ -419,6 +426,15 @@
 				3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		34B754942BABBCC5001459BD /* Notices */ = {
+			isa = PBXGroup;
+			children = (
+				34B754952BABBCCF001459BD /* NoticeController.swift */,
+				34B754972BABBECA001459BD /* NoticeCell.swift */,
+			);
+			path = Notices;
 			sourceTree = "<group>";
 		};
 		34BDC8FC2B97814900B17351 /* Stripe */ = {
@@ -525,6 +541,7 @@
 				34E3F07D2B93DFE70085A239 /* Address.swift */,
 				34E3F08C2B9617E50085A239 /* FillUp.swift */,
 				34BEA2252B9FB6C50038698A /* FillUpManager.swift */,
+				34B754922BABBAE0001459BD /* Notice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -721,6 +738,7 @@
 				34BEA2712BA290A20038698A /* FillUpController.swift in Sources */,
 				348D87BE2B90F5CB00F98745 /* SignUpController.swift in Sources */,
 				34BEA2342BA160A60038698A /* SpeedbumpPopup.swift in Sources */,
+				34B754962BABBCCF001459BD /* NoticeController.swift in Sources */,
 				3464D6A12BA4B1F400AAE7AD /* CalculationsCell.swift in Sources */,
 				3464D69F2BA4B15400AAE7AD /* DataEntryCell.swift in Sources */,
 				34E3F07E2B93DFE70085A239 /* Address.swift in Sources */,
@@ -766,6 +784,7 @@
 				3464D6AC2BA9013000AAE7AD /* Calculations.swift in Sources */,
 				348D87D32B9109BE00F98745 /* CheckZipController.swift in Sources */,
 				34BDC8972B96A2A800B17351 /* AddressButton.swift in Sources */,
+				34B754932BABBAE0001459BD /* Notice.swift in Sources */,
 				343F43082B9BE3D800AF9F5D /* EditPaymentMethodController.swift in Sources */,
 				348D87C32B90F67700F98745 /* Theme.swift in Sources */,
 				340339B52B98FFB700044E77 /* AddPaymentMethodController.swift in Sources */,
@@ -778,6 +797,7 @@
 				34E3F06E2B92976A0085A239 /* CarCell.swift in Sources */,
 				34BEA2792BA3533F0038698A /* CompleteFillUpController.swift in Sources */,
 				343F42FE2B9AC50B00AF9F5D /* Settings.swift in Sources */,
+				34B754982BABBECA001459BD /* NoticeCell.swift in Sources */,
 				34E3F0742B9398FD0085A239 /* BaseViewController.swift in Sources */,
 				34E3F08A2B9579560085A239 /* CarController.swift in Sources */,
 			);
@@ -924,7 +944,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hermes/Hermes.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZHUP53TKVA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hermes/Info.plist;
@@ -939,7 +959,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.expedition.Hermes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -957,7 +977,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hermes/Hermes.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZHUP53TKVA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hermes/Info.plist;
@@ -972,7 +992,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.expedition.Hermes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

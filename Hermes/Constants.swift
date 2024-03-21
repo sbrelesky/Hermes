@@ -26,6 +26,7 @@ struct Constants {
         static let fillUpsCollection = "FillUps"
         static let disabledDatesCollection = "Disabled_Dates"
         static let deletedAccounts = "Deleted_Accounts"
+        static let notices = "Notices"
         
         static let carsSubCollection = "Cars"
         static let addressesSubCollection = "Addresses"
