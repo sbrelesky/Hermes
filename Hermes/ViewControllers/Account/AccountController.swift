@@ -58,21 +58,29 @@ class AccountController: BaseViewController {
     }
     
     private func resetPassword() {
-        UserManager.shared.resetPassword { error in
-            if let error = error {
-                self.presentError(error: error)
-            } else {
-                self.presentSuccess(message: "Password reset email sent successfully")
+        presentSpeedbump(title: "Reset Password", message: "Are you sure you want to reset your password?") {
+            print("Cancelled")
+        } confirmCompletion: {
+            UserManager.shared.resetPassword { error in
+                if let error = error {
+                    self.presentError(error: error)
+                } else {
+                    self.presentSuccess(message: "Password reset email sent successfully")
+                }
             }
         }
     }
     
     private func logout() {
-        do {
-            try UserManager.shared.signOut()
-            navigationController?.dismiss(animated: true)
-        } catch let error {
-            self.presentError(error: error)
+        presentSpeedbump(title: "Log Out", message: "Are you sure you want to log out?") {
+            print("Cancelled")
+        } confirmCompletion: {
+            do {
+                try UserManager.shared.signOut()
+                self.navigationController?.dismiss(animated: true)
+            } catch let error {
+                self.presentError(error: error)
+            }
         }
     }
     

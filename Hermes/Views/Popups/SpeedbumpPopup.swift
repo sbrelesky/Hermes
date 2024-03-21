@@ -70,7 +70,14 @@ class SpeedbumpPopup: PopupController {
     }
     
     override func setupAdditionalViews() {
-    
+        
+        popupView.snp.remakeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.9)
+            make.height.equalToSuperview().multipliedBy(0.4)
+        }
+        
         popupView.addSubview(warningImageView)
         popupView.addSubview(titleLabel)
         popupView.addSubview(messageLabel)

@@ -62,7 +62,7 @@ class PopupController: UIViewController {
         popupView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.95)
+            make.width.equalToSuperview().multipliedBy(0.9)
             make.height.equalToSuperview().multipliedBy(0.45)
         }
                 

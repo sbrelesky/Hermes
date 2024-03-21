@@ -65,7 +65,8 @@ class LoadingPopup: PopupController {
         messageLabel.snp.makeConstraints { make in
             make.top.equalTo(activityIndicator.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.75)
+            make.width.equalToSuperview().multipliedBy(0.85)
+            make.bottom.lessThanOrEqualToSuperview().offset(-5)
         }
         
         // activityIndicator.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
