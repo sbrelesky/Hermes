@@ -74,7 +74,7 @@ exports.sendDailyNotification = functions.pubsub.schedule('every day 19:00').tim
 });
 
 exports.sendNotificationOnStatusChange = functions.firestore
-.document('Open_Fill_Ups/{fillUpId}')
+.document('FillUps/{fillUpId}')
 .onUpdate((change, context) => {
     
     const oldData = change.before.data();
@@ -101,6 +101,58 @@ exports.sendNotificationOnStatusChange = functions.firestore
             console.error('Error sending notification:', error);
             throw error;
         });
+    }
+
+    return;
+
+});
+
+exports.sendNotificationToAdminOnCreate = functions.firestore.document('FillUps/{fillUpId}')
+.onCreate(async (snap, context) => {
+
+    const fillUpData = snap.data();
+    const date = fillUpData.date.toDate();
+    const dateString = formatDate(date);
+
+    try {
+        // Pull all the admins
+        const admins = await usersCollection.where("type", "==", "admin").get();
+        
+        admins.forEach(adminUser => {
+            const userData = adminUser.data();
+            const deviceToken = userData.deviceToken;
+      
+            console.log(`Sending Notification to: ${userData.firstName}: ${deviceToken}`);
+
+            if (deviceToken) {
+                // Construct the notification message
+                const message = {
+                    notification: {
+                        title: 'New Fill Up Scheduled!',
+                        body: `A fill up was just scheduled for ${dateString}.`
+                    },
+                    token: deviceToken 
+                };
+
+                // Send the notification
+                admin.messaging().send(message)
+                .then((response) => {
+                    console.log('Notification sent successfully:', response);
+                })
+                .catch((error) => {
+                    console.error('Error sending notification:', error);
+                    throw error;
+                });
+            } else {
+              console.log('No device token found for user admin');
+            }
+        });
+
+        return;
+
+    } catch (error) {
+        console.error(error);
+        throw error;
     }
 
 });
@@ -490,13 +542,13 @@ async function fetchPaymentMethods(customerId) {
     }
 }
 
-
-// Speacializing .... TK-5 age group
-
-// Geena James - Experienced elementary teacher/tutor in San Diego. Empowering Students to Succeed in Reading, Writing, and Math.
-
-// Elementary student engaged in reading practice with a tutor. Excited student learning to read with focused instruction. Reading session aimed at improving literacy skills.
-
-// Elementary student attending a remote session from home using a laptop or tablet. Engaged student participating in online learning with enthusiasm. Adapting to remote education with the help of digital technology.
-
-// Elementary students engaged in collaborative learning activities in a learning pod. Group of students working together on a project in a supportive environment. Active participation and teamwork.
+// Function to format date as 'Wednesday, July 21, 2024'
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+}

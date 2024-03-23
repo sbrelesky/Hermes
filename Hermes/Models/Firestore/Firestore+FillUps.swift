@@ -86,9 +86,17 @@ extension FirestoreManager {
                         snap.reference.updateData(["deviceToken": token])
                     })
                     
-                    completion(nil)
+                    // Update the user's device token if they are an admin
+                    
+                    if UserManager.shared.currentUser?.type == .admin {
+                        db.collection(Constants.FirestoreKeys.userCollection).document(uid).updateData(["deviceToken": token], completion: completion)
+                    } else {
+                        completion(nil)
+                    }
                 }
             }
+        
+        
     }
     
     func fetchDisabledDates(completion: @escaping (Result<[Date], Error>)->()) {

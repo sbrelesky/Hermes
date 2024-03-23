@@ -25,6 +25,7 @@ class User: Codable {
     private var _name: String
     private var _phone: String
     private var _stripeCustomerId: String?
+    private var deviceToken: String?
         
     var name: String {
        get {
@@ -62,6 +63,7 @@ class User: Codable {
         case cars
         case stripeCustomerId
         case type
+        case deviceToken
     }
     
     init(name: String, email: String, phone: String, stripeCustomerId: String?) {
@@ -79,6 +81,7 @@ class User: Codable {
         _phone = try values.decode(String.self, forKey: .phone)
         _stripeCustomerId = try values.decodeIfPresent(String.self, forKey: .stripeCustomerId)
         type = try values.decodeIfPresent(UserType.self, forKey: .type)
+        deviceToken = try values.decodeIfPresent(String.self, forKey: .deviceToken)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -89,7 +92,8 @@ class User: Codable {
         try container.encode(email, forKey: .email)
         try container.encode(_phone, forKey: .phone)
         try container.encode(_stripeCustomerId, forKey: .stripeCustomerId)
-        try container.encode(type, forKey: .type)
+        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(deviceToken, forKey: .deviceToken)
     }
     
     static let test = User(name: "Shane", email: "shane@gmail.com", phone: "1234567899", stripeCustomerId: nil)
