@@ -44,7 +44,7 @@ class CompleteFillUpController: BaseViewController, TextFieldValidation {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.text
         l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(18.0)
-        l.textAlignment = .center
+        l.textAlignment = .left
         
         return l
     }()
@@ -54,7 +54,17 @@ class CompleteFillUpController: BaseViewController, TextFieldValidation {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.gray
         l.font = ThemeManager.Font.Style.secondary(weight: .medium).font
-        l.textAlignment = .center
+        l.textAlignment = .left
+        l.numberOfLines = 0
+        
+        return l
+    }()
+    
+    let notesLabel: UILabel = {
+        let l = UILabel(frame: .zero)
+        l.textColor = ThemeManager.Color.gray
+        l.font = ThemeManager.Font.Style.secondary(weight: .medium).font
+        l.textAlignment = .left
         l.numberOfLines = 0
         
         return l
@@ -105,7 +115,9 @@ class CompleteFillUpController: BaseViewController, TextFieldValidation {
         
         orderLabel.text = "Order #\(fillUp.id ?? "")"
         nameLabel.text = fillUp.user.name
-        
+        if let notes = fillUp.notes {
+            notesLabel.text = "Notes: \(notes)"
+        }
         
         setupForKeyboard()
         setupViews()
@@ -114,6 +126,7 @@ class CompleteFillUpController: BaseViewController, TextFieldValidation {
     private func setupViews() {
         view.addSubview(nameLabel)
         view.addSubview(orderLabel)
+        view.addSubview(notesLabel)
         view.addSubview(tableView)
         
         nameLabel.snp.makeConstraints { make in
@@ -126,8 +139,13 @@ class CompleteFillUpController: BaseViewController, TextFieldValidation {
             make.leading.equalTo(nameLabel)
         }
         
+        notesLabel.snp.makeConstraints { make in
+            make.leading.equalTo(nameLabel)
+            make.top.equalTo(orderLabel.snp.bottom)
+        }
+        
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(orderLabel.snp.bottom).offset(20)
+            make.top.equalTo(notesLabel.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }

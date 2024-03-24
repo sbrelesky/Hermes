@@ -13,6 +13,7 @@ enum CheckoutCellType: Int {
     case car = 0
     case address = 1
     case date = 2
+    case notes = 3
 }
 
 class CheckoutCell: UITableViewCell {

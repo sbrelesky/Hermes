@@ -79,6 +79,7 @@ class CheckoutController: BaseViewController {
         tableView.register(CheckoutCell.self, forCellReuseIdentifier: "cell")
         tableView.register(CarCheckoutCell.self, forCellReuseIdentifier: "carCell")
         tableView.register(DateCheckoutCell.self, forCellReuseIdentifier: "dateCell")
+        tableView.register(NotesCell.self, forCellReuseIdentifier: "notesCell")
         
         if let price = calculatePrice().formatCurrency() {
             totalView.totalAmountLabel.text = "\(price)"
@@ -117,6 +118,10 @@ class CheckoutController: BaseViewController {
     
     @objc func checkoutPressed() {
     
+        guard let notesCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as? NotesCell, let notes = notesCell.textView.text else { return }
+        
+        fillUp.notes = notes
+        
         checkoutButton.setLoading(true)
         
         UserManager.shared.checkForCustomerOrCreate { error in
@@ -223,7 +228,7 @@ class CheckoutController: BaseViewController {
 extension CheckoutController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -248,6 +253,10 @@ extension CheckoutController: UITableViewDelegate, UITableViewDataSource {
             cell.mainLabel.text = fillUp.date.dayOfWeek()
             cell.subLabel.text = fillUp.formattedDate
             return cell
+        case .notes:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as! NotesCell
+            
+            return cell
         default:
             return UITableViewCell()
         }
@@ -270,6 +279,8 @@ extension CheckoutController: UITableViewDelegate, UITableViewDataSource {
         switch CheckoutCellType(rawValue: indexPath.section) {
         case .car, .address, .date:
             return 60
+        case .notes:
+            return 100
         default: return 0
         }
     }

@@ -27,6 +27,7 @@ class FillUp: Codable {
     var dateCompleted: Date?
     var totalAmountPaid: Int?
     var totalPaymentIntentId: String?
+    var notes: String?
     
     var formattedDate: String? {
         let components = date.get(.day, .year)

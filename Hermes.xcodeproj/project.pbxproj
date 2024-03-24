@@ -51,6 +51,7 @@
 		34B754A02BAC99E5001459BD /* Firestore+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B7549F2BAC99E5001459BD /* Firestore+Address.swift */; };
 		34B754A22BAC9A09001459BD /* Firestore+FillUps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754A12BAC9A09001459BD /* Firestore+FillUps.swift */; };
 		34B754A42BAC9A2F001459BD /* Firestore+Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754A32BAC9A2F001459BD /* Firestore+Admin.swift */; };
+		34B754AD2BB09FFB001459BD /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754AC2BB09FFA001459BD /* NotesCell.swift */; };
 		34BDC8952B96848D00B17351 /* CheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8942B96848D00B17351 /* CheckoutController.swift */; };
 		34BDC8972B96A2A800B17351 /* AddressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8962B96A2A800B17351 /* AddressButton.swift */; };
 		34BDC8992B96C51C00B17351 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8982B96C51C00B17351 /* Calendar.swift */; };
@@ -186,6 +187,7 @@
 		34B7549F2BAC99E5001459BD /* Firestore+Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Address.swift"; sourceTree = "<group>"; };
 		34B754A12BAC9A09001459BD /* Firestore+FillUps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+FillUps.swift"; sourceTree = "<group>"; };
 		34B754A32BAC9A2F001459BD /* Firestore+Admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Admin.swift"; sourceTree = "<group>"; };
+		34B754AC2BB09FFA001459BD /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		34BDC8942B96848D00B17351 /* CheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutController.swift; sourceTree = "<group>"; };
 		34BDC8962B96A2A800B17351 /* AddressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressButton.swift; sourceTree = "<group>"; };
 		34BDC8982B96C51C00B17351 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				340339BB2B995D5400044E77 /* CheckoutCell.swift */,
 				34BEA22F2BA1228C0038698A /* DateCheckoutCell.swift */,
 				34BEA2312BA122E00038698A /* CarCheckoutCell.swift */,
+				34B754AC2BB09FFA001459BD /* NotesCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -786,6 +789,7 @@
 				34BEA2302BA1228C0038698A /* DateCheckoutCell.swift in Sources */,
 				348D87D62B9114F300F98745 /* Constants.swift in Sources */,
 				34E3F0672B927DE50085A239 /* ErrorPopup.swift in Sources */,
+				34B754AD2BB09FFB001459BD /* NotesCell.swift in Sources */,
 				34BEA21C2B9F70330038698A /* HomeInstructionCell.swift in Sources */,
 				34E3F07A2B93B8540085A239 /* EditAddressController.swift in Sources */,
 				34E3EFFF2B913F760085A239 /* LoginController.swift in Sources */,
