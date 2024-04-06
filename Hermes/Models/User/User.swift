@@ -66,7 +66,8 @@ class User: Codable {
         case deviceToken
     }
     
-    init(name: String, email: String, phone: String, stripeCustomerId: String?) {
+    init(id: String, name: String, email: String, phone: String, stripeCustomerId: String?) {
+        self.id = id
         self._name = name
         self.email = email
         self._phone = phone
@@ -88,6 +89,7 @@ class User: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encode(_id, forKey: .id)
+        try container.encodeIfPresent(id, forKey: .id) // Encodes with a property id if need be
         try container.encode(_name, forKey: .name)
         try container.encode(email, forKey: .email)
         try container.encode(_phone, forKey: .phone)
@@ -96,5 +98,5 @@ class User: Codable {
         try container.encodeIfPresent(deviceToken, forKey: .deviceToken)
     }
     
-    static let test = User(name: "Shane", email: "shane@gmail.com", phone: "1234567899", stripeCustomerId: nil)
+    static let test = User(id: "123", name: "Tester", email: "test@gmail.com", phone: "1234567899", stripeCustomerId: nil)
 }

@@ -165,7 +165,6 @@ class LoginController: UIViewController, TextFieldValidation {
     // MARK: - Helper Methods
     
     private func handleLoginSuccess() {
-                
         // Fetch user
         UserManager.shared.fetch { error in
             if let error = error {

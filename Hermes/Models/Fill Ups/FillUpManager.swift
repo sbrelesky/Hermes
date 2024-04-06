@@ -37,6 +37,13 @@ class FillUpManager {
     
     func fetchFillUps(completion: @escaping (Error?) -> ()){
         
+        #if DEBUG
+        
+        self.openFillUps = [FillUp.test]
+        self.completeFillUps = [FillUp(id: "12345", status: .complete, date: Date(), address: Address.test, cars: [Car.test], user: User.test, paymentIntentSecret: "")]
+        completion(nil)
+        
+        #else
         listener = FirestoreManager.shared.observeFillUps { result in
             switch result {
             case .success(let fillUps):
@@ -47,6 +54,7 @@ class FillUpManager {
                 completion(error)
             }
         }
+        #endif
         
 //        FirestoreManager.shared.fetchFillUps { result in
 //            switch result {

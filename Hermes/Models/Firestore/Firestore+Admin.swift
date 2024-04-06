@@ -46,4 +46,26 @@ extension FirestoreManager {
                 "totalPaymentIntentId": fillUp.totalPaymentIntentId
             ], completion: completion)
     }
+    
+    
+    // MARK: - Support
+    
+    func fetchAllSupportItems(completion: @escaping (Result<[Support], Error>)->()) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        db.collection(Constants.FirestoreKeys.supportCollection)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    do {
+                        let support  = try snapshot?.documents.compactMap({ try $0.data(as: Support.self )})
+                        completion(.success(support ?? []))
+                    } catch (let error) {
+                        completion(.failure(error))
+                    }
+                }
+            }
+        
+    }
+    
 }

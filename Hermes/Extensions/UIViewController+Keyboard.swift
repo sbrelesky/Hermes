@@ -50,6 +50,7 @@ extension UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(dismissMyKeyboard))
+        
         tap.cancelsTouchesInView = false
         
         //Add this tap gesture recognizer to the parent view

@@ -17,6 +17,8 @@ class AdminManager {
     
     var openOrders: [Order] = []
     var completeOrders: [Order] = []
+    
+    var supportTickets: [Support] = []
    
     // MARK: - Fill Up Methods
     
@@ -120,6 +122,20 @@ class AdminManager {
         SettingsManager.shared.update(prices: prices, serviceFee: serviceFee, completion: completion)
     }
     
+    // MARK: - Support Methods
+    
+    func fetchAllSupportTickets(completion: @escaping (Error?) -> ()) {
+        FirestoreManager.shared.fetchAllSupportItems { result in
+            switch result {
+            case .success(let support):
+                self.supportTickets = support
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
+    }
+    
     
     
     // MARK: - Helper Methods
@@ -170,6 +186,9 @@ class AdminManager {
     func getCompleteFillUpsForDate(_ date: Date) -> [FillUp] {
         return completeOrders.first(where: { $0.date == date})?.fillUps ?? []
     }
+    
+    
+    
 }
 
 class Order {

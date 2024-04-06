@@ -180,6 +180,8 @@ class HomeController: BaseViewController {
     
     private func fetchData() {
         
+        #if !DEBUG
+   
         // Fetch customer if they exist
         if UserManager.shared.currentUser?.stripeCustomerId != nil {
             UserManager.shared.fetchCustomer { error in
@@ -189,6 +191,8 @@ class HomeController: BaseViewController {
             }
         }
         
+        #endif
+        
         FillUpManager.shared.fetchFillUps { error in
             if let error = error {
                 self.presentError(error: error)
@@ -196,6 +200,7 @@ class HomeController: BaseViewController {
                 self.handleMode()
             }
         }
+        
     }
     
     // MARK: - Button Targets
@@ -218,7 +223,7 @@ class HomeController: BaseViewController {
     }
     
     @objc func adminPressed() {
-        let vc = AdminHomeController()
+        let vc = AdminController()
         navigationController?.pushViewController(vc, animated: true)
     }
    
