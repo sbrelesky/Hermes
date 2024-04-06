@@ -161,10 +161,10 @@ class CarTableViewCell: UITableViewCell {
     }
     
     private func styleSelected() {
-        cardView.backgroundColor = ThemeManager.Color.yellow
+        cardView.backgroundColor = ThemeManager.Color.primary
         
         if shadowLayer != nil {
-            shadowLayer?.fillColor = ThemeManager.Color.yellow.cgColor
+            shadowLayer?.fillColor = ThemeManager.Color.primary.cgColor
         }
         
         modelLabel.textColor = .white

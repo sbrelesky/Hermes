@@ -125,20 +125,20 @@ class ViewOrderProgressCell: UITableViewCell {
     
     private func highlightCircles() {
         if fillUp?.status == .complete {
-            circleView.backgroundColor = ThemeManager.Color.yellow
-            lineView.backgroundColor = ThemeManager.Color.yellow
+            circleView.backgroundColor = ThemeManager.Color.primary
+            lineView.backgroundColor = ThemeManager.Color.primary
         } else {
             
             if type == .scheduled {
-                circleView.backgroundColor = ThemeManager.Color.yellow
+                circleView.backgroundColor = ThemeManager.Color.primary
             }
             
             if let date = fillUp?.date {
                 if Calendar.current.isDateInToday(date) {
                     // Highlight first two circles
                     if type == .scheduled || type == .today {
-                        circleView.backgroundColor = ThemeManager.Color.yellow
-                        lineView.backgroundColor = ThemeManager.Color.yellow
+                        circleView.backgroundColor = ThemeManager.Color.primary
+                        lineView.backgroundColor = ThemeManager.Color.primary
                     }
                 }
             }

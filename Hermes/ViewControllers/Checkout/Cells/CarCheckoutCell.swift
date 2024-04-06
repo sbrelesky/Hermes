@@ -91,7 +91,7 @@ class CarCheckoutCell: UITableViewCell {
                 if let previousModelLabel = previousModel {
                     
                     let separatorLine = UIView()
-                    separatorLine.backgroundColor = ThemeManager.Color.yellow.withAlphaComponent(0.28)
+                    separatorLine.backgroundColor = ThemeManager.Color.primary.withAlphaComponent(0.28)
                     addSubview(separatorLine)
                     
                     separatorLine.snp.makeConstraints { make in

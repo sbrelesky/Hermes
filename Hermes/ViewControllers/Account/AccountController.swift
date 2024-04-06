@@ -186,16 +186,16 @@ extension AccountController {
         var appearance = configuration.appearance
         
         configuration.headerTextForSelectionScreen = "Header Tex"
-//        configuration.primaryButtonColor = ThemeManager.Color.yellow
+//        configuration.primaryButtonColor = ThemeManager.Color.primary
 //        configuration.primaryButtonLabel = "Pay"
         configuration.style = .alwaysLight
         appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
         appearance.primaryButton.textColor = .white
-        appearance.primaryButton.backgroundColor = ThemeManager.Color.yellow
+        appearance.primaryButton.backgroundColor = ThemeManager.Color.primary
         appearance.primaryButton.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
         appearance.primaryButton.successTextColor = .white
         appearance.primaryButton.successBackgroundColor = ThemeManager.Color.green
-        appearance.colors.primary = ThemeManager.Color.yellow
+        appearance.colors.primary = ThemeManager.Color.primary
         appearance.colors.text = ThemeManager.Color.text
 
         configuration.appearance = appearance

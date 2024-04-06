@@ -68,7 +68,7 @@ class AdminFillUpCell: UITableViewCell {
             addressLabel.text = fillUp.address.street
             subAddressLabel.text = fillUp.address.cityStateZip
             
-            addressIconImageView.tintColor = fillUp.status == .open ? ThemeManager.Color.yellow : ThemeManager.Color.green
+            addressIconImageView.tintColor = fillUp.status == .open ? ThemeManager.Color.primary : ThemeManager.Color.green
             
             if !didSetupCars {
                 setupViews()
@@ -84,7 +84,7 @@ class AdminFillUpCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         accessoryType = .disclosureIndicator
-        tintColor = ThemeManager.Color.yellow
+        tintColor = ThemeManager.Color.primary
         
         setupViews()
     }
@@ -170,7 +170,7 @@ class AdminFillUpCell: UITableViewCell {
                 if let previousModelLabel = previousModel {
                                         
                     let separatorLine = UIView()
-                    separatorLine.backgroundColor = ThemeManager.Color.yellow.withAlphaComponent(0.28)
+                    separatorLine.backgroundColor = ThemeManager.Color.primary.withAlphaComponent(0.28)
                     addSubview(separatorLine)
                     
                     separatorLine.snp.makeConstraints { make in

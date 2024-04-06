@@ -157,7 +157,7 @@ class CheckoutController: BaseViewController {
         configuration.allowsDelayedPaymentMethods = false
         
         var appearance = PaymentSheet.Appearance()
-        appearance.colors.primary = ThemeManager.Color.yellow
+        appearance.colors.primary = ThemeManager.Color.primary
         appearance.colors.componentText = ThemeManager.Color.text
         appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(16.0)
         appearance.primaryButton.textColor = .white

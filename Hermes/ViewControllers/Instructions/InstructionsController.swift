@@ -26,7 +26,7 @@ class InstructionsController: BaseViewController {
     
     let pageControl: UIPageControl = {
         let pc = UIPageControl(frame: .zero)
-        pc.currentPageIndicatorTintColor = ThemeManager.Color.yellow
+        pc.currentPageIndicatorTintColor = ThemeManager.Color.primary
         pc.pageIndicatorTintColor = ThemeManager.Color.gray
         pc.currentPage = 0
         

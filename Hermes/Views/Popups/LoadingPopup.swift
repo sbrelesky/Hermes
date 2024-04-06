@@ -13,7 +13,7 @@ class LoadingPopup: PopupController {
     
     let activityIndicator: UIActivityIndicatorView = {
         let iv = UIActivityIndicatorView(style: .large)
-        iv.color = ThemeManager.Color.yellow
+        iv.color = ThemeManager.Color.primary
         iv.hidesWhenStopped = true
         
         return iv

@@ -70,9 +70,9 @@ class HomeController: BaseViewController {
         let b = HermesButton(frame: .zero)
         b.setTitle("View Orders", for: .normal)
         b.backgroundColor = UIColor(hex: "#FEF8EB")
-        b.setTitleColor(ThemeManager.Color.yellow, for: .normal)
+        b.setTitleColor(ThemeManager.Color.primary, for: .normal)
         b.layer.borderWidth = 1
-        b.layer.borderColor = ThemeManager.Color.yellow.cgColor
+        b.layer.borderColor = ThemeManager.Color.primary.cgColor
         
         b.addTarget(self, action: #selector(viewOrdersPressed), for: .touchUpInside)
         

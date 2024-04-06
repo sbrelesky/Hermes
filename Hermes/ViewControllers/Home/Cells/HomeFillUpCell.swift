@@ -14,7 +14,7 @@ class HomeFillUpCell: UITableViewCell {
     
     let dateContainer: UIView = {
         let v = UIView()
-        v.backgroundColor = ThemeManager.Color.yellow.withAlphaComponent(0.28)
+        v.backgroundColor = ThemeManager.Color.primary.withAlphaComponent(0.28)
         v.layer.cornerRadius = 10
         
         return v
@@ -22,7 +22,7 @@ class HomeFillUpCell: UITableViewCell {
     
     let timeLabel: UILabel = {
         let l = UILabel(frame: .zero)
-        l.textColor = ThemeManager.Color.yellow
+        l.textColor = ThemeManager.Color.primary
         l.textAlignment = .center
         l.font = ThemeManager.Font.Style.main.font.withDynamicSize(20.0)
         l.text = "\(Constants.Text.operatingHours)"
@@ -33,7 +33,7 @@ class HomeFillUpCell: UITableViewCell {
     
     let weekdayLabel: UILabel = {
         let l = UILabel(frame: .zero)
-        l.textColor = ThemeManager.Color.yellow
+        l.textColor = ThemeManager.Color.primary
         l.textAlignment = .center
         l.font = ThemeManager.Font.Style.main.font.withDynamicSize(16.0)
         
@@ -42,7 +42,7 @@ class HomeFillUpCell: UITableViewCell {
     
     let monthLabel: UILabel = {
         let l = UILabel(frame: .zero)
-        l.textColor = ThemeManager.Color.yellow
+        l.textColor = ThemeManager.Color.primary
         l.textAlignment = .center
         l.font = ThemeManager.Font.Style.main.font.withDynamicSize(16.0)
         
@@ -51,7 +51,7 @@ class HomeFillUpCell: UITableViewCell {
     
     let dayLabel: UILabel = {
         let l = UILabel(frame: .zero)
-        l.textColor = ThemeManager.Color.yellow
+        l.textColor = ThemeManager.Color.primary
         l.textAlignment = .center
         l.font = ThemeManager.Font.Style.main.font.withDynamicSize(40.0)
         
@@ -95,7 +95,7 @@ class HomeFillUpCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         accessoryType = .disclosureIndicator
-        tintColor = ThemeManager.Color.yellow
+        tintColor = ThemeManager.Color.primary
     }
     
     required init?(coder: NSCoder) {
@@ -174,7 +174,7 @@ class HomeFillUpCell: UITableViewCell {
                 if let previousModelLabel = previousModel {
                                         
                     let separatorLine = UIView()
-                    separatorLine.backgroundColor = ThemeManager.Color.yellow.withAlphaComponent(0.28)
+                    separatorLine.backgroundColor = ThemeManager.Color.primary.withAlphaComponent(0.28)
                     addSubview(separatorLine)
                     
                     separatorLine.snp.makeConstraints { make in

@@ -250,7 +250,7 @@ extension SelectDateController: CVCalendarViewAppearanceDelegate {
     func dayLabelBackgroundColor(by weekDay: Weekday, status: CVStatus, present: CVPresent) -> UIColor? {
         switch (weekDay, status, present) {
         // Any selected day, that's not current day
-        case (_, .selected, .not), (_, .highlighted, .not): return ThemeManager.Color.yellow
+        case (_, .selected, .not), (_, .highlighted, .not): return ThemeManager.Color.primary
         // Current day at all times
         case (_, _, .present): return ThemeManager.Color.gray
         default: return nil

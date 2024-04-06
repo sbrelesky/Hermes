@@ -231,7 +231,7 @@ extension AddressController: UITableViewDelegate, UITableViewDataSource {
             completionHandler(true)
         }
         
-        deleteAction.backgroundColor = ThemeManager.Color.yellow
+        deleteAction.backgroundColor = ThemeManager.Color.primary
         deleteAction.image = UIImage(systemName: "trash")
         
         return UISwipeActionsConfiguration(actions: [deleteAction, setDefaultAction, editAction])

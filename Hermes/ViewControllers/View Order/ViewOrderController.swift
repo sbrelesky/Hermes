@@ -200,7 +200,7 @@ extension ViewOrderController: UITableViewDelegate, UITableViewDataSource {
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: footerHeight))
             
             let line = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 1))
-            line.backgroundColor = ThemeManager.Color.yellow.withAlphaComponent(0.28)
+            line.backgroundColor = ThemeManager.Color.primary.withAlphaComponent(0.28)
             
             footerView.addSubview(line)
             return footerView
