@@ -32,7 +32,7 @@ class ChatController: BaseViewController {
     }()
  
     
-    private let support: Support
+    let support: Support
     private var messageListener: ListenerRegistration?
     
     var inputBarBottom: Constraint?
@@ -63,11 +63,11 @@ class ChatController: BaseViewController {
             if let error = error {
                 self.presentError(error: error)
             } else {
-                #if !DEBUG
-                    SupportManager.shared.markReadMessagesForSupport(self.support) { error in
-                        print("Error Marking Messages: ", error)
-                    }
-                #endif
+                SupportManager.shared.markReadMessagesForSupport(self.support) { error in
+                    print("Error Marking Messages: ", error)
+                }
+                
+                print("Support Chat Pulled")
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -84,7 +84,7 @@ class ChatController: BaseViewController {
         messageListener?.remove()
     }
     
-    private func setupViews() {
+    func setupViews() {
         view.addSubview(inputBar)
         view.addSubview(collectionView)
         
@@ -135,10 +135,6 @@ class ChatController: BaseViewController {
                 self.presentError(error: error)
             } else {
                 print("Successfully sent message")
-                #if DEBUG
-                self.collectionView.reloadData()
-                self.scrollToBottom()
-                #endif
             }
         }
     }

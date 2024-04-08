@@ -63,6 +63,7 @@
 		34B754C32BB278E5001459BD /* AdminController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754C22BB278E5001459BD /* AdminController.swift */; };
 		34B754C62BB27DAD001459BD /* AdminSupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754C52BB27DAD001459BD /* AdminSupportController.swift */; };
 		34B754C82BB39983001459BD /* AdminSupportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754C72BB39983001459BD /* AdminSupportCell.swift */; };
+		34B754CA2BC44EFC001459BD /* AdminChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754C92BC44EFC001459BD /* AdminChatController.swift */; };
 		34BDC8952B96848D00B17351 /* CheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8942B96848D00B17351 /* CheckoutController.swift */; };
 		34BDC8972B96A2A800B17351 /* AddressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8962B96A2A800B17351 /* AddressButton.swift */; };
 		34BDC8992B96C51C00B17351 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BDC8982B96C51C00B17351 /* Calendar.swift */; };
@@ -210,6 +211,7 @@
 		34B754C22BB278E5001459BD /* AdminController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminController.swift; sourceTree = "<group>"; };
 		34B754C52BB27DAD001459BD /* AdminSupportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSupportController.swift; sourceTree = "<group>"; };
 		34B754C72BB39983001459BD /* AdminSupportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSupportCell.swift; sourceTree = "<group>"; };
+		34B754C92BC44EFC001459BD /* AdminChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatController.swift; sourceTree = "<group>"; };
 		34BDC8942B96848D00B17351 /* CheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutController.swift; sourceTree = "<group>"; };
 		34BDC8962B96A2A800B17351 /* AddressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressButton.swift; sourceTree = "<group>"; };
 		34BDC8982B96C51C00B17351 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 			children = (
 				34B754C52BB27DAD001459BD /* AdminSupportController.swift */,
 				34B754C72BB39983001459BD /* AdminSupportCell.swift */,
+				34B754C92BC44EFC001459BD /* AdminChatController.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				348D87D12B91091E00F98745 /* HermesButton.swift in Sources */,
 				34B754B82BB1E27B001459BD /* ChatController.swift in Sources */,
 				343F43042B9ADF5000AF9F5D /* AccountController.swift in Sources */,
+				34B754CA2BC44EFC001459BD /* AdminChatController.swift in Sources */,
 				343F42FC2B9A909200AF9F5D /* InstructionCell.swift in Sources */,
 				343F42FA2B9A84DF00AF9F5D /* InstructionsController.swift in Sources */,
 				34B754A42BAC9A2F001459BD /* Firestore+Admin.swift in Sources */,

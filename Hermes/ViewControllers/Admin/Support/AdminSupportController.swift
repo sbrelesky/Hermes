@@ -77,7 +77,7 @@ extension AdminSupportController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ChatController(support: AdminManager.shared.supportTickets[indexPath.row])
+        let vc = AdminChatController(support: AdminManager.shared.supportTickets[indexPath.row])
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 extension FirestoreManager {
     
-    func fetchSupportItem(completion: @escaping (Result<Support, Error>)->()) {
+    func fetchSupportItem(completion: @escaping (Result<Support?, Error>)->()) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         db.collection(Constants.FirestoreKeys.supportCollection)
             .whereField("user.id", isEqualTo: uid)
@@ -25,6 +25,8 @@ extension FirestoreManager {
                         let support  = try snapshot?.documents.compactMap({ try $0.data(as: Support.self )})
                         if let first = support?.first {
                             completion(.success(first))
+                        } else {
+                            completion(.success(nil))
                         }
                     } catch (let error) {
                         completion(.failure(error))
