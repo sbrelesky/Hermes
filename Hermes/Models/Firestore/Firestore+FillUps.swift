@@ -42,16 +42,7 @@ extension FirestoreManager {
                 if let error = error {
                     completion(.failure(error))
                 } else {
-                    db.collection(Constants.FirestoreKeys.fillUpsCollection).document(newDocumentRef.documentID).updateData([
-                        "user.id": uid
-                    ]) { error in
-                        if let error = error {
-                            completion(.failure(error))
-                        } else {
-                            db.collection(Constants.FirestoreKeys.fillUpsCollection).document(newDocumentRef.documentID).getDocument(as: FillUp.self, completion: completion)
-                        }
-                    }
-                    
+                    db.collection(Constants.FirestoreKeys.fillUpsCollection).document(newDocumentRef.documentID).getDocument(as: FillUp.self, completion: completion)
                 }
             }
         } catch let error  {

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class AdminHomeController: BaseViewController {
+class AdminOrdersController: BaseViewController {
     
     lazy var segmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Open", "Complete"])
@@ -42,10 +42,7 @@ class AdminHomeController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Admin Control"
-        
-        let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsPressed))
-        navigationItem.rightBarButtonItem = settingsButton
+        title = "Orders"
         
         setupViews()
         
@@ -89,14 +86,9 @@ class AdminHomeController: BaseViewController {
             tableView.reloadData()
         }
     }
-    
-    @objc func settingsPressed() {
-        let vc = AdminSettingsController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
-extension AdminHomeController: UITableViewDelegate, UITableViewDataSource, AdminHomeHeaderDelegate {
+extension AdminOrdersController: UITableViewDelegate, UITableViewDataSource, AdminOrderHeaderDelegate {
   
     func numberOfSections(in tableView: UITableView) -> Int {
         return mode == .open ? AdminManager.shared.openOrders.count : AdminManager.shared.completeOrders.count
@@ -136,7 +128,7 @@ extension AdminHomeController: UITableViewDelegate, UITableViewDataSource, Admin
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = AdminHomeHeader(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: headerHeight))
+        let headerView = AdminOrderHeader(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: headerHeight))
         headerView.delegate = self
 
         let order = mode == .open ? AdminManager.shared.openOrders[section] : AdminManager.shared.completeOrders[section]
@@ -156,11 +148,11 @@ extension AdminHomeController: UITableViewDelegate, UITableViewDataSource, Admin
     }
 }
 
-protocol AdminHomeHeaderDelegate: AnyObject {
+protocol AdminOrderHeaderDelegate: AnyObject {
     func mapPressed(date: Date)
 }
 
-class AdminHomeHeader: UIView {
+class AdminOrderHeader: UIView {
     
     let label: UILabel = {
         let label = UILabel(frame: .zero)
@@ -190,7 +182,7 @@ class AdminHomeHeader: UIView {
         }
     }
     
-    weak var delegate: AdminHomeHeaderDelegate?
+    weak var delegate: AdminOrderHeaderDelegate?
     
     
     override init(frame: CGRect) {

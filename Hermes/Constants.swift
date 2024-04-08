@@ -24,12 +24,14 @@ struct Constants {
         static let userCollection = "User"
         static let waitListCollection = "Waitlist"
         static let fillUpsCollection = "FillUps"
+        static let supportCollection = "Support"
         static let disabledDatesCollection = "Disabled_Dates"
         static let deletedAccounts = "Deleted_Accounts"
         static let notices = "Notices"
         
         static let carsSubCollection = "Cars"
         static let addressesSubCollection = "Addresses"
+        static let chatSubCollection = "Chat"
     }
     
     struct Padding {
