@@ -194,7 +194,7 @@ extension AccountController {
                     }
                 }
             }
-        } completion: {
+        } dismissCompletion: {
             self.presentCustomerSheet()
         }
     }

@@ -60,7 +60,6 @@ extension SupportController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FillUpCell
         cell.fillUp = FillUpManager.shared.completeFillUps[indexPath.row]
-        cell.timeLabel.isHidden = true
         return cell
     }
     

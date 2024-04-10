@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-struct PaymentIntent: Decodable {
+struct PaymentIntent: Codable {
     let id: String
     let clientSecret: String
     let ephemeralKey: String

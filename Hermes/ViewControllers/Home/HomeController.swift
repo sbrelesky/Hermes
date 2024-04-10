@@ -180,18 +180,14 @@ class HomeController: BaseViewController {
     
     private func fetchData() {
         
-        #if !DEBUG
-   
-        // Fetch customer if they exist
-        if UserManager.shared.currentUser?.stripeCustomerId != nil {
-            UserManager.shared.fetchCustomer { error in
-                if let error = error {
-                    self.presentError(error: error)
-                }
-            }
-        }
-        
-        #endif
+         // Fetch customer if they exist
+         if UserManager.shared.currentUser?.stripeCustomerId != nil {
+             UserManager.shared.fetchCustomer { error in
+                 if let error = error {
+                     self.presentError(error: error)
+                 }
+             }
+         }
         
         FillUpManager.shared.fetchFillUps { error in
             if let error = error {
@@ -292,6 +288,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "fillUpCell", for: indexPath) as! HomeFillUpCell
             
             let fillUp = FillUpManager.shared.openFillUps[indexPath.row]
+            cell.configure(cars: fillUp.cars)
             cell.fillUp = fillUp
             return cell
             
@@ -303,8 +300,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mode == .inProgress || mode == .tonight {
-            let fillUp = FillUpManager.shared.openFillUps[indexPath.section]
+        if mode == .inProgress {
+            let fillUp = FillUpManager.shared.openFillUps[indexPath.row]
             let vc = ViewOrderController(fillUp: fillUp)
             navigationController?.pushViewController(vc, animated: true)
         }

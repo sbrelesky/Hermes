@@ -52,7 +52,7 @@ extension FirestoreManager {
     }
     
     func cancelFillUp(_ fillUp: FillUp, completion: @escaping (Error?) -> ()) {
-        guard let uid = UserManager.shared.currentUser?.id, let fillUpId = fillUp.id else { return }
+        guard let _ = UserManager.shared.currentUser?.id, let fillUpId = fillUp.id else { return }
     
         db.collection(Constants.FirestoreKeys.fillUpsCollection).document(fillUpId).delete { error in
             if let error = error {

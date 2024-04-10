@@ -119,7 +119,7 @@ class ViewOrderProgressCell: UITableViewCell {
         messageLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom)
             make.leading.equalTo(titleLabel)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().inset(10)
         }
     }
     

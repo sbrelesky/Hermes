@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol ViewOrderCancelCellDelegate: AnyObject {
-    func cancelPressed()
+    func cancelPressed(button: HermesLoadingButton)
 }
 
 class ViewOrderCancelCell: UITableViewCell {
@@ -46,6 +46,6 @@ class ViewOrderCancelCell: UITableViewCell {
     }
     
     @objc func cancelPressed() {
-        delegate?.cancelPressed()
+        delegate?.cancelPressed(button: cancelButton)
     }
 }

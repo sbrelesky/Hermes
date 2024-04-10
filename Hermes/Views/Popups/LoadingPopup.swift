@@ -30,9 +30,9 @@ class LoadingPopup: PopupController {
         return l
     }()
 
-    init(message: String, completion: (() -> Void)?) {
+    init(message: String, dismissCompletion: (() -> Void)?) {
         messageLabel.text = message
-        super.init(completion)
+        super.init(dismissCompletion)
         
         dismissButton.isHidden = true
     }

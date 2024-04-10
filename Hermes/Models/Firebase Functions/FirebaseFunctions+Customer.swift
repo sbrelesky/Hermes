@@ -7,6 +7,7 @@
 
 import Foundation
 import Stripe
+import FirebaseFirestore
 import FirebaseFunctions
 import FirebaseFunctionsCombineSwift
 
@@ -88,7 +89,7 @@ extension FirebaseFunctionManager {
                     let paymentIntent = try JSONDecoder().decode(PaymentIntent.self, from: data)
                     completion(.success(paymentIntent))
                 } catch {
-                    completion(.failure(CustomError.invalidResponse))
+                    completion(.failure(error))
                 }
             }
         }
@@ -115,6 +116,18 @@ extension FirebaseFunctionManager {
                 } catch {
                     completion(.failure(CustomError.invalidResponse))
                 }
+            }
+        }
+    }
+    
+    func refundFillUp(fillUp: FillUp, completion: @escaping (Error?) -> ()) {
+        guard let paymentIntent = fillUp.serviceFeePaymentIntent else { return }
+        
+        functions.httpsCallable("cancelFillUp").call(["fillUpId": fillUp.id, "paymentIntentId": paymentIntent.id]) { result, error in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
             }
         }
     }

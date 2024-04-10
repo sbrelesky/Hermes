@@ -41,23 +41,12 @@ class FillUpManager {
             switch result {
             case .success(let fillUps):
                 self.openFillUps = fillUps.filter({ $0.status == .open }).sorted(by: { $0.date < $1.date })
-                self.completeFillUps = fillUps.filter({ $0.status == .complete }).sorted(by: { $0.date < $1.date })
+                self.completeFillUps = fillUps.filter({ $0.status != .open }).sorted(by: { $0.date > $1.date })
                 completion(nil)
             case .failure(let error):
                 completion(error)
             }
         }
-        
-//        FirestoreManager.shared.fetchFillUps { result in
-//            switch result {
-//            case .success(let fillUps):
-//                self.openFillUps = fillUps.filter({ $0.status == .open }).sorted(by: { $0.date < $1.date })
-//                self.completeFillUps = fillUps.filter({ $0.status == .complete }).sorted(by: { $0.date < $1.date })
-//                completion(nil)
-//            case .failure(let error):
-//                completion(error)
-//            }
-//        }
     }
     
     func fetchDisabledDates(completion: @escaping (Error?) -> ()) {
@@ -125,16 +114,25 @@ class FillUpManager {
     // MARK: - Cancel Fill Up
     
     func cancelFillUp(_ fillUp: FillUp, completion: @escaping (Error?) -> ()) {
-        FirestoreManager.shared.cancelFillUp(fillUp) { error in
+        
+        FirebaseFunctionManager.shared.refundFillUp(fillUp: fillUp) { error in
             if let error = error {
                 completion(error)
             } else {
-                if let idx = self.openFillUps.firstIndex(where: { $0.id == fillUp.id }) {
-                    self.openFillUps.remove(at: idx)
-                    self.openFillUps = self.openFillUps.filter({ $0.status == .open }).sorted(by: { $0.date < $1.date })
-                }
-                
                 completion(nil)
+                
+//                FirestoreManager.shared.cancelFillUp(fillUp) { error in
+//                    if let error = error {
+//                        completion(error)
+//                    } else {
+//                        if let idx = self.openFillUps.firstIndex(where: { $0.id == fillUp.id }) {
+//                            self.openFillUps.remove(at: idx)
+//                            self.openFillUps = self.openFillUps.filter({ $0.status == .open }).sorted(by: { $0.date < $1.date })
+//                        }
+//                        
+//                        completion(nil)
+//                    }
+//                }
             }
         }
     }
