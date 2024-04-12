@@ -14,7 +14,7 @@ class SpeedbumpPopup: PopupController {
     let warningImageView: UIImageView = {
         let iv = UIImageView(image: UIImage(systemName: "exclamationmark.triangle.fill")?.withRenderingMode(.alwaysTemplate).applyingSymbolConfiguration(.init(pointSize: 40.0)))
         iv.contentMode = .scaleToFill
-        iv.tintColor = ThemeManager.Color.yellow
+        iv.tintColor = ThemeManager.Color.primary
         
         return iv
     }()

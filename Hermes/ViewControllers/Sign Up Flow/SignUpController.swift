@@ -75,7 +75,7 @@ class SignUpController: UIViewController, TextFieldValidation {
     let errorMessageLabel: UILabel = {
         let l = UILabel(frame: .zero)
         l.font = ThemeManager.Font.Style.secondary(weight: .regular).font
-        l.textColor = ThemeManager.Color.yellow
+        l.textColor = ThemeManager.Color.primary
         l.numberOfLines = 0
         l.text = ""
         l.textAlignment = .center

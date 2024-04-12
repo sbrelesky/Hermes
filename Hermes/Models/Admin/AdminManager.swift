@@ -17,6 +17,8 @@ class AdminManager {
     
     var openOrders: [Order] = []
     var completeOrders: [Order] = []
+    
+    var supportTickets: [Support] = []
    
     // MARK: - Fill Up Methods
     
@@ -36,18 +38,18 @@ class AdminManager {
         }
     }
     
-    func completeFillUp(_ fillUp: FillUp, completion: @escaping (Error?) -> ()) {
-        guard UserManager.shared.currentUser?.type == .admin else { return }
+    func completeFillUp(_ fillUp: FillUp, totalInCents: Int, completion: @escaping (Error?) -> ()) {
+        guard UserManager.shared.currentUser?.type == .admin , let paymentIntent = fillUp.serviceFeePaymentIntent else { return }
         
         // Fetch the old payment intent
-        STPAPIClient.shared.retrievePaymentIntent(withClientSecret: fillUp.paymentIntentSecret) { servicePaymentIntent, error in
+        STPAPIClient.shared.retrievePaymentIntent(withClientSecret: paymentIntent.clientSecret) { servicePaymentIntent, error in
             if let error = error {
                 completion(error)
             } else {
                 // Get the payment method used for the initial payment
                 if let paymentMethodId = servicePaymentIntent?.paymentMethodId {
                     
-                    self.createPaymentIntentWithMethodId(paymentMethodId: paymentMethodId, fillUp: fillUp) { error in
+                    self.createPaymentIntentWithMethodId(paymentMethodId: paymentMethodId, totalInCents: totalInCents, fillUp: fillUp) { error in
                         if let error = error {
                             completion(error)
                         } else {
@@ -59,31 +61,31 @@ class AdminManager {
         }
     }
     
-    private func createPaymentIntentWithMethodId(paymentMethodId: String, fillUp: FillUp, completion: @escaping (Error?) -> ()) {
-        guard let totalAmountPaid = fillUp.totalAmountPaid, let customerId = fillUp.user.stripeCustomerId else { return }
+    private func createPaymentIntentWithMethodId(paymentMethodId: String, totalInCents: Int, fillUp: FillUp, completion: @escaping (Error?) -> ()) {
+        guard let customerId = fillUp.user.stripeCustomerId else { return }
         
         // Create a new payment intent for the gas charge
-        FirebaseFunctionManager.shared.createPaymentIntentForCustomer(amount: totalAmountPaid, customerId: customerId) { result in
+        FirebaseFunctionManager.shared.createPaymentIntentForCustomer(amount: totalInCents, customerId: customerId) { result in
             
             switch result {
             case .success(let paymentIntent):
-                self.confirmPaymentIntent(paymentMethodId: paymentMethodId, clientSecret: paymentIntent.clientSecret, fillUp: fillUp, completion: completion)
+                self.confirmPaymentIntent(paymentIntent: paymentIntent, fillUp: fillUp, completion: completion)
             case .failure(let error):
                 completion(error)
             }
         }
     }
     
-    private func confirmPaymentIntent(paymentMethodId: String, clientSecret: String, fillUp: FillUp, completion: @escaping (Error?) -> ()) {
-        let params = STPPaymentIntentParams(clientSecret: clientSecret)
-        params.paymentMethodId = paymentMethodId
+    private func confirmPaymentIntent(paymentIntent: PaymentIntent, fillUp: FillUp, completion: @escaping (Error?) -> ()) {
+        let params = STPPaymentIntentParams(clientSecret: paymentIntent.clientSecret)
+        params.paymentMethodId = paymentIntent.id
         
         // Confirm this payment intent -- Charge the customer for gas
-        STPAPIClient.shared.confirmPaymentIntent(with: params) { paymentIntent, error in
+        STPAPIClient.shared.confirmPaymentIntent(with: params) { _, error in
             if let error = error {
                 completion(error)
             } else {
-                fillUp.totalPaymentIntentId = paymentIntent?.stripeId
+                fillUp.payments?.append(paymentIntent)
                 completion(nil)
             }
         }
@@ -118,6 +120,20 @@ class AdminManager {
         guard UserManager.shared.currentUser?.type == .admin else { return }
         
         SettingsManager.shared.update(prices: prices, serviceFee: serviceFee, completion: completion)
+    }
+    
+    // MARK: - Support Methods
+    
+    func fetchAllSupportTickets(completion: @escaping (Error?) -> ()) {
+        FirestoreManager.shared.fetchAllSupportItems { result in
+            switch result {
+            case .success(let support):
+                self.supportTickets = support
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
     }
     
     
@@ -170,6 +186,9 @@ class AdminManager {
     func getCompleteFillUpsForDate(_ date: Date) -> [FillUp] {
         return completeOrders.first(where: { $0.date == date})?.fillUps ?? []
     }
+    
+    
+    
 }
 
 class Order {

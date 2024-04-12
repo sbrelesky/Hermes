@@ -119,26 +119,26 @@ class ViewOrderProgressCell: UITableViewCell {
         messageLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom)
             make.leading.equalTo(titleLabel)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().inset(10)
         }
     }
     
     private func highlightCircles() {
         if fillUp?.status == .complete {
-            circleView.backgroundColor = ThemeManager.Color.yellow
-            lineView.backgroundColor = ThemeManager.Color.yellow
+            circleView.backgroundColor = ThemeManager.Color.primary
+            lineView.backgroundColor = ThemeManager.Color.primary
         } else {
             
             if type == .scheduled {
-                circleView.backgroundColor = ThemeManager.Color.yellow
+                circleView.backgroundColor = ThemeManager.Color.primary
             }
             
             if let date = fillUp?.date {
                 if Calendar.current.isDateInToday(date) {
                     // Highlight first two circles
                     if type == .scheduled || type == .today {
-                        circleView.backgroundColor = ThemeManager.Color.yellow
-                        lineView.backgroundColor = ThemeManager.Color.yellow
+                        circleView.backgroundColor = ThemeManager.Color.primary
+                        lineView.backgroundColor = ThemeManager.Color.primary
                     }
                 }
             }

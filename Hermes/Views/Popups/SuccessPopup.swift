@@ -62,7 +62,7 @@ class SuccessPopup: PopupController {
         popupView.snp.remakeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.75)
+            make.width.equalToSuperview().multipliedBy(0.85)
             make.height.equalTo(popupView.snp.width)
         }
         
@@ -86,7 +86,7 @@ class SuccessPopup: PopupController {
         
         messageLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.bottom.lessThanOrEqualTo(okayButton.snp.top).offset(-30)
+            make.bottom.lessThanOrEqualTo(okayButton.snp.top).offset(-10)
             make.centerX.equalTo(titleLabel)
             make.width.equalTo(titleLabel)
         }

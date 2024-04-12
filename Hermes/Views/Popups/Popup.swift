@@ -28,10 +28,10 @@ class PopupController: UIViewController {
         return b
     }()
    
-    let completionHandler: (() -> Void)?
+    let dismissHandler: (() -> Void)?
     
-    init(_ completion: (() -> Void)?) {
-        self.completionHandler = completion
+    init(_ dismissCompletion: (() -> Void)?) {
+        self.dismissHandler = dismissCompletion
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -81,7 +81,7 @@ class PopupController: UIViewController {
     }
     
     @objc func dismissPopup() {
-        dismiss(animated: true, completion: completionHandler)
+        dismiss(animated: true, completion: dismissHandler)
     }
  
     // MARK: - Override this methods in subclasses

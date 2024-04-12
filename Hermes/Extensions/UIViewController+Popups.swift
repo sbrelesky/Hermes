@@ -26,16 +26,17 @@ extension UIViewController {
         self.present(popup, animated: true)
     }
     
-    func presentLoading(message: String, popupInstance: @escaping (LoadingPopup) ->(), completion: (() -> Void)? = nil) {
-        let popup = LoadingPopup(message: message, completion: completion)
+    func presentLoading(message: String, popupInstance: @escaping (LoadingPopup) ->(), dismissCompletion: (() -> Void)? = nil) {
+        let popup = LoadingPopup(message: message, dismissCompletion: dismissCompletion)
         popup.modalPresentationStyle = .overCurrentContext
         popup.modalTransitionStyle = .crossDissolve
-        self.present(popup, animated: true)        
-        popupInstance(popup)
+        self.present(popup, animated: true) {
+            popupInstance(popup)
+        }
     }
     
-    func presentLoading(message: String, completion: (() -> Void)? = nil) -> LoadingPopup {
-        let popup = LoadingPopup(message: message, completion: completion)
+    func presentLoading(message: String, dismissCompletion: (() -> Void)? = nil) -> LoadingPopup {
+        let popup = LoadingPopup(message: message, dismissCompletion: dismissCompletion)
         popup.modalPresentationStyle = .overCurrentContext
         popup.modalTransitionStyle = .crossDissolve
         self.present(popup, animated: true)

@@ -21,6 +21,17 @@ struct Car: Codable {
     var fuelCapacity: CGFloat
     var gasCapUnlockNeeded: String = "Yes"
 
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self._id, forKey: .id)
+        try container.encode(self.make, forKey: .make)
+        try container.encode(self.model, forKey: .model)
+        try container.encode(self.year, forKey: .year)
+        try container.encode(self.license, forKey: .license)
+        try container.encode(self.fuel, forKey: .fuel)
+        try container.encode(self.fuelCapacity, forKey: .fuelCapacity)
+        try container.encode(self.gasCapUnlockNeeded, forKey: .gasCapUnlockNeeded)
+    }
     
     static let test = Car(id: "1", make: "Audi", model: "A3", year: "2020", license: "XJSW3", fuel: .premium, fuelCapacity: 14.3, gasCapUnlockNeeded: "No")
 }

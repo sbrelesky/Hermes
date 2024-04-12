@@ -132,7 +132,7 @@ class AddEditCarController: UIViewController, TextFieldValidation {
         }
         
         if mode == .edit {
-            presentLoading(message: "Loading car data...") { popup in
+            presentLoading(message: "Loading data...") { popup in
                 fetchMakes(popup)
             }
         } else {

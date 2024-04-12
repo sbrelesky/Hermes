@@ -37,6 +37,7 @@ class ViewOrderController: BaseViewController {
         return tv
     }()
        
+    private let headerHeight = 60.0
     private let footerHeight = 50.0
     
     let fillUp: FillUp
@@ -171,19 +172,35 @@ extension ViewOrderController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
-            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: footerHeight))
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: fillUp.status == .open ? headerHeight : headerHeight + 30))
             
-            let label = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.bounds.width, height: footerHeight - 20))
+            let label = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.bounds.width, height: 40))
             label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(24.0)
             label.textColor = ThemeManager.Color.text
             label.text = "Order Details"
             label.textAlignment = .left
             
-            let orderLabel = UILabel(frame: CGRect(x: 20, y: footerHeight - 20, width: tableView.bounds.width, height: 20))
+            let orderLabel = UILabel(frame: CGRect(x: 20, y: 40, width: tableView.bounds.width, height: 20))
             orderLabel.textColor = ThemeManager.Color.gray
             orderLabel.font = ThemeManager.Font.Style.secondary(weight: .medium).font
             orderLabel.textAlignment = .left
             orderLabel.text = "#\(fillUp.id ?? "")"
+            
+            if fillUp.status != .open {
+                let circle = UIView(frame: CGRect(x: 20, y: 70, width: 10, height: 10))
+                circle.layer.cornerRadius = 5
+                circle.backgroundColor = fillUp.status == .complete ? ThemeManager.Color.green : ThemeManager.Color.gray
+                
+                headerView.addSubview(circle)
+                
+                let statusLabel = UILabel(frame: CGRect(x: 40, y: 65, width: tableView.bounds.width, height: 20))
+                statusLabel.font = ThemeManager.Font.Style.secondary(weight: .medium).font
+                statusLabel.textAlignment = .left
+                statusLabel.text = fillUp.status.rawValue.capitalized
+                statusLabel.textColor = fillUp.status == .complete ? ThemeManager.Color.green : ThemeManager.Color.gray
+
+                headerView.addSubview(statusLabel)
+            }
                         
             headerView.addSubview(label)
             headerView.addSubview(orderLabel)
@@ -200,7 +217,7 @@ extension ViewOrderController: UITableViewDelegate, UITableViewDataSource {
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: footerHeight))
             
             let line = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 1))
-            line.backgroundColor = ThemeManager.Color.yellow.withAlphaComponent(0.28)
+            line.backgroundColor = ThemeManager.Color.primary.withAlphaComponent(0.28)
             
             footerView.addSubview(line)
             return footerView
@@ -214,19 +231,29 @@ extension ViewOrderController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 1 ? footerHeight : .zero
+        
+        if section == 1 {
+            return fillUp.status == .open ? headerHeight : headerHeight + 30
+        } else {
+            return .zero
+        }
     }
 }
 
 extension ViewOrderController: ViewOrderCancelCellDelegate {
-    func cancelPressed() {
+    func cancelPressed(button: HermesLoadingButton) {
         
         self.presentSpeedbump(title: "Cancel Fill Up", message: "Are you sure you want to cancel this fill up?", confirmCompletion:  {
+            button.setLoading(true)
+            
             FillUpManager.shared.cancelFillUp(self.fillUp) { error in
                 if let error = error {
                     self.presentError(error: error)
                 } else {
-                    self.navigationController?.popViewController(animated: true)
+                    button.setLoading(false)
+                    self.presentSuccess(title: "Success", message: "Your refund was successfully sent. It may take 5-10 business days for funds to settle.") {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
         })

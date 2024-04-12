@@ -10,6 +10,7 @@ import Foundation
 enum CustomError: Error {
     case invalidResponse
     case noData
+    case unknown
 }
 
 class CarApiManager {

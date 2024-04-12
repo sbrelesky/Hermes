@@ -70,9 +70,9 @@ class HomeController: BaseViewController {
         let b = HermesButton(frame: .zero)
         b.setTitle("View Orders", for: .normal)
         b.backgroundColor = UIColor(hex: "#FEF8EB")
-        b.setTitleColor(ThemeManager.Color.yellow, for: .normal)
+        b.setTitleColor(ThemeManager.Color.primary, for: .normal)
         b.layer.borderWidth = 1
-        b.layer.borderColor = ThemeManager.Color.yellow.cgColor
+        b.layer.borderColor = ThemeManager.Color.primary.cgColor
         
         b.addTarget(self, action: #selector(viewOrdersPressed), for: .touchUpInside)
         
@@ -180,14 +180,14 @@ class HomeController: BaseViewController {
     
     private func fetchData() {
         
-        // Fetch customer if they exist
-        if UserManager.shared.currentUser?.stripeCustomerId != nil {
-            UserManager.shared.fetchCustomer { error in
-                if let error = error {
-                    self.presentError(error: error)
-                }
-            }
-        }
+         // Fetch customer if they exist
+         if UserManager.shared.currentUser?.stripeCustomerId != nil {
+             UserManager.shared.fetchCustomer { error in
+                 if let error = error {
+                     self.presentError(error: error)
+                 }
+             }
+         }
         
         FillUpManager.shared.fetchFillUps { error in
             if let error = error {
@@ -196,6 +196,7 @@ class HomeController: BaseViewController {
                 self.handleMode()
             }
         }
+        
     }
     
     // MARK: - Button Targets
@@ -218,7 +219,7 @@ class HomeController: BaseViewController {
     }
     
     @objc func adminPressed() {
-        let vc = AdminHomeController()
+        let vc = AdminController()
         navigationController?.pushViewController(vc, animated: true)
     }
    
@@ -287,6 +288,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "fillUpCell", for: indexPath) as! HomeFillUpCell
             
             let fillUp = FillUpManager.shared.openFillUps[indexPath.row]
+            cell.configure(cars: fillUp.cars)
             cell.fillUp = fillUp
             return cell
             
@@ -298,8 +300,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mode == .inProgress || mode == .tonight {
-            let fillUp = FillUpManager.shared.openFillUps[indexPath.section]
+        if mode == .inProgress {
+            let fillUp = FillUpManager.shared.openFillUps[indexPath.row]
             let vc = ViewOrderController(fillUp: fillUp)
             navigationController?.pushViewController(vc, animated: true)
         }

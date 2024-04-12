@@ -157,7 +157,7 @@ class CheckoutController: BaseViewController {
         configuration.allowsDelayedPaymentMethods = false
         
         var appearance = PaymentSheet.Appearance()
-        appearance.colors.primary = ThemeManager.Color.yellow
+        appearance.colors.primary = ThemeManager.Color.primary
         appearance.colors.componentText = ThemeManager.Color.text
         appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(16.0)
         appearance.primaryButton.textColor = .white
@@ -170,7 +170,7 @@ class CheckoutController: BaseViewController {
             switch paymentResult {
             case .completed:
                 print("Your order is confirmed")
-                self.scheduleFillUp(paymentIntentSecret: paymentIntent.clientSecret)
+                self.scheduleFillUp(paymentIntent: paymentIntent)
             case .canceled:
                 print("Canceled!")
             case .failed(let error):
@@ -182,8 +182,9 @@ class CheckoutController: BaseViewController {
     
    
    
-    private func scheduleFillUp(paymentIntentSecret: String) {
-        fillUp.paymentIntentSecret = paymentIntentSecret
+    private func scheduleFillUp(paymentIntent: PaymentIntent) {
+        
+        fillUp.payments?.append(paymentIntent)
         
         FillUpManager.shared.scheduleFillUp(fillUp) { error in
             

@@ -21,9 +21,9 @@ class ButtonsCell: CompleteFillUpCell {
         b.setTitle("Calculate", for: .normal)
         b.addTarget(self, action: #selector(calculatePressed), for: .touchUpInside)
         b.backgroundColor = UIColor(hex: "#FEF8EB")
-        b.setTitleColor(ThemeManager.Color.yellow, for: .normal)
+        b.setTitleColor(ThemeManager.Color.primary, for: .normal)
         b.layer.borderWidth = 1
-        b.layer.borderColor = ThemeManager.Color.yellow.cgColor
+        b.layer.borderColor = ThemeManager.Color.primary.cgColor
         
         return b
     }()

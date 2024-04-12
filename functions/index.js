@@ -1,5 +1,6 @@
 
 const admin = require("firebase-admin");
+const { Timestamp } = require("firebase-admin/firestore");
 admin.initializeApp();
 
 const functions = require("firebase-functions");
@@ -313,6 +314,7 @@ exports.createEphemeralKey = functions.https.onCall(async (data, context) => {
 
 });
 
+// Scheduling Fill Up Charging Customer
 exports.createPaymentIntentForFillUp = functions.https.onCall(async (data, context) => {
     try {
         // Ensure the user is authenticated
@@ -351,14 +353,25 @@ exports.createPaymentIntentForFillUp = functions.https.onCall(async (data, conte
         );
 
         const paymentIntent = await stripe.paymentIntents.create(paymentIntentData);
+        const timestamp = Date.now();
 
-        return { 
+        console.log({ 
+            date: timestamp,
             clientSecret: paymentIntent.client_secret,
             ephemeralKey: ephemeralKey.secret,
             customerId: stripeCustomerId,
             amount: amount,
             id: paymentIntent.id
-          }
+          });
+        
+        return { 
+            date: timestamp,
+            clientSecret: paymentIntent.client_secret,
+            ephemeralKey: ephemeralKey.secret,
+            customerId: stripeCustomerId,
+            amount: amount,
+            id: paymentIntent.id
+        };
 
 
     } catch (error) {
@@ -368,6 +381,7 @@ exports.createPaymentIntentForFillUp = functions.https.onCall(async (data, conte
 
 });
 
+// Admin Charging the Customer
 exports.createPaymentIntentForCustomer = functions.https.onCall(async (data, context) => {
     try {
         // Ensure the user is authenticated
@@ -403,8 +417,10 @@ exports.createPaymentIntentForCustomer = functions.https.onCall(async (data, con
         );
 
         const paymentIntent = await stripe.paymentIntents.create(paymentIntentData);
-
+        const timestamp = Timestamp.now();
+        
         return { 
+            date: timestamp,
             clientSecret: paymentIntent.client_secret,
             ephemeralKey: ephemeralKey.secret,
             customerId: stripeCustomerId,
@@ -420,32 +436,32 @@ exports.createPaymentIntentForCustomer = functions.https.onCall(async (data, con
 });
 
 
-exports.fetchPaymentIntentForFillUp = functions.https.onCall(async (data, context) => {
+// exports.fetchPaymentIntentForFillUp = functions.https.onCall(async (data, context) => {
 
-    try {
-        if (!context.auth) {
-            throw new functions.https.HttpsError('unauthenticated', 'You must be authenticated to access this resource.');
-        }
+//     try {
+//         if (!context.auth) {
+//             throw new functions.https.HttpsError('unauthenticated', 'You must be authenticated to access this resource.');
+//         }
 
-        const fillUpId = data.fillUpId;
-        const fillUp = await fillUpsCollection.doc(fillUpId).get();
-        const paymentIntentId = fillUp.data().paymentIntentId;
+//         const fillUpId = data.fillUpId;
+//         const fillUp = await fillUpsCollection.doc(fillUpId).get();
+//         const paymentIntentId = fillUp.data().paymentIntentId;
 
-        if (!paymentIntentId) {
-            throw new functions.https.HttpsError('not-found', 'Payment Intent Id not found.');
-        }
+//         if (!paymentIntentId) {
+//             throw new functions.https.HttpsError('not-found', 'Payment Intent Id not found.');
+//         }
 
-        // Fetch the PaymentIntent
-        const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+//         // Fetch the PaymentIntent
+//         const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
 
-        // Return the PaymentIntent
-        return paymentIntent;
+//         // Return the PaymentIntent
+//         return paymentIntent;
 
-    } catch (error) {
-        console.error('Error fetching PaymentIntent:', error);
-        throw error;
-    }
-});
+//     } catch (error) {
+//         console.error('Error fetching PaymentIntent:', error);
+//         throw error;
+//     }
+// });
 
 // Create a setup intent for managing payment methods
 exports.createSetupIntent = functions.https.onCall(async (data, context) => {
@@ -523,7 +539,36 @@ exports.retrievePaymentMethodForPaymentIntent = functions.https.onCall(async (da
     }
 });
 
+exports.cancelFillUp = functions.https.onCall(async (data, context) => {
 
+        // Check if the user is authenticated
+    if (!context.auth) {
+        throw new functions.https.HttpsError('unauthenticated', 'You must be authenticated to access this resource.');
+    }
+
+    const fillUpId  = data.fillUpId;
+    const paymentIntentId = data.paymentIntentId;    
+
+    try {
+        // Refund payment intent
+        const refund = await stripe.refunds.create({
+            payment_intent: paymentIntentId,
+            reason: "requested_by_customer"
+        });
+
+        // Update fill up document with refund status
+        await fillUpsCollection.doc(fillUpId).update({ 
+            status: "refunded", 
+            refund: refund
+        });
+
+        console.log('Refund processed successfully:', refund.id);
+        return;
+    } catch (error) {
+        console.error('Error processing refund:', error);
+        throw error;
+    }
+});
 
 
 async function fetchPaymentMethods(customerId) {

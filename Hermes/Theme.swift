@@ -19,6 +19,8 @@ struct ThemeManager {
         static let yellow = UIColor(hex: "#eeb422")
         static let textFieldBackground = UIColor(hex: "#F7F7F7")
         static let green = UIColor(hex: "#21A0A0")
+        
+        static let primary = ThemeManager.Color.yellow
     }
     
     struct Font {

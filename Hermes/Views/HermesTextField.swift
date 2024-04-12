@@ -123,7 +123,7 @@ class HermesTextField: UITextField {
     }
 
     func showError() {
-        layer.borderColor = ThemeManager.Color.yellow.cgColor
+        layer.borderColor = ThemeManager.Color.primary.cgColor
         layer.borderWidth = 1.5
     }
 }

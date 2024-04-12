@@ -54,7 +54,7 @@ class AddressCell: UITableViewCell {
             subAddressLabel.text = "\(address.city), \(address.state) \(address.zip)"
             
             if address.isDefault {
-                placemarkImageView.tintColor = ThemeManager.Color.yellow
+                placemarkImageView.tintColor = ThemeManager.Color.primary
             } else {
                 placemarkImageView.tintColor = ThemeManager.Color.gray
             }

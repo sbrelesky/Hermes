@@ -16,7 +16,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationController?.navigationBar.tintColor = ThemeManager.Color.yellow
+        navigationController?.navigationBar.tintColor = ThemeManager.Color.primary
         navigationController?.navigationBar.titleTextAttributes = [
             .font: ThemeManager.Font.Style.main.font.withDynamicSize(29.0),
             .foregroundColor: ThemeManager.Color.text

@@ -13,7 +13,7 @@ class LoadingPopup: PopupController {
     
     let activityIndicator: UIActivityIndicatorView = {
         let iv = UIActivityIndicatorView(style: .large)
-        iv.color = ThemeManager.Color.yellow
+        iv.color = ThemeManager.Color.primary
         iv.hidesWhenStopped = true
         
         return iv
@@ -30,9 +30,9 @@ class LoadingPopup: PopupController {
         return l
     }()
 
-    init(message: String, completion: (() -> Void)?) {
+    init(message: String, dismissCompletion: (() -> Void)?) {
         messageLabel.text = message
-        super.init(completion)
+        super.init(dismissCompletion)
         
         dismissButton.isHidden = true
     }

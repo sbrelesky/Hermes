@@ -19,7 +19,7 @@ class AccountController: BaseViewController {
         case cars = "Cars"
         case addresses = "Addresses"
         case paymentMethods = "Payment Methods"
-        // case notifications = "Notifications"
+        case support = "Support"
         case resetPassword = "Reset Password"
         case logout = "Log Out"
         case deleteAccount = "Delete Account"
@@ -97,6 +97,24 @@ class AccountController: BaseViewController {
             }
         }
     }
+    
+    private func handleSupport() {
+        SupportManager.shared.fetchOpenSupportTicket { error in
+            if let error = error {
+                self.presentError(error: error)
+            } else {
+                
+                guard let openTicket = SupportManager.shared.openSupportTicket else {
+                    let vc = SupportController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    return
+                }
+                
+                let vc = ChatController(support: openTicket)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
 }
 extension AccountController: UITableViewDelegate, UITableViewDataSource {
     
@@ -133,8 +151,8 @@ extension AccountController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc, animated: true)
         case .paymentMethods:
             handlePaymentMethods()
-//        case .notifications:
-//            self.presentError(message: "Not implemented yet")
+        case .support:
+            handleSupport()
         case .resetPassword:
             resetPassword()
         case .logout:
@@ -176,7 +194,7 @@ extension AccountController {
                     }
                 }
             }
-        } completion: {
+        } dismissCompletion: {
             self.presentCustomerSheet()
         }
     }
@@ -186,16 +204,16 @@ extension AccountController {
         var appearance = configuration.appearance
         
         configuration.headerTextForSelectionScreen = "Header Tex"
-//        configuration.primaryButtonColor = ThemeManager.Color.yellow
+//        configuration.primaryButtonColor = ThemeManager.Color.primary
 //        configuration.primaryButtonLabel = "Pay"
         configuration.style = .alwaysLight
         appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
         appearance.primaryButton.textColor = .white
-        appearance.primaryButton.backgroundColor = ThemeManager.Color.yellow
+        appearance.primaryButton.backgroundColor = ThemeManager.Color.primary
         appearance.primaryButton.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
         appearance.primaryButton.successTextColor = .white
         appearance.primaryButton.successBackgroundColor = ThemeManager.Color.green
-        appearance.colors.primary = ThemeManager.Color.yellow
+        appearance.colors.primary = ThemeManager.Color.primary
         appearance.colors.text = ThemeManager.Color.text
 
         configuration.appearance = appearance

@@ -42,16 +42,7 @@ extension FirestoreManager {
                 if let error = error {
                     completion(.failure(error))
                 } else {
-                    db.collection(Constants.FirestoreKeys.fillUpsCollection).document(newDocumentRef.documentID).updateData([
-                        "user.id": uid
-                    ]) { error in
-                        if let error = error {
-                            completion(.failure(error))
-                        } else {
-                            db.collection(Constants.FirestoreKeys.fillUpsCollection).document(newDocumentRef.documentID).getDocument(as: FillUp.self, completion: completion)
-                        }
-                    }
-                    
+                    db.collection(Constants.FirestoreKeys.fillUpsCollection).document(newDocumentRef.documentID).getDocument(as: FillUp.self, completion: completion)
                 }
             }
         } catch let error  {
@@ -61,7 +52,7 @@ extension FirestoreManager {
     }
     
     func cancelFillUp(_ fillUp: FillUp, completion: @escaping (Error?) -> ()) {
-        guard let uid = UserManager.shared.currentUser?.id, let fillUpId = fillUp.id else { return }
+        guard let _ = UserManager.shared.currentUser?.id, let fillUpId = fillUp.id else { return }
     
         db.collection(Constants.FirestoreKeys.fillUpsCollection).document(fillUpId).delete { error in
             if let error = error {

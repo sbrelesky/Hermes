@@ -18,6 +18,7 @@ class FillUpsController: BaseViewController {
         tv.dataSource = self
         tv.register(FillUpCell.self, forCellReuseIdentifier: "cell")
         tv.separatorStyle = .none
+        tv.showsVerticalScrollIndicator = false
         
         return tv
     }()
@@ -59,11 +60,10 @@ extension FillUpsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FillUpCell
         
-        if indexPath.section == 0 {
-            cell.fillUp = FillUpManager.shared.openFillUps[indexPath.row]
-        } else {
-            cell.fillUp = FillUpManager.shared.completeFillUps[indexPath.row]
-        }
+        let fillUp = indexPath.section == 0 ? FillUpManager.shared.openFillUps[indexPath.row] : FillUpManager.shared.completeFillUps[indexPath.row]
+        
+        cell.configure(cars: fillUp.cars)
+        cell.fillUp = fillUp
         
         return cell
     }
@@ -88,7 +88,7 @@ extension FillUpsController: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.bounds.width, height: headerHeight))
         label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(18.0)
         label.textColor = ThemeManager.Color.text
-        label.text = section == 0 ? "Open Fill Ups": "Completed Fill Ups"
+        label.text = section == 0 ? "Open Fill Ups": "Previous Fill Ups"
         label.textAlignment = .left
         
         headerView.addSubview(label)
@@ -99,9 +99,5 @@ extension FillUpsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return headerHeight
     }
-    
-}
-
-class FillUpCell: HomeFillUpCell {
     
 }

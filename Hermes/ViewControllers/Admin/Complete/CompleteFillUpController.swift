@@ -251,10 +251,8 @@ extension CompleteFillUpController: ButtonCellDelegate, Calculations {
         guard let totalInCents = totalInCents else { return }
         
         button.setLoading(true)
-        
-        fillUp.totalAmountPaid = totalInCents
-        
-        AdminManager.shared.completeFillUp(fillUp) { error in
+                
+        AdminManager.shared.completeFillUp(fillUp, totalInCents: totalInCents) { error in
             button.setLoading(false)
             if let error = error {
                 self.presentError(error: error)

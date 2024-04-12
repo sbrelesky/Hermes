@@ -7,10 +7,12 @@
 
 import Foundation
 import FirebaseFirestore
+import Stripe
 
 enum FillUpStatus: String, Codable {
     case open
     case complete
+    case refunded
 }
 
 class FillUp: Codable {
@@ -22,12 +24,20 @@ class FillUp: Codable {
     var address: Address
     var cars: [Car]
     var user: User
-    var paymentIntentSecret: String
     var deviceToken: String? = UserDefaults.standard.messageToken
     var dateCompleted: Date?
-    var totalAmountPaid: Int?
-    var totalPaymentIntentId: String?
     var notes: String?
+    
+    // Stripe Properties
+    var refund: Refund?
+    var payments: [PaymentIntent]? = []
+    
+    var serviceFeePaymentIntent: PaymentIntent? {
+        if let paymentIntent = payments?.sorted(by: { $0.amount < $1.amount }).first {
+            return paymentIntent
+        }
+        return nil
+    }
     
     var formattedDate: String? {
         let components = date.get(.day, .year)
@@ -43,7 +53,7 @@ class FillUp: Codable {
         self.address = address
         self.cars = cars
         self.user = user
-        self.paymentIntentSecret = paymentIntentSecret
+        // self.paymentIntentSecret = paymentIntentSecret
     }
     
     static let test = FillUp(status: .open, date: Date(), address: Address.test, cars: [Car.test], user: User.test, paymentIntentSecret: "")

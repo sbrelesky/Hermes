@@ -35,6 +35,7 @@ class UserManager {
     // MARK: - Fetch and Set Current User
     
     func fetch(completion: @escaping (Error?) -> ()){
+        
         FirestoreManager.shared.fetchUser { result in
             switch result {
             case .success(let user):
