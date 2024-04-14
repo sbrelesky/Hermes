@@ -67,9 +67,7 @@ class CheckZipController: UIViewController {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(80)
             make.leading.trailing.equalTo(checkButton)
             make.height.equalTo(65)
-        }
-        
-        zipTextField.text = "89002"
+        }        
     }
     
     @objc func checkZip() {
