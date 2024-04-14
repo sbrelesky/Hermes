@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        StripeAPI.defaultPublishableKey = "pk_test_51Or3t9BkajlE0Nzvx2qshqdVtsbBJLiPZmKS5gNQGqvCiBdsfaiH5tRWCsIPijZi7jfEZH66H7QcwM9rxRw5cqLp00MEXfuFQt"
+        StripeAPI.defaultPublishableKey = Constants.StripeKeys.key
         Messaging.messaging().delegate = self
         
         UNUserNotificationCenter.current().delegate = self

@@ -34,6 +34,11 @@ struct Constants {
         static let chatSubCollection = "Chat"
     }
     
+    struct StripeKeys {
+        static let testKey = "pk_test_51Or3t9BkajlE0Nzvx2qshqdVtsbBJLiPZmKS5gNQGqvCiBdsfaiH5tRWCsIPijZi7jfEZH66H7QcwM9rxRw5cqLp00MEXfuFQt"
+        static let key = "pk_live_51Or3t9BkajlE0NzvIdIdbMNza83gMcg00JfvE9GNydGcpq0WNZp7T3wDSpzIVk4lwKL0qyPibcDUjXgh85Q8u0mO00buxD9cSb"
+    }
+    
     struct Padding {
         struct Vertical {
             static var textFieldSpacing = 30.0

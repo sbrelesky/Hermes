@@ -12,7 +12,7 @@ require("firebase-functions/logger/compat");
 // const {onCall} = require("firebase-functions/v2/https");
 // const {onRequest} = require("firebase-functions/v2/https");
 // const logger = require("firebase-functions/logger");
-const stripe = require('stripe')('sk_test_51Or3t9BkajlE0NzvrXB5mboEnj02Juw7JTOg86Dj7dB78ouLDfYXKAFI5gMO0K96QBKgpsNssa3EOfySv98tKcK700U7Z7BBH6');
+const stripe = require('stripe')(functions.config().stripe.secret_key);
 
 
 // Create and deploy your first functions
@@ -189,8 +189,8 @@ exports.createStripeCustomer = functions.https.onCall(async (data, context) => {
         return customer;
 
     } catch (error) {
-        // Handle errors
-        throw new functions.https.HttpsError('internal', 'Error creating Stripe customer.', error);
+        console.error(error);
+        throw error;
     }
 });
 

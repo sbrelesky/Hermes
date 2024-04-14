@@ -61,6 +61,7 @@ class CheckoutController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupForKeyboard()
         
         title = "Checkout"
         
