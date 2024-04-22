@@ -38,5 +38,100 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2ED76011-2951-442D-8E8D-EDCE4758C39C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Hermes/ViewControllers/Checkout/CheckoutController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "configurePaymentSheet(paymentIntent:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "72C4E5C2-9F39-4BC8-AF65-A630C8C976A5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Hermes/ViewControllers/Checkout/CheckoutController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "createPaymentIntent()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "72C4E5C2-9F39-4BC8-AF65-A630C8C976A5 - f6fceb285d30f9f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Hermes.PaymentIntent, Swift.Error&gt;) -&gt; () in Hermes.CheckoutController.createPaymentIntent() -&gt; ()"
+                  moduleName = "Hermes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shane/Desktop/Hermes/Hermes/ViewControllers/Checkout/CheckoutController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "72C4E5C2-9F39-4BC8-AF65-A630C8C976A5 - f6fceb285d30f9f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Hermes.PaymentIntent, Swift.Error&gt;) -&gt; () in Hermes.CheckoutController.createPaymentIntent() -&gt; ()"
+                  moduleName = "Hermes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shane/Desktop/Hermes/Hermes/ViewControllers/Checkout/CheckoutController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "72C4E5C2-9F39-4BC8-AF65-A630C8C976A5 - f6fceb285d30f9f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Hermes.PaymentIntent, Swift.Error&gt;) -&gt; () in Hermes.CheckoutController.createPaymentIntent() -&gt; ()"
+                  moduleName = "Hermes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shane/Desktop/Hermes/Hermes/ViewControllers/Checkout/CheckoutController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "560">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8EE3031C-7970-4B71-882C-F941E97609C3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Hermes/Models/Fill Ups/FillUpManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "scheduleFillUp(_:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

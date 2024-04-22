@@ -12,7 +12,15 @@ require("firebase-functions/logger/compat");
 // const {onCall} = require("firebase-functions/v2/https");
 // const {onRequest} = require("firebase-functions/v2/https");
 // const logger = require("firebase-functions/logger");
-const stripe = require('stripe')(functions.config().stripe.secret_key);
+
+let stripeApiKey = process.env.STRIPEKEY;
+
+const functionConfig = () => {
+    const fs = require('fs');
+    return JSON.parse(fs.readFileSync('.env.json'));
+};
+
+const stripe = require('stripe')("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");
 
 
 // Create and deploy your first functions
@@ -22,6 +30,22 @@ const stripe = require('stripe')(functions.config().stripe.secret_key);
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+exports.getStripeSecretKey =  functions.https.onCall((data, context) => {
+    return {
+        key: functionConfig().stripesecretkeys.key
+    };
+});
+
+exports.getStripePublishableKey =  functions.https.onCall((data, context) => {
+    return {
+        key: functionConfig().stripepublishablekeys.key
+    };
+});
+
+exports.hello = functions.https.onRequest((request, response) => {
+    response.send(`NODE: ${process.env.NODE_ENV}, STRIPEKEY: ${process.env.STRIPEKEY}`);
+});
 
 const usersCollection = db.collection('User');
 const fillUpsCollection = db.collection('FillUps');
@@ -317,6 +341,7 @@ exports.createEphemeralKey = functions.https.onCall(async (data, context) => {
 // Scheduling Fill Up Charging Customer
 exports.createPaymentIntentForFillUp = functions.https.onCall(async (data, context) => {
     try {
+
         // Ensure the user is authenticated
         if (!context.auth) {
             throw new functions.https.HttpsError('unauthenticated', 'You must be authenticated to access this resource.');
@@ -327,15 +352,10 @@ exports.createPaymentIntentForFillUp = functions.https.onCall(async (data, conte
         const userDoc = await usersCollection.doc(uid).get();
         const userData = userDoc.data();
         const stripeCustomerId = userData.stripeCustomerId;
-
-        //const fillUpId = data.fillUpId;
  
         if (!stripeCustomerId) {
             throw new functions.https.HttpsError('not-found', 'Stripe customer ID not found for the user.');
         }
-
-        // Need the id of the payment method
-        // payment_method: "pm_1OrTJXBkajlE0NzvNwlNzXVC",
 
         const amount = data.amount;
 
@@ -354,15 +374,6 @@ exports.createPaymentIntentForFillUp = functions.https.onCall(async (data, conte
 
         const paymentIntent = await stripe.paymentIntents.create(paymentIntentData);
         const timestamp = Date.now();
-
-        console.log({ 
-            date: timestamp,
-            clientSecret: paymentIntent.client_secret,
-            ephemeralKey: ephemeralKey.secret,
-            customerId: stripeCustomerId,
-            amount: amount,
-            id: paymentIntent.id
-          });
         
         return { 
             date: timestamp,
@@ -372,8 +383,6 @@ exports.createPaymentIntentForFillUp = functions.https.onCall(async (data, conte
             amount: amount,
             id: paymentIntent.id
         };
-
-
     } catch (error) {
         console.error('Error Creating payment intent: ', error);
         throw error;
