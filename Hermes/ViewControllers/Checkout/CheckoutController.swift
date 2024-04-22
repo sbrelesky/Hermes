@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import StripePaymentSheet
-
+import FirebaseAnalytics
 
 class CheckoutController: BaseViewController {
     
@@ -63,6 +63,9 @@ class CheckoutController: BaseViewController {
         super.viewDidLoad()
         setupForKeyboard()
         
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "checkout_screen"])
+        Analytics.logEvent(AnalyticsEventBeginCheckout, parameters: nil)
+
         title = "Checkout"
         
         setupViews()        
@@ -195,6 +198,10 @@ class CheckoutController: BaseViewController {
                         self.presentError(error: error)
                     } else {
                         print("Fill Up Successfully Scheduled")
+                        Analytics.logEvent(AnalyticsEventPurchase, parameters: [
+                          AnalyticsParameterPrice: paymentIntent.amount,
+                        ])
+                        
                         let vc = InstructionsController()
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
@@ -207,7 +214,7 @@ class CheckoutController: BaseViewController {
         var price: Double = 0.0
 
         for car in fillUp.cars {
-            var gasPrice = switch car.fuel {
+            let gasPrice = switch car.fuel {
                 case .regular: SettingsManager.shared.settings.prices.regular
                 case .midgrade: SettingsManager.shared.settings.prices.midgrade
                 case .premium: SettingsManager.shared.settings.prices.premium

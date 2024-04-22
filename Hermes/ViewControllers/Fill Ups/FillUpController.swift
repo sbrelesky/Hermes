@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import FirebaseAnalytics
 
 class FillUpsController: BaseViewController {
  
@@ -29,6 +30,10 @@ class FillUpsController: BaseViewController {
         super.viewDidLoad()
         
         title = "Fill Ups"
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+            AnalyticsParameterScreenName: "view_fill_ups_screen"
+        ])
         
         setupViews()
     }

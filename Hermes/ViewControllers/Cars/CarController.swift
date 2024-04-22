@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import FirebaseAnalytics
 
 extension UITableView {
     func reloadData(completion:@escaping ()->()) {
@@ -74,9 +75,23 @@ class CarController: BaseViewController {
     private var tableViewHeightConstraint: Constraint?
     private var initialFetchLoaded = false
     
+    let inFillUpProcess: Bool
+    
+    init(inFillUpProcess: Bool) {
+        self.inFillUpProcess = inFillUpProcess
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Cars"
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "cars_screen", "in_fill_up_process": inFillUpProcess])
         
         setupViews()
         
@@ -154,6 +169,10 @@ class CarController: BaseViewController {
             make.top.equalTo(addNewCarButton.snp.bottom).offset(5)
             make.bottom.lessThanOrEqualTo(scheduleButton.snp.top).offset(-20).priority(.required)
         }
+        
+        
+        scheduleButton.isHidden = !inFillUpProcess
+        selectCarsLabel.isHidden = !inFillUpProcess
        
     }
     

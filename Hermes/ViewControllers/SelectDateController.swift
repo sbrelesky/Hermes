@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import CVCalendar
-
+import FirebaseAnalytics
 
 class SelectDateController: BaseViewController {
     
@@ -102,6 +102,9 @@ class SelectDateController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Select Date"
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "select_date_screen"])
+
         
         setupViews()
         

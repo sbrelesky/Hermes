@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import FirebaseAuth
+import FirebaseAnalytics
 
 class SignUpController: UIViewController, TextFieldValidation {
     
@@ -225,6 +226,7 @@ class SignUpController: UIViewController, TextFieldValidation {
             if let error = error {
                 self.showError(error)
             } else {
+                Analytics.logEvent(AnalyticsEventSignUp, parameters: ["name": name, "email": Auth.auth().currentUser?.email])
                 self.handleDatabaseSuccess()
             }
         }

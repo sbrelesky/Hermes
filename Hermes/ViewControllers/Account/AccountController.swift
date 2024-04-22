@@ -142,9 +142,7 @@ extension AccountController: UITableViewDelegate, UITableViewDataSource {
             let vc = FillUpsController()
             navigationController?.pushViewController(vc, animated: true)
         case .cars:
-            let vc = CarController()
-            vc.scheduleButton.isHidden = true
-            vc.selectCarsLabel.isHidden = true
+            let vc = CarController(inFillUpProcess: false)
             navigationController?.pushViewController(vc, animated: true)
         case .addresses:
             let vc = AddressController()

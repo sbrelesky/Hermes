@@ -7,12 +7,22 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseAnalytics
 
 class UserManager {
     
     static let shared = UserManager()
     
-    var currentUser: User?
+    var currentUser: User? {
+        didSet {
+            guard let currentUser = currentUser else { return }
+            
+            Analytics.setUserID(currentUser.id)
+            Analytics.setUserProperty(currentUser.name, forName: "name")
+            Analytics.setUserProperty(currentUser.email, forName: "email")
+            Analytics.setUserProperty(currentUser.phone, forName: "phone")
+        }
+    }
     var cars: [Car] = []
     var addresses: [Address] = []
     

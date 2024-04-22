@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
-import CVCalendar
+import FirebaseAnalytics
 
 class SelectAddressController: BaseViewController {
     
@@ -59,6 +59,8 @@ class SelectAddressController: BaseViewController {
         super.viewDidLoad()
         
         title = "Select Address"
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "select_addresses_screen"])
         
         setupViews()
         

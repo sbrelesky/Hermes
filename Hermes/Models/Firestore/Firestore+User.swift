@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseAuth
-
+import FirebaseAnalytics
 
 
 // MARK: - User Methods

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import FirebaseAuth
+import FirebaseAnalytics
 
 class LoginController: UIViewController, TextFieldValidation {
     
@@ -177,6 +178,7 @@ class LoginController: UIViewController, TextFieldValidation {
                     vc.modalPresentationStyle = .overFullScreen
                     self.present(vc, animated: true)
                     
+                    Analytics.logEvent("login", parameters: nil)
                     
                     self.emailTextField.text = nil
                     self.passwordTextField.text = nil
