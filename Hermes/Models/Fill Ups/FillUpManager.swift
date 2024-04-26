@@ -84,8 +84,6 @@ class FillUpManager {
         FirestoreManager.shared.scheduleFillUp(fillUp) { result in
             switch result {
             case .success(let fillUp):
-//                self.openFillUps.append(fillUp)
-//                self.openFillUps = self.openFillUps.filter({ $0.status == .open }).sorted(by: { $0.date < $1.date })
                 self.checkDateForMaxCapacity(date: fillUp.date, completion: completion)
             case .failure(let error):
                 completion(error)

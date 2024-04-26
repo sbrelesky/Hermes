@@ -210,8 +210,8 @@ class HomeController: BaseViewController {
     }
     
     @objc func schedulePressed() {
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterContentType: "schedule_button_tapped"])
 
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterContentType: "schedule_button_tapped"])
         let vc = CarController(inFillUpProcess: true)
         navigationController?.pushViewController(vc, animated: true)
     }

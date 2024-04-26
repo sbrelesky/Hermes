@@ -24,3 +24,11 @@ extension Double {
        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
    }
 }
+
+extension CGFloat {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> CGFloat {
+        let divisor = pow(10.0, CGFloat(places))
+        return (self * divisor).rounded() / divisor
+    }
+}

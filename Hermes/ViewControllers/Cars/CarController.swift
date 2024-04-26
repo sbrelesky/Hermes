@@ -191,20 +191,13 @@ class CarController: BaseViewController {
     // MARK: - Targets
     
     @objc func schedulePressed() {
+      
         if let selectedIndexPaths = tableView.indexPathsForSelectedRows {
             // Iterate over the indexPaths and get the corresponding cells
             let selectedCars = selectedIndexPaths.compactMap({ (tableView.cellForRow(at: $0) as? CarTableViewCell)?.car })
             
-            
-            // Fetch addresses so we have the default on the next page
-            UserManager.shared.fetchAddresses { error in
-                if let error = error {
-                    self.presentError(error: error)
-                } else {
-                    let vc = SelectAddressController(cars: selectedCars)
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            }
+            let vc = GasEstimateController(cars: selectedCars)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

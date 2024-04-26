@@ -179,6 +179,11 @@ extension CompleteFillUpController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.car.rawValue, for: indexPath) as! CarTableViewCell
             cell.car = fillUp.cars[indexPath.row]
             cell.yearLabel.text = "\(fillUp.cars[indexPath.row].fuelCapacity) gallons"
+            
+            if let gasEstimate = fillUp.cars[indexPath.row].gasEstimate, let estimateText = GasEstimateAmount(rawValue: gasEstimate)?.text {
+                cell.yearLabel.text = (cell.yearLabel.text ?? "") + " - \(estimateText) tank left"
+            }
+            
             cell.selectionStyle = .none
             return cell
         case .data:

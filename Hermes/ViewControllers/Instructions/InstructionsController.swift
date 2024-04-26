@@ -167,20 +167,12 @@ class InstructionsController: BaseViewController {
             self.collectionView.isPagingEnabled = true
         }
     }
-    
         
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let collectionView = scrollView as? UICollectionView,
-              let indexPath = getCurrentIndexPath(collectionView: collectionView) else { return }
+              let indexPath = collectionView.getCurrentIndexPath() else { return }
         
         self.currentIndex = indexPath.item
-    }
-    
-    func getCurrentIndexPath(collectionView: UICollectionView) -> IndexPath? {
-        // Calculate the index of the currently visible cell
-        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
-        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        return collectionView.indexPathForItem(at: visiblePoint)
     }
 }
 

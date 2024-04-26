@@ -76,6 +76,30 @@ class CarTableViewCell: UITableViewCell {
         return l
     }()
     
+    let gasEstimateLabel: UILabel = {
+        let l = UILabel(frame: .zero)
+        l.textColor = ThemeManager.Color.gray.withAlphaComponent(0.43)
+        l.textAlignment = .right
+        l.font = ThemeManager.Font.Style.main.font
+        
+        return l
+    }()
+    
+    
+    let gasEstimateSlider: UISlider = {
+        let s = UISlider(frame: .zero)
+        s.minimumValue = 0
+        s.maximumValue = 0.5
+        s.value = 0.25
+        
+        s.thumbTintColor = ThemeManager.Color.primary
+        s.tintColor = ThemeManager.Color.gray
+        
+        return s
+    }()
+    
+    
+    
     var car: Car? {
         didSet {
             guard let car = car else { return }
@@ -99,7 +123,7 @@ class CarTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
+    func setupViews() {
         addSubview(cardView)
         cardView.addSubview(modelLabel)
         cardView.addSubview(makeLabel)
@@ -212,4 +236,10 @@ class CarTableViewCell: UITableViewCell {
 //            cardView.layer.insertSublayer(shadowLayer, at: 0)
 //        }
     }
+}
+
+
+class CarSliderCell: CarTableViewCell {
+    
+    
 }

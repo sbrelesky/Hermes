@@ -20,7 +20,7 @@ class AdminOrdersController: BaseViewController {
     
    lazy var tableView: UITableView = {
        let tv = UITableView(frame: .zero, style: .grouped)
-       tv.backgroundColor = .white
+       tv.backgroundColor = .clear
        tv.delegate = self
        tv.dataSource = self
        tv.register(AdminFillUpCell.self, forCellReuseIdentifier: "cell")
@@ -36,8 +36,9 @@ class AdminOrdersController: BaseViewController {
     }
     
     private let headerHeight = 70.0
-    
     private var mode: Mode = .open
+    
+    var footerViews: [AdminOrderFooter] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +78,7 @@ class AdminOrdersController: BaseViewController {
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.bottom.equalToSuperview()
         }
-    }   
+    }
     
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         // Handle segmented control value change events
@@ -142,77 +143,22 @@ extension AdminOrdersController: UITableViewDelegate, UITableViewDataSource, Adm
         return headerHeight
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = AdminOrderFooter(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 100.0))
+        footer.order = mode == .open ? AdminManager.shared.openOrders[section] : AdminManager.shared.completeOrders[section]
+        
+        return footer
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return tableView.bounds.height * 0.2233
+    }
+    
     func mapPressed(date: Date) {
         let vc = MapViewController(date: date)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
-protocol AdminOrderHeaderDelegate: AnyObject {
-    func mapPressed(date: Date)
-}
 
-class AdminOrderHeader: UIView {
-    
-    let label: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.font = ThemeManager.Font.Style.secondary(weight: .bold).font.withDynamicSize(24.0)
-        label.textColor = ThemeManager.Color.text
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .left
-        
-        return label
-    }()
-    
-    lazy var mapIcon: UIButton = {
-        let mapIcon = UIButton(frame: .zero)
-        mapIcon.addTarget(self, action: #selector(mapPressed), for: .touchUpInside)
-        mapIcon.setImage(UIImage(systemName: "map")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        mapIcon.tintColor = ThemeManager.Color.gray
-        
-        return mapIcon
-    }()
-    
-    var date: Date? {
-        didSet {
-            guard let date = date else { return }
-            let components = date.get(.day, .year)
-            guard let day = components.day, let year = components.year else { return }
-            label.text = "\(date.dayOfWeek() ?? ""), \(date.monthName()) \(day), \(year)"
-        }
-    }
-    
-    weak var delegate: AdminOrderHeaderDelegate?
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupViews() {
-        addSubview(label)
-        addSubview(mapIcon)
-        
-        label.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.centerY.equalToSuperview()
-        }
-        
-        mapIcon.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
-            make.width.height.equalTo(30)
-            make.centerY.equalTo(label)
-        }
-    }
-    
-    @objc func mapPressed() {
-        guard let date = date else { return }
-        delegate?.mapPressed(date: date)
-    }
-    
-}

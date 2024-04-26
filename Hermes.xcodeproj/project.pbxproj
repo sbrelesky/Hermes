@@ -56,6 +56,13 @@
 		34A2273B2BD6E961009A742D /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 34A2273A2BD6E961009A742D /* FirebaseFunctions */; };
 		34A2273D2BD6E961009A742D /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 34A2273C2BD6E961009A742D /* FirebaseFunctionsCombine-Community */; };
 		34A227472BD6E961009A742D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 34A227462BD6E961009A742D /* FirebaseMessaging */; };
+		34A227542BD74931009A742D /* GasEstimateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A227532BD74931009A742D /* GasEstimateController.swift */; };
+		34A227562BD88388009A742D /* CircularSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A227552BD88388009A742D /* CircularSliderView.swift */; };
+		34A227582BD883B2009A742D /* GasEstimateCarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A227572BD883B2009A742D /* GasEstimateCarCell.swift */; };
+		34A2275A2BD88577009A742D /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A227592BD88577009A742D /* UICollectionView.swift */; };
+		34A2275D2BD9D359009A742D /* AdminOrderHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2275C2BD9D359009A742D /* AdminOrderHeader.swift */; };
+		34A2275F2BD9D370009A742D /* AdminOrderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2275E2BD9D370009A742D /* AdminOrderFooter.swift */; };
+		34ABE3FC2BDACBF300D5AC8C /* GasGaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABE3FB2BDACBF300D5AC8C /* GasGaugeView.swift */; };
 		34B754932BABBAE0001459BD /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754922BABBAE0001459BD /* Notice.swift */; };
 		34B754962BABBCCF001459BD /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754952BABBCCF001459BD /* NoticeController.swift */; };
 		34B754982BABBECA001459BD /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B754972BABBECA001459BD /* NoticeCell.swift */; };
@@ -199,6 +206,13 @@
 		348D87D02B91091E00F98745 /* HermesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HermesButton.swift; sourceTree = "<group>"; };
 		348D87D22B9109BE00F98745 /* CheckZipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckZipController.swift; sourceTree = "<group>"; };
 		348D87D42B9113E700F98745 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		34A227532BD74931009A742D /* GasEstimateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasEstimateController.swift; sourceTree = "<group>"; };
+		34A227552BD88388009A742D /* CircularSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSliderView.swift; sourceTree = "<group>"; };
+		34A227572BD883B2009A742D /* GasEstimateCarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasEstimateCarCell.swift; sourceTree = "<group>"; };
+		34A227592BD88577009A742D /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		34A2275C2BD9D359009A742D /* AdminOrderHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOrderHeader.swift; sourceTree = "<group>"; };
+		34A2275E2BD9D370009A742D /* AdminOrderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOrderFooter.swift; sourceTree = "<group>"; };
+		34ABE3FB2BDACBF300D5AC8C /* GasGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasGaugeView.swift; sourceTree = "<group>"; };
 		34B754922BABBAE0001459BD /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		34B754952BABBCCF001459BD /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		34B754972BABBECA001459BD /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
@@ -440,6 +454,7 @@
 				340339BA2B995D3F00044E77 /* Checkout */,
 				340339B32B98FFA000044E77 /* Payment Methods */,
 				34E3F07F2B94ED560085A239 /* Addresses */,
+				34A227522BD74923009A742D /* Gas Estimate */,
 				34E3F08B2B957BF50085A239 /* Cars */,
 				34E3F06C2B92975C0085A239 /* Home */,
 				34E3F0542B9157910085A239 /* Sign Up Flow */,
@@ -460,6 +475,8 @@
 				34E3F0912B96198D0085A239 /* DesertEmptyView.swift */,
 				34BDC8962B96A2A800B17351 /* AddressButton.swift */,
 				34B754BC2BB20EBA001459BD /* PaddingLabel.swift */,
+				34A227552BD88388009A742D /* CircularSliderView.swift */,
+				34ABE3FB2BDACBF300D5AC8C /* GasGaugeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -485,8 +502,28 @@
 				34BEA26B2BA24C540038698A /* UserDefaults.swift */,
 				3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */,
 				34B754CD2BC4B2CC001459BD /* Encodable.swift */,
+				34A227592BD88577009A742D /* UICollectionView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		34A227522BD74923009A742D /* Gas Estimate */ = {
+			isa = PBXGroup;
+			children = (
+				34A227532BD74931009A742D /* GasEstimateController.swift */,
+				34A227572BD883B2009A742D /* GasEstimateCarCell.swift */,
+			);
+			path = "Gas Estimate";
+			sourceTree = "<group>";
+		};
+		34A2275B2BD9D347009A742D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				34BEA27E2BA4AB840038698A /* AdminFillUpCell.swift */,
+				34A2275C2BD9D359009A742D /* AdminOrderHeader.swift */,
+				34A2275E2BD9D370009A742D /* AdminOrderFooter.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		34B754942BABBCC5001459BD /* Notices */ = {
@@ -608,10 +645,10 @@
 		34BEA2722BA2D0430038698A /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				34A2275B2BD9D347009A742D /* Cells */,
 				34B754C42BB27DA1001459BD /* Support */,
 				3464D6A62BA4C9C100AAE7AD /* Complete */,
 				34BEA2732BA2D0530038698A /* AdminOrdersController.swift */,
-				34BEA27E2BA4AB840038698A /* AdminFillUpCell.swift */,
 				3464D6A72BA6169200AAE7AD /* MapViewController.swift */,
 				3464D6A92BA8975300AAE7AD /* AdminSettingsController.swift */,
 				34B754C22BB278E5001459BD /* AdminController.swift */,
@@ -853,8 +890,11 @@
 				340339B22B98FDC000044E77 /* PaymentMethodsController.swift in Sources */,
 				34B754C82BB39983001459BD /* AdminSupportCell.swift in Sources */,
 				34E3EFFB2B913C1B0085A239 /* User.swift in Sources */,
+				34A227542BD74931009A742D /* GasEstimateController.swift in Sources */,
 				34BDC8AC2B9772AE00B17351 /* UserManager+Stripe.swift in Sources */,
+				34A2275D2BD9D359009A742D /* AdminOrderHeader.swift in Sources */,
 				34B754C12BB21D35001459BD /* MessageInputView.swift in Sources */,
+				34A227562BD88388009A742D /* CircularSliderView.swift in Sources */,
 				3464D6A52BA4C11200AAE7AD /* CompleteFillUpCell.swift in Sources */,
 				34BEA2232B9F850A0038698A /* ViewOrderProgressCell.swift in Sources */,
 				34BEA2262B9FB6C50038698A /* FillUpManager.swift in Sources */,
@@ -897,6 +937,7 @@
 				34BEA22C2B9FBC540038698A /* ViewOrderCancelCell.swift in Sources */,
 				34BEA2822BA4AFBD0038698A /* MapAddressCell.swift in Sources */,
 				348D87D12B91091E00F98745 /* HermesButton.swift in Sources */,
+				34A2275F2BD9D370009A742D /* AdminOrderFooter.swift in Sources */,
 				34B754CE2BC4B2CC001459BD /* Encodable.swift in Sources */,
 				34B754B82BB1E27B001459BD /* ChatController.swift in Sources */,
 				343F43042B9ADF5000AF9F5D /* AccountController.swift in Sources */,
@@ -908,6 +949,7 @@
 				34E3EFF82B9125840085A239 /* UIViewController+Keyboard.swift in Sources */,
 				34E3F0812B94ED760085A239 /* AddressSuggestionCell.swift in Sources */,
 				34E3F0782B939C3F0085A239 /* HermesTextField+SearchBar.swift in Sources */,
+				34A2275A2BD88577009A742D /* UICollectionView.swift in Sources */,
 				34B754CC2BC4A844001459BD /* Refund.swift in Sources */,
 				34E3F08D2B9617E50085A239 /* FillUp.swift in Sources */,
 				34B754B42BB1DE16001459BD /* Firestore+Support.swift in Sources */,
@@ -916,6 +958,7 @@
 				34B754BB2BB1EB85001459BD /* SupportManager.swift in Sources */,
 				343F430B2B9CCAC900AF9F5D /* FirebaseFunctions+Customer.swift in Sources */,
 				34E3F0702B938BEA0085A239 /* LoadingPopup.swift in Sources */,
+				34A227582BD883B2009A742D /* GasEstimateCarCell.swift in Sources */,
 				34E3F0652B924AF40085A239 /* CarApiManager.swift in Sources */,
 				348D87C12B90F5E200F98745 /* HermesTextField.swift in Sources */,
 				3464D6AC2BA9013000AAE7AD /* Calculations.swift in Sources */,
@@ -936,6 +979,7 @@
 				34BEA2792BA3533F0038698A /* CompleteFillUpController.swift in Sources */,
 				343F42FE2B9AC50B00AF9F5D /* Settings.swift in Sources */,
 				34B754982BABBECA001459BD /* NoticeCell.swift in Sources */,
+				34ABE3FC2BDACBF300D5AC8C /* GasGaugeView.swift in Sources */,
 				34E3F0742B9398FD0085A239 /* BaseViewController.swift in Sources */,
 				34E3F08A2B9579560085A239 /* CarController.swift in Sources */,
 				34B7549C2BAC9991001459BD /* Firestore+User.swift in Sources */,
