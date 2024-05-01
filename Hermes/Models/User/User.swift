@@ -25,7 +25,8 @@ class User: Codable {
     private var _name: String
     private var _phone: String
     private var _stripeCustomerId: String?
-    private var deviceToken: String?
+    
+    var deviceToken: String?
         
     var name: String {
        get {

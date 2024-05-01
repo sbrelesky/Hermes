@@ -69,16 +69,16 @@ class AdminManager {
             
             switch result {
             case .success(let paymentIntent):
-                self.confirmPaymentIntent(paymentIntent: paymentIntent, fillUp: fillUp, completion: completion)
+                self.confirmPaymentIntent(paymentIntent: paymentIntent, fillUp: fillUp, paymentMethodId: paymentMethodId, completion: completion)
             case .failure(let error):
                 completion(error)
             }
         }
     }
     
-    private func confirmPaymentIntent(paymentIntent: PaymentIntent, fillUp: FillUp, completion: @escaping (Error?) -> ()) {
+    private func confirmPaymentIntent(paymentIntent: PaymentIntent, fillUp: FillUp, paymentMethodId: String, completion: @escaping (Error?) -> ()) {
         let params = STPPaymentIntentParams(clientSecret: paymentIntent.clientSecret)
-        params.paymentMethodId = paymentIntent.id
+        params.paymentMethodId = paymentMethodId
         
         // Confirm this payment intent -- Charge the customer for gas
         STPAPIClient.shared.confirmPaymentIntent(with: params) { _, error in

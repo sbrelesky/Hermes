@@ -132,6 +132,8 @@ extension FirebaseFunctionManager {
         }
     }
     
+ 
+    
 //    func fetchPaymentIntentForFillUpId(id: String, completion: @escaping (Result<STPPaymentIntent, Error>)->()) {
 //        functions.httpsCallable("fetchPaymentIntentForFillUp").call(["fillUpId": id]) { result, error in
 //            if let error = error {

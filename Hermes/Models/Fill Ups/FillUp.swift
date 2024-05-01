@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import Stripe
 
 enum FillUpStatus: String, Codable {
@@ -24,7 +25,6 @@ class FillUp: Codable {
     var address: Address
     var cars: [Car]
     var user: User
-    var deviceToken: String? = UserDefaults.standard.messageToken
     var dateCompleted: Date?
     var notes: String?
     

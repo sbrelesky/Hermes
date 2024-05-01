@@ -12,7 +12,6 @@ import SnapKit
 
 class InstructionsController: BaseViewController {
     
-    
     let titleLabel: UILabel = {
         let l = UILabel()
         l.font = ThemeManager.Font.Style.secondary(weight: .demiBold).font.withDynamicSize(22.0)
@@ -70,9 +69,9 @@ class InstructionsController: BaseViewController {
             self.pageControl.currentPage = currentIndex
             
             if currentIndex == 0 {
-                navigationItem.leftBarButtonItem?.isHidden = true
+                navigationItem.leftBarButtonItem = nil
             } else {
-                navigationItem.leftBarButtonItem?.isHidden = false
+                navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backPressed))
             }
         }
     }
@@ -81,11 +80,6 @@ class InstructionsController: BaseViewController {
         super.viewDidLoad()
         
         title = "Instructions"
-        
-        // Create a custom bar button item
-        let customBackButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backPressed))
-        // Set it as the left navigation item
-        navigationItem.leftBarButtonItem = customBackButton
 
         setupViews()
         currentIndex = 0

@@ -1,5 +1,6 @@
 
 const admin = require("firebase-admin");
+const { ServerValue } = require("firebase-admin/database");
 const { Timestamp } = require("firebase-admin/firestore");
 admin.initializeApp();
 
@@ -20,7 +21,7 @@ const functionConfig = () => {
     return JSON.parse(fs.readFileSync('.env.json'));
 };
 
-const stripe = require('stripe')("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");
+const stripe = require('stripe')(functionConfig().stripesecretkeys.key);
 
 
 // Create and deploy your first functions
@@ -31,7 +32,7 @@ const stripe = require('stripe')("sk_live_51Or3t9BkajlE0NzvIIwjL29eMybzJg5Zh9p35
 //   response.send("Hello from Firebase!");
 // });
 
-exports.getStripeSecretKey =  functions.https.onCall((data, context) => {
+exports.getStripeSecretKey = functions.https.onCall((data, context) => {
     return {
         key: functionConfig().stripesecretkeys.key
     };
@@ -54,9 +55,18 @@ exports.sendDailyNotification = functions.pubsub.schedule('every day 19:00').tim
 
     try {        
         
-        // Get tomorrow's date and time
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
+        // Create a new Date object
+        let tomorrow = new Date();
+        // Move to the next day
+        tomorrow.setDate(tomorrow.getDate());
+        // Set the timezone offset to Pacific Time (PT), the Server Time
+        tomorrow.setUTCHours(7); // Assuming Pacific Time is UTC-7
+        // Set hours, minutes, seconds, and milliseconds to midnight
+        tomorrow.setUTCMinutes(0);
+        tomorrow.setUTCSeconds(0);
+        tomorrow.setUTCMilliseconds(0);
+
+        console.log("Check for Fill Ups Tomorrow: ", tomorrow);
 
         // Query where the selected fill up date is tomorrow (overnight tonight)
         const snapshot = await fillUpsCollection
@@ -64,10 +74,19 @@ exports.sendDailyNotification = functions.pubsub.schedule('every day 19:00').tim
         .get();
 
         // Iterate through the documents and send notifications
-        snapshot.forEach((doc) => {
+        snapshot.forEach(async (doc) => {
             const fillUpData = doc.data();
+            const userData = fillUpData.user;
+            const uid = userData.id; 
+            
+            let deviceToken = userData.deviceToken;
 
-            if (fillUpData.deviceToken) {
+            if (!deviceToken) {
+                const userDoc = await usersCollection.doc(uid).get();
+                deviceToken = userDoc.data().deviceToken;
+            }
+
+            if (deviceToken) {
 
                 // Construct notification message
                 const message = {
@@ -75,57 +94,68 @@ exports.sendDailyNotification = functions.pubsub.schedule('every day 19:00').tim
                         title: 'Daily Fill-Up Reminder',
                         body: `Don't forget your fill up is scheduled for tonight! Please open app to see instructions`
                     },
-                    token: fillUpData.deviceToken // Assuming device token is stored in the document
+                    token: deviceToken // Assuming device token is stored in the document
                 };
 
                 // Send the notification
                 admin.messaging().send(message)
                     .then((response) => {
-                        console.log('Notification sent successfully:', response);
+                        console.log('Notification sent successfully:', uid, deviceToken);
                     })
                     .catch((error) => {
                         console.error('Error sending notification:', error);
                     });
             }
-
         });
 
-        return null; // All notifications sent successfully
+        return;
+
     } catch (error) {
-
+        console.error('Error sending scheduled notification:', error);
+        throw error;
     }
-
-
 });
 
 exports.sendNotificationOnStatusChange = functions.firestore
 .document('FillUps/{fillUpId}')
-.onUpdate((change, context) => {
+.onUpdate(async (change, context) => {
     
     const oldData = change.before.data();
     const newData = change.after.data();
 
-    if (oldData.status == 'open' && newData.status == 'complete' && newData.deviceToken) {
-        // Fill up was just completed
+    // Fill up was just completed
+    if (oldData.status == 'open' && newData.status == 'complete') {
+       
+        const userData = newData.user; 
+        const uid = newData.user.id;
 
-        // Construct the notification message
-        const message = {
-            notification: {
-                title: 'Fill Up Completed!',
-                body: 'Your fill up was just completed. Enjoy a hassle free full tank of gas.'
-            },
-            token: newData.deviceToken 
-        };
+        let deviceToken = userData.deviceToken;
 
-        // Send the notification
-        admin.messaging().send(message)
-        .then((response) => {
-            console.log('Notification sent successfully:', response);
-        })
-        .catch((error) => {
-            console.error('Error sending notification:', error);
-            throw error;
-        });
+        if (!deviceToken) {
+            const userDoc = await usersCollection.doc(uid).get();
+            deviceToken = userDoc.data().deviceToken;
+        }
+
+        if (deviceToken) {
+            // Construct the notification message
+            const message = {
+                notification: {
+                    title: 'Fill Up Completed!',
+                    body: 'Your fill up was just completed. Enjoy a hassle free full tank of gas.'
+                },
+                token: deviceToken 
+            };
+
+            // Send the notification
+            admin.messaging().send(message)
+            .then((response) => {
+                console.log('Notification sent successfully:', uid, deviceToken);
+            })
+            .catch((error) => {
+                console.error('Error sending notification:', error);
+                throw error;
+            });
+        }
     }
 
     return;

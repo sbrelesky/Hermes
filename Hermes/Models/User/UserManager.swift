@@ -82,6 +82,28 @@ class UserManager {
     func deleteAccount(completion: @escaping (Error?)->()) {
         FirestoreManager.shared.deleteAccount(completion: completion)
     }
+    
+    func updateDeviceTokenIfNeeded() {
+        
+        guard let storedToken = UserDefaults.standard.deviceToken, self.currentUser != nil else {
+            return
+        }
+        
+        if currentUser?.deviceToken != storedToken {
+            updateDeviceToken(storedToken)
+        }
+    }
+    
+    private func updateDeviceToken(_ token: String) {
+        
+        FirestoreManager.shared.updateUserToken(token) { error in
+            if let error = error {
+                print("Error with token: ", error)
+            } else {
+                self.currentUser?.deviceToken = token
+            }
+        }
+    }
 }
 
 

@@ -63,33 +63,6 @@ extension FirestoreManager {
         }
     }
     
-    func updateFillUpsWithToken(_ token: String, completion: @escaping (Error?)->()) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        db.collection(Constants.FirestoreKeys.fillUpsCollection)
-            .whereField("user.id", isEqualTo: uid)
-            .whereField("status", isEqualTo: FillUpStatus.open.rawValue)
-            .getDocuments { snapshot, error in
-                if let error = error {
-                    completion(error)
-                } else {
-                    snapshot?.documents.forEach({ snap in
-                        snap.reference.updateData(["deviceToken": token])
-                    })
-                    
-                    // Update the user's device token if they are an admin
-                    
-                    if UserManager.shared.currentUser?.type == .admin {
-                        db.collection(Constants.FirestoreKeys.userCollection).document(uid).updateData(["deviceToken": token], completion: completion)
-                    } else {
-                        completion(nil)
-                    }
-                }
-            }
-        
-        
-    }
-    
     func fetchDisabledDates(completion: @escaping (Result<[Date], Error>)->()) {
         db.collection(Constants.FirestoreKeys.disabledDatesCollection).getDocuments { snapshot, error in
             if let error = error {

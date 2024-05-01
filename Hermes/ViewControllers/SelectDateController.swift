@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import CVCalendar
 import FirebaseAnalytics
+import FirebaseFirestore
 
 class SelectDateController: BaseViewController {
     
@@ -109,7 +110,7 @@ class SelectDateController: BaseViewController {
         setupViews()
         
         let calendar = Calendar(identifier: .gregorian)
-        monthLabel.text = CVDate(date: Date(), calendar: calendar).globalDescription
+        monthLabel.text = CVDate(date: getFirstSelectedDate(), calendar: calendar).globalDescription
         
         
         FillUpManager.shared.fetchDisabledDates { [weak self] error in
@@ -191,7 +192,7 @@ class SelectDateController: BaseViewController {
     }
     
     private func getFirstSelectedDate() -> Date {
-        var calendar = Calendar.current
+        let calendar = Calendar.current
         // Use the following line if you want midnight UTC instead of local time
         //calendar.timeZone = TimeZone(secondsFromGMT: 0)
         let today = Date()
@@ -232,7 +233,9 @@ extension SelectDateController: CVCalendarViewDelegate {
     
     
     func presentedDateUpdated(_ date: CVDate) {
-        self.date = date.convertedDate()
+        guard let convertedDate = date.convertedDate() else { return }
+        self.date = Calendar.current.startOfDay(for: convertedDate)
+        
         monthLabel.text = "\(date.globalDescription)"
     }
     

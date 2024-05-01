@@ -34,15 +34,23 @@ extension FirestoreManager {
     }
     
     func setFillUpComplete(fillUp: FillUp, completion: @escaping (Error?)->()) {
-        guard let _ = Auth.auth().currentUser?.uid, let id = fillUp.id else { return }
+        guard let _ = Auth.auth().currentUser?.uid, let id = fillUp.id, let dateCompleted = fillUp.dateCompleted else { return }
+                
+        do {
+            var paymentJson: [[String: Any]] = []
+            try fillUp.payments?.forEach({ paymentJson.append( try $0.toDictionary() )})
+            
+            db.collection(Constants.FirestoreKeys.fillUpsCollection)
+                .document(id)
+                .updateData([
+                    "status": FillUpStatus.complete.rawValue,
+                    "dateCompleted": dateCompleted,
+                    "payments": paymentJson
+                ], completion: completion)
+        } catch (let error) {
+            completion(error)
+        }
         
-        db.collection(Constants.FirestoreKeys.fillUpsCollection)
-            .document(id)
-            .updateData([
-                "status": FillUpStatus.complete.rawValue,
-                "dateCompleted": fillUp.dateCompleted,
-                "payments": fillUp.payments
-            ], completion: completion)
     }
     
     

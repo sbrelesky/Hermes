@@ -118,42 +118,8 @@ class FillUpManager {
                 completion(error)
             } else {
                 completion(nil)
-                
-//                FirestoreManager.shared.cancelFillUp(fillUp) { error in
-//                    if let error = error {
-//                        completion(error)
-//                    } else {
-//                        if let idx = self.openFillUps.firstIndex(where: { $0.id == fillUp.id }) {
-//                            self.openFillUps.remove(at: idx)
-//                            self.openFillUps = self.openFillUps.filter({ $0.status == .open }).sorted(by: { $0.date < $1.date })
-//                        }
-//                        
-//                        completion(nil)
-//                    }
-//                }
             }
         }
     }
-    
-    // MARK: - Update Fill Up
-    
-    func updateFillUpsWithToken(_ token: String) {
-        print("Updating Fill Up Tokens: ", token)
-
-        FirestoreManager.shared.updateFillUpsWithToken(token) { error in
-            if let error = error {
-                print(error)
-            } else {
-                UserDefaults.standard.updateToken(token: token)
-            }
-        }
-    }
-    
-    
-    // MARK: - Observe Data Methods
-    
-    private func startListeningForFillUps() {
-        
-   }
-   
+     
 }

@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import FirebaseAuth
 import FirebaseAnalytics
+import FirebaseFirestore
 
 class LoginController: UIViewController, TextFieldValidation {
     
@@ -171,6 +172,8 @@ class LoginController: UIViewController, TextFieldValidation {
             if let error = error {
                 self.handleError(error)
             } else {
+                
+                UserManager.shared.updateDeviceTokenIfNeeded()
                 
                 self.loginButton.setLoading(false) { success in
                     // Go to home screen

@@ -69,4 +69,9 @@ extension FirestoreManager {
         }
     }
     
+    func updateUserToken(_ token: String, completion: @escaping (Error?)->()) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        db.collection(Constants.FirestoreKeys.userCollection).document(uid).updateData(["deviceToken": token], completion: completion)
+    }
+    
 }

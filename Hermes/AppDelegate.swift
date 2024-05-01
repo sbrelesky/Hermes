@@ -69,8 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let token = fcmToken else { return }
         
-        if UserDefaults.standard.messageToken == nil || UserDefaults.standard.messageToken != fcmToken {
-            FillUpManager.shared.updateFillUpsWithToken(token)
+        // If device token has changed, set the new one
+        if UserDefaults.standard.deviceToken != fcmToken {
+            UserDefaults.standard.updateToken(token: token)
+            UserManager.shared.updateDeviceTokenIfNeeded()
         }
     }
 }

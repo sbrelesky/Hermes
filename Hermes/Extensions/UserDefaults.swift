@@ -9,7 +9,7 @@ import Foundation
 
 extension UserDefaults {
     
-    var messageToken: String? {
+    var deviceToken: String? {
         return string(forKey: Constants.UserDefaults.messageToken)
     }
     
