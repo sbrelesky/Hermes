@@ -33,7 +33,7 @@ class GasEstimateController: BaseViewController, CircluarSliderViewDelegate {
         let l = UILabel(frame: .zero)
         l.textColor = ThemeManager.Color.gray
         l.textAlignment = .left
-        l.font = ThemeManager.Font.Style.main.font.withSize(48.0)
+        l.font = ThemeManager.Font.Style.main.font.withDynamicSize(48.0)
         l.text = ""
         
         return l
@@ -98,19 +98,21 @@ class GasEstimateController: BaseViewController, CircluarSliderViewDelegate {
         
         gaugeView.sliderView.delegate = self
         
+        let spacing = view.bounds.height * 0.02
+        
         selectLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(40)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
         gaugeView.snp.makeConstraints { make in
-            make.top.equalTo(selectLabel.snp.bottom).offset(40)
+            make.top.equalTo(selectLabel.snp.bottom).offset(spacing)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(gaugeView.snp.width)
         }
         
         selectedAmountLabel.snp.makeConstraints { make in
-            make.top.equalTo(gaugeView.snp.bottom).offset(20)
+            make.top.equalTo(gaugeView.snp.bottom).offset(spacing)
             make.centerX.equalToSuperview()
         }
         
@@ -120,7 +122,7 @@ class GasEstimateController: BaseViewController, CircluarSliderViewDelegate {
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(selectedAmountLabel.snp.bottom).offset(20)
+            make.top.equalTo(selectedAmountLabel.snp.bottom) //.offset(8)
             make.leading.trailing.equalTo(gaugeView)
             make.bottom.equalTo(nextButton.snp.top)
         }
