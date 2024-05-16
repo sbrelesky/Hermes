@@ -88,13 +88,7 @@ class HomeController: BaseViewController {
         
         let accountButton = UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: self, action: #selector(accountPressed))
         navigationItem.rightBarButtonItem = accountButton
-        
-        if UserManager.shared.currentUser?.type == .admin {
-            let accountButton = UIBarButtonItem(image: UIImage(systemName: "person.2.badge.gearshape.fill"), style: .plain, target: self, action: #selector(adminPressed))
-            navigationItem.leftBarButtonItem = accountButton
-        }
-        
-        
+            
         setupViews()
         
         setNameLabel()
@@ -220,12 +214,6 @@ class HomeController: BaseViewController {
         let vc = FillUpsController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    @objc func adminPressed() {
-        let vc = AdminController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-   
     
     // MARK: - Helper Methods
     

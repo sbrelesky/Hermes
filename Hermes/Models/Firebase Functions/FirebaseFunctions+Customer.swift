@@ -94,32 +94,7 @@ extension FirebaseFunctionManager {
             }
         }
     }
-    
-    func createPaymentIntentForCustomer(amount: Int, customerId: String, completion: @escaping (Result<PaymentIntent, Error>)->()) {
-        functions.httpsCallable("createPaymentIntentForCustomer").call(["amount": amount, "customerId": customerId]) { result, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                guard let result = result else {
-                    completion(.failure(CustomError.noData))
-                    return
-                }
-                
-                guard let data = try? JSONSerialization.data(withJSONObject: result.data, options: []) else {
-                    completion(.failure(CustomError.invalidResponse))
-                    return
-                }
-                                
-                do {
-                    let paymentIntent = try JSONDecoder().decode(PaymentIntent.self, from: data)
-                    completion(.success(paymentIntent))
-                } catch {
-                    completion(.failure(CustomError.invalidResponse))
-                }
-            }
-        }
-    }
-    
+        
     func refundFillUp(fillUp: FillUp, completion: @escaping (Error?) -> ()) {
         guard let paymentIntent = fillUp.serviceFeePaymentIntent else { return }
         

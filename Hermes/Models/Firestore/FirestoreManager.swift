@@ -17,25 +17,6 @@ struct FirestoreManager {
     let db = Firestore.firestore()
 }
 
-
-// MARK: - Settings Methods
-
-extension FirestoreManager {
-    
-    func fetchSettings(completion: @escaping (Result<AppSettings, Error>)->()) {
-        db.collection("Settings").document("Nevada").getDocument(as: AppSettings.self, completion: completion)
-    }
-
-    func updateSettings(completion: @escaping (Error?)->()) {
-        do {
-            try db.collection("Settings").document("Nevada").setData(from: SettingsManager.shared.settings, completion: completion)
-        } catch let error {
-            completion(error)
-        }
-    }
-}
-
-
 // MARK: - Waitlist Methods
 
 extension FirestoreManager {

@@ -26,15 +26,6 @@ class SettingsManager {
             }
         }
     }
-    
-    // MARK: - Update Data
-    
-    func update(prices: Prices, serviceFee: Double, completion: @escaping (Error?) -> ()) {
-        self.settings.prices = prices
-        self.settings.serviceFee = serviceFee
-        
-        FirestoreManager.shared.updateSettings(completion: completion)
-    }
 }
 
 class AppSettings: Codable {
