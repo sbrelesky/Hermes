@@ -9,25 +9,22 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-enum UserType: String, Codable {
-    case basic
-    case pro
-    case admin
-}
 
-class User: Codable {
+
+class BaseUser: Codable {
     
     @DocumentID var id: String?
-    
     let email: String
     var type: UserType? = .basic
     
-    private var _name: String
-    private var _phone: String
-    private var _stripeCustomerId: String?
+    enum CodingKeys: String, CodingKey {
+        case id
+        case email
+        case type
+        case _name = "firstName"
+    }
     
-    var deviceToken: String?
-        
+    private var _name: String
     var name: String {
        get {
            return _name
@@ -37,6 +34,46 @@ class User: Codable {
        }
     }
     
+    init(id: String, name: String, email: String, type: UserType) {
+        self.id = id
+        self._name = name
+        self.email = email
+        self.type = type
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        _id = try container.decode(DocumentID<String>.self, forKey: .id)
+        _name = try container.decode(String.self, forKey: ._name)
+        type = try container.decodeIfPresent(UserType.self, forKey: .type)
+        email = try container.decode(String.self, forKey: .email)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_id, forKey: .id)
+        try container.encodeIfPresent(id, forKey: .id) // Encodes with a property id if nee
+        try container.encode(self._id, forKey: .id)
+        try container.encode(self.email, forKey: .email)
+        try container.encodeIfPresent(self.type, forKey: .type)
+        try container.encode(self._name, forKey: ._name)
+    }
+}
+
+
+enum UserType: String, Codable {
+    case basic
+    case pro
+    case admin
+}
+
+class User: BaseUser {
+    
+    private var _phone: String
+    private var _stripeCustomerId: String?
+    
+    var deviceToken: String?
+        
     var phone: String{
         get {
             return _phone
@@ -57,47 +94,36 @@ class User: Codable {
     
     
     private enum CodingKeys: String, CodingKey {
-        case id
-        case name = "firstName"
-        case email
         case phone
         case cars
         case stripeCustomerId
-        case type
         case deviceToken
     }
     
-    init(id: String, name: String, email: String, phone: String, stripeCustomerId: String?) {
-        self.id = id
-        self._name = name
-        self.email = email
+    init(id: String, name: String, type: UserType, email: String, phone: String, stripeCustomerId: String?) {
         self._phone = phone
         self._stripeCustomerId = stripeCustomerId
+        
+        super.init(id: id, name: name, email: email, type: type)
     }
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        _id = try values.decode(DocumentID<String>.self, forKey: .id)
-        _name = try values.decode(String.self, forKey: .name)
-        email = try values.decode(String.self, forKey: .email)
         _phone = try values.decode(String.self, forKey: .phone)
         _stripeCustomerId = try values.decodeIfPresent(String.self, forKey: .stripeCustomerId)
-        type = try values.decodeIfPresent(UserType.self, forKey: .type)
         deviceToken = try values.decodeIfPresent(String.self, forKey: .deviceToken)
+        
+        try super.init(from: decoder)
     }
     
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
         
-        try container.encode(_id, forKey: .id)
-        try container.encodeIfPresent(id, forKey: .id) // Encodes with a property id if need be
-        try container.encode(_name, forKey: .name)
-        try container.encode(email, forKey: .email)
+        var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(_phone, forKey: .phone)
         try container.encode(_stripeCustomerId, forKey: .stripeCustomerId)
-        try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(deviceToken, forKey: .deviceToken)
     }
     
-    static let test = User(id: "123", name: "Tester", email: "test@gmail.com", phone: "1234567899", stripeCustomerId: nil)
+    static let test = User(id: "123", name: "Tester", type: .basic, email: "test@gmail.com", phone: "1234567899", stripeCustomerId: nil)
 }

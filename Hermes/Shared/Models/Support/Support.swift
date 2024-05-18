@@ -18,7 +18,7 @@ class Support: Codable {
     
     @DocumentID var id: String?
     var status: SupportStatus
-    var user: User
+    var user: BaseUser
     var fillUp: FillUp
     var dateCreated: Timestamp
     
@@ -32,7 +32,7 @@ class Support: Codable {
         return chat?.filter({ $0.senderId != uid && $0.read == false }) ?? []
     }
     
-    init(id: String? = nil, status: SupportStatus, user: User, fillUp: FillUp, dateCreated: Timestamp, chat: [ChatMessage]? = nil) {
+    init(id: String? = nil, status: SupportStatus, user: BaseUser, fillUp: FillUp, dateCreated: Timestamp, chat: [ChatMessage]? = nil) {
         self.id = id
         self.status = status
         self.user = user

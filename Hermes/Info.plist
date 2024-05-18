@@ -10,7 +10,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>BebasKai.otf</string>
+		<string>BebasKai.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

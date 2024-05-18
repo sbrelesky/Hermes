@@ -23,6 +23,8 @@
 		343F43082B9BE3D800AF9F5D /* EditPaymentMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343F43072B9BE3D800AF9F5D /* EditPaymentMethodController.swift */; };
 		343F430B2B9CCAC900AF9F5D /* FirebaseFunctions+Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343F430A2B9CCAC900AF9F5D /* FirebaseFunctions+Customer.swift */; };
 		343F430D2B9CCAED00AF9F5D /* FirebaseFunctions+PaymentMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343F430C2B9CCAED00AF9F5D /* FirebaseFunctions+PaymentMethods.swift */; };
+		344E886D2BF5A53100B4D855 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E886C2BF5A53100B4D855 /* AppSettings.swift */; };
+		344E88732BF5B92500B4D855 /* BebasKai.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 344E88722BF5B92500B4D855 /* BebasKai.ttf */; };
 		3464D6AC2BA9013000AAE7AD /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464D6AB2BA9013000AAE7AD /* Calculations.swift */; };
 		3464D6AE2BAA0DDB00AAE7AD /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */; };
 		348D876B2B90F25D00F98745 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D876A2B90F25D00F98745 /* AppDelegate.swift */; };
@@ -34,7 +36,6 @@
 		348D87BE2B90F5CB00F98745 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87BD2B90F5CB00F98745 /* SignUpController.swift */; };
 		348D87C12B90F5E200F98745 /* HermesTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87C02B90F5E200F98745 /* HermesTextField.swift */; };
 		348D87C32B90F67700F98745 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87C22B90F67700F98745 /* Theme.swift */; };
-		348D87CC2B90FB8F00F98745 /* BebasKai.otf in Resources */ = {isa = PBXBuildFile; fileRef = 348D87CB2B90F9BE00F98745 /* BebasKai.otf */; };
 		348D87CF2B90FF1F00F98745 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87CE2B90FF1F00F98745 /* UIColor.swift */; };
 		348D87D12B91091E00F98745 /* HermesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87D02B91091E00F98745 /* HermesButton.swift */; };
 		348D87D32B9109BE00F98745 /* CheckZipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D87D22B9109BE00F98745 /* CheckZipController.swift */; };
@@ -170,6 +171,8 @@
 		343F43072B9BE3D800AF9F5D /* EditPaymentMethodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPaymentMethodController.swift; sourceTree = "<group>"; };
 		343F430A2B9CCAC900AF9F5D /* FirebaseFunctions+Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseFunctions+Customer.swift"; sourceTree = "<group>"; };
 		343F430C2B9CCAED00AF9F5D /* FirebaseFunctions+PaymentMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseFunctions+PaymentMethods.swift"; sourceTree = "<group>"; };
+		344E886C2BF5A53100B4D855 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		344E88722BF5B92500B4D855 /* BebasKai.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasKai.ttf; sourceTree = "<group>"; };
 		3464D6AB2BA9013000AAE7AD /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
 		3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		348D87672B90F25D00F98745 /* Hermes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hermes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,7 +185,6 @@
 		348D87BD2B90F5CB00F98745 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		348D87C02B90F5E200F98745 /* HermesTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HermesTextField.swift; sourceTree = "<group>"; };
 		348D87C22B90F67700F98745 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		348D87CB2B90F9BE00F98745 /* BebasKai.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = BebasKai.otf; path = ../../../Personal/Fonts/bebas_kai/BebasKai.otf; sourceTree = "<group>"; };
 		348D87CE2B90FF1F00F98745 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		348D87D02B91091E00F98745 /* HermesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HermesButton.swift; sourceTree = "<group>"; };
 		348D87D22B9109BE00F98745 /* CheckZipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckZipController.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 		3409EF152BEAAD30002360A7 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				348D87C42B90F92F00F98745 /* Font */,
 				348D87D42B9113E700F98745 /* Constants.swift */,
 				348D87C22B90F67700F98745 /* Theme.swift */,
 				3409F01A2BEAD001002360A7 /* Protocols */,
@@ -342,13 +345,13 @@
 				3409F02A2BEAD25F002360A7 /* Stripe */,
 				3409F0462BEBD4CF002360A7 /* Support */,
 				3409F0242BEAD1FF002360A7 /* Firebase Functions */,
-				343F42FD2B9AC50B00AF9F5D /* Settings.swift */,
 				34E3EFFA2B913C1B0085A239 /* User.swift */,
 				34E3F08C2B9617E50085A239 /* FillUp.swift */,
 				34E3F05A2B9182460085A239 /* Car.swift */,
 				34E3F07D2B93DFE70085A239 /* Address.swift */,
 				3409F0342BEAD42C002360A7 /* CustomError.swift */,
 				3409F0422BEBD436002360A7 /* GasEstimateAmount.swift */,
+				344E886C2BF5A53100B4D855 /* AppSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 		3409EFE12BEAB72B002360A7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				34BEA26B2BA24C540038698A /* UserDefaults.swift */,
 				348D87CE2B90FF1F00F98745 /* UIColor.swift */,
 				34E3EFF72B9125840085A239 /* UIViewController+Keyboard.swift */,
 				34E3F0682B9280640085A239 /* UIViewController+Popups.swift */,
@@ -518,7 +522,6 @@
 				34E3F0512B9154E50085A239 /* Protocols */,
 				34E3EFF92B913C130085A239 /* Models */,
 				348D87CD2B90FF1600F98745 /* Extensions */,
-				348D87C42B90F92F00F98745 /* Font */,
 				348D87BF2B90F5D100F98745 /* Views */,
 				348D87BC2B90F5BF00F98745 /* ViewControllers */,
 				348D876A2B90F25D00F98745 /* AppDelegate.swift */,
@@ -570,7 +573,7 @@
 		348D87C42B90F92F00F98745 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				348D87CB2B90F9BE00F98745 /* BebasKai.otf */,
+				344E88722BF5B92500B4D855 /* BebasKai.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -580,7 +583,6 @@
 			children = (
 				34E3F0872B955AC00085A239 /* UIImage.swift */,
 				34BDC8982B96C51C00B17351 /* Calendar.swift */,
-				34BEA26B2BA24C540038698A /* UserDefaults.swift */,
 				34A227592BD88577009A742D /* UICollectionView.swift */,
 			);
 			path = Extensions;
@@ -687,6 +689,7 @@
 				34E3F0642B924AF40085A239 /* CarApiManager.swift */,
 				34E3F07B2B93BAC60085A239 /* Location.swift */,
 				34B754922BABBAE0001459BD /* Notice.swift */,
+				343F42FD2B9AC50B00AF9F5D /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -838,7 +841,7 @@
 			files = (
 				348D87772B90F25E00F98745 /* LaunchScreen.storyboard in Resources */,
 				34BEA26E2BA2660C0038698A /* GoogleService-Info.plist in Resources */,
-				348D87CC2B90FB8F00F98745 /* BebasKai.otf in Resources */,
+				344E88732BF5B92500B4D855 /* BebasKai.ttf in Resources */,
 				348D87742B90F25E00F98745 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -954,6 +957,7 @@
 				34ABE3FC2BDACBF300D5AC8C /* GasGaugeView.swift in Sources */,
 				34E3F0742B9398FD0085A239 /* BaseViewController.swift in Sources */,
 				34E3F08A2B9579560085A239 /* CarController.swift in Sources */,
+				344E886D2BF5A53100B4D855 /* AppSettings.swift in Sources */,
 				34B7549C2BAC9991001459BD /* Firestore+User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1114,7 +1118,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.expedition.Hermes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1147,7 +1151,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.expedition.Hermes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
