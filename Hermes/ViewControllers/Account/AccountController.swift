@@ -10,8 +10,7 @@ import UIKit
 import SnapKit
 import StripePaymentSheet
 
-class AccountController: BaseViewController {
-    
+class AccountController: BaseViewController, PaymentMethodsDelegate {
     
     private enum AccountType: String, CaseIterable {
         case info = "Account Info"
@@ -32,9 +31,7 @@ class AccountController: BaseViewController {
         
         return tv
     }()
-    
-    var customerSheet: CustomerSheet?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,7 +89,12 @@ class AccountController: BaseViewController {
                 if let error = error {
                     self.presentError(error: error)
                 } else {
-                    self.logout()
+                    do {
+                        try UserManager.shared.signOut()
+                        self.navigationController?.dismiss(animated: true)
+                    } catch let error {
+                        self.presentError(error: error)
+                    }
                 }
             }
         }
@@ -161,54 +163,78 @@ extension AccountController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension AccountController {
+extension PaymentMethodsDelegate where Self: UIViewController  {
     
-    private func handlePaymentMethods() {
+    // MARK: Main Method to be called
+    
+    func handlePaymentMethods() {
         
         UserManager.shared.checkForCustomerOrCreate { error in
             if let error = error {
                 self.presentError(error: error)
             } else {
-                self.presentPaymentMethods()
+                Task {
+                    await self.presentPaymentMethods()
+                }
             }
         }
     }
     
-    private func presentPaymentMethods() {
+    func presentPaymentMethods() async {
+        var sheet: CustomerSheet?
         
-        presentLoading(message: "Loading payment methods") { popup in
-            Task {
-                if self.customerSheet == nil {
-                    await self.setupCustomerSheet()
-                    
-                    DispatchQueue.main.async {
-                        popup.dismissPopup()
-                    }
-                    
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        popup.dismissPopup()
-                    }
-                }
-            }
-        } dismissCompletion: {
-            self.presentCustomerSheet()
+        let popup = await presentLoading(message: "Loading payment methods") {
+            self.presentCustomerSheet(sheet)
         }
+            
+        do {
+            sheet = try await setupCustomerSheet()
+            await popup.dismissPopup()
+            
+        } catch (let error) {
+            await self.presentError(error: error)
+        }
+        
+        
+    }
+    
+    func setupCustomerSheet() async throws -> CustomerSheet {
+        let configuration = configureCustomerSheet()
+                
+        // So if users don't have a customer
+        guard let customerId = UserManager.shared.customer?.id else {
+            throw CustomError.unknown
+        }
+        
+        do {
+            let key = try await FirebaseFunctionManager.shared.createEphemeralKey()
+            let setupIntent = try await FirebaseFunctionManager.shared.createSetupIntent()
+        
+            let customerAdapter = StripeCustomerAdapter(customerEphemeralKeyProvider: {
+                return CustomerEphemeralKey(customerId: customerId, ephemeralKeySecret: key)
+            }, setupIntentClientSecretProvider: {
+                return setupIntent.clientSecret
+            })
+
+            return CustomerSheet(configuration: configuration, customer: customerAdapter)
+            
+        } catch (let error) {
+            throw error
+        }
+       
     }
     
     func configureCustomerSheet() -> CustomerSheet.Configuration {
         var configuration = CustomerSheet.Configuration()
         var appearance = configuration.appearance
         
-        configuration.headerTextForSelectionScreen = "Header Tex"
 //        configuration.primaryButtonColor = ThemeManager.Color.primary
 //        configuration.primaryButtonLabel = "Pay"
         configuration.style = .alwaysLight
-        appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
+        appearance.font.base = ThemeManager.Font.Style.secondary(weight: .medium).font.withSize(18.0)
         appearance.primaryButton.textColor = .white
         appearance.primaryButton.backgroundColor = ThemeManager.Color.primary
-        appearance.primaryButton.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withDynamicSize(18.0)
+        appearance.primaryButton.font = ThemeManager.Font.Style.secondary(weight: .medium).font.withSize(18.0)
         appearance.primaryButton.successTextColor = .white
         appearance.primaryButton.successBackgroundColor = ThemeManager.Color.green
         appearance.colors.primary = ThemeManager.Color.primary
@@ -216,41 +242,15 @@ extension AccountController {
 
         configuration.appearance = appearance
 
-        // Configure settings for the CustomerSheet here. For example:
         configuration.headerTextForSelectionScreen = "Manage your payment method"
+        
         return configuration
     
     }
-    
-    func setupCustomerSheet() async {
-        let configuration = configureCustomerSheet()
-                
-        // So if users don't have a customer
-        guard let customerId = UserManager.shared.customer?.id else { return }
         
-        do {
-            let key = try await FirebaseFunctionManager.shared.createEphemeralKey()
-            let setupIntent = try await FirebaseFunctionManager.shared.createSetupIntent()
-
-            
-            let customerAdapter = StripeCustomerAdapter(customerEphemeralKeyProvider: {
-                return CustomerEphemeralKey(customerId: customerId, ephemeralKeySecret: key)
-            }, setupIntentClientSecretProvider: {
-                return setupIntent.clientSecret
-            })
-            
-            customerSheet = CustomerSheet(configuration: configuration, customer: customerAdapter)
-            
-            return
-        } catch (let error) {
-            self.presentError(error: error)
-        }
-       
-    }
-    
-    func presentCustomerSheet()  {
+    func presentCustomerSheet(_ customerSheet: CustomerSheet?)  {
         customerSheet?.present(from: self, completion: { result in
-       
+            
             switch result {
             case .canceled(_):
               break
@@ -266,3 +266,13 @@ extension AccountController {
         })
     }
 }
+
+
+protocol PaymentMethodsDelegate: AnyObject {
+    func handlePaymentMethods()
+    func presentPaymentMethods() async
+    func configureCustomerSheet() -> CustomerSheet.Configuration
+    func setupCustomerSheet() async throws -> CustomerSheet
+    func presentCustomerSheet(_ customerSheet: CustomerSheet?)
+}
+

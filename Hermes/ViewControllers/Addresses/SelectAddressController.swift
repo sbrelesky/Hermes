@@ -60,7 +60,7 @@ class SelectAddressController: BaseViewController {
         
         title = "Select Address"
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "select_addresses_screen"])
+        HermesAnalytics.shared.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "select_addresses_screen"])
         
         setupViews()
         

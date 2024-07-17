@@ -104,7 +104,7 @@ class SelectDateController: BaseViewController {
         super.viewDidLoad()
         title = "Select Date"
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "select_date_screen"])
+        HermesAnalytics.shared.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "select_date_screen"])
 
         
         setupViews()

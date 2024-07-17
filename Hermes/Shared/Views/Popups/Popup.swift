@@ -81,7 +81,9 @@ class PopupController: UIViewController {
     }
     
     @objc func dismissPopup() {
-        dismiss(animated: true, completion: dismissHandler)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: self.dismissHandler)
+        }
     }
  
     // MARK: - Override this methods in subclasses

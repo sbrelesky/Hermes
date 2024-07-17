@@ -108,7 +108,7 @@ class CarTableViewCell: UITableViewCell {
             yearLabel.text = car.year
             licenseLabel.text = car.license
             gasTypeLabel.text = car.fuel.rawValue
-            unlockNeededLabel.text = car.gasCapUnlockNeeded == "Yes" ? "Key Needed" : "Key Not Needed"
+            //unlockNeededLabel.text = car.gasCapUnlockNeeded == "Yes" ? "Key Needed" : "Key Not Needed"
         }
     }
     

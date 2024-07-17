@@ -28,10 +28,12 @@ struct Constants {
         static let disabledDatesCollection = "Disabled_Dates"
         static let deletedAccounts = "Deleted_Accounts"
         static let notices = "Notices"
+        static let promos = "Promotions"
         
         static let carsSubCollection = "Cars"
         static let addressesSubCollection = "Addresses"
         static let chatSubCollection = "Chat"
+        static let promosSubCollection = "Promotions"
     }
     
     struct StripeKeys {

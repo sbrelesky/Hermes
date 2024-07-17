@@ -47,7 +47,7 @@ extension UserManager {
             case .success(let customer):
                 self.customer = customer
                 self.currentUser?.stripeCustomerId = customer.id
-                Analytics.logEvent("create_stripe_customer", parameters: ["customer_id": customer.id])
+                HermesAnalytics.shared.logEvent("create_stripe_customer", parameters: ["customer_id": customer.id])
                 completion(nil)
             case .failure(let error):
                 completion(error)

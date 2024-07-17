@@ -7,6 +7,10 @@ yarn-error.log*
 firebase-debug.log*
 firebase-debug.*.log*
 
+# Certificates
+*.certSigningRequest
+*.p12
+
 # Firebase cache
 .firebase/
 

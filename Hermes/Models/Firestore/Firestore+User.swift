@@ -27,11 +27,31 @@ extension FirestoreManager {
             "dateCreated": Timestamp(date: Date())
         ] as [String : Any]
         
-        
         db.collection(Constants.FirestoreKeys.userCollection).document(uid).setData(data) { error in
             if let error = error {
                 completion(error)
             } else {
+                
+                fetchPromotions(for: .signUp) { result in
+                    switch result {
+                    case .success(let promos):
+                        if let promo = promos.first {
+                            do {
+                                try db.collection(Constants.FirestoreKeys.userCollection)
+                                    .document(uid)
+                                    .collection(Constants.FirestoreKeys.promosSubCollection)
+                                    .addDocument(from: promo)
+                            } catch (let error) {
+                                print("Error saving promo: ", error)
+                                HermesAnalytics.shared.logError(error, message: "Error saving promotion to user: \(uid)")
+                            }
+                        }
+                    case .failure(let error):
+                        print("Error fetching promos: ", error)
+                        HermesAnalytics.shared.logError(error, message: "Error fetching promotions")
+                    }
+                }
+                
                 completion(nil)
             }
         }
@@ -73,5 +93,20 @@ extension FirestoreManager {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         db.collection(Constants.FirestoreKeys.userCollection).document(uid).updateData(["deviceToken": token], completion: completion)
     }
-    
+        
+    func fetchAllPromotions(completion: @escaping (Result<[Promotion],Error>)->()) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        db.collection(Constants.FirestoreKeys.userCollection).document(uid).collection(Constants.FirestoreKeys.promosSubCollection).getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                do {
+                    let promos  = try snapshot?.documents.compactMap({ try $0.data(as: Promotion.self )})
+                    completion(.success(promos ?? []))
+                } catch (let error) {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }

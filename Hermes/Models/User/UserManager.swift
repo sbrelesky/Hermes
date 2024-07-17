@@ -25,6 +25,7 @@ class UserManager {
     }
     var cars: [Car] = []
     var addresses: [Address] = []
+    var promotions: [Promotion] = []
     
     var customer: Customer?
     
@@ -218,6 +219,21 @@ extension UserManager {
                 
                 UserManager.shared.addresses.first(where: {$0.id == address.id })?.isDefault = true
                 completion(nil)
+            }
+        }
+    }
+}
+
+extension UserManager {
+    
+    func fetchPromotions(completion: @escaping (Error?) -> ()) {
+        FirestoreManager.shared.fetchAllPromotions { result in
+            switch result {
+            case .success(let promotions):
+                self.promotions = promotions.sorted(by: { $0.discountPercentage > $1.discountPercentage })
+                completion(nil)
+            case .failure(let error):
+                completion(error)
             }
         }
     }

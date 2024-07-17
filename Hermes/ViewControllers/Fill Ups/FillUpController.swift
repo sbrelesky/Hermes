@@ -31,7 +31,7 @@ class FillUpsController: BaseViewController {
         
         title = "Fill Ups"
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+        HermesAnalytics.shared.logEvent(AnalyticsEventScreenView, parameters: [
             AnalyticsParameterScreenName: "view_fill_ups_screen"
         ])
         

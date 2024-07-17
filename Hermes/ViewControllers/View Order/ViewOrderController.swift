@@ -58,7 +58,7 @@ class ViewOrderController: BaseViewController {
         title = "Fill Up"
         
         if let fillUpId = fillUp.id {
-            Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+            HermesAnalytics.shared.logEvent(AnalyticsEventScreenView, parameters: [
                 AnalyticsParameterScreenName: "view_fill_up_screen",
                 "fill_up_id": fillUpId
             ])
@@ -250,7 +250,7 @@ extension ViewOrderController: UITableViewDelegate, UITableViewDataSource {
 
 extension ViewOrderController: ViewOrderCancelCellDelegate {
     func cancelPressed(button: HermesLoadingButton) {
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterContentType: "cancel_button_tapped"])
+        HermesAnalytics.shared.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterContentType: "cancel_button_tapped"])
         
         self.presentSpeedbump(title: "Cancel Fill Up", message: "Are you sure you want to cancel this fill up?", confirmCompletion:  {
             button.setLoading(true)
@@ -261,7 +261,7 @@ extension ViewOrderController: ViewOrderCancelCellDelegate {
                 } else {
                     button.setLoading(false)
                     
-                    Analytics.logEvent(AnalyticsEventRefund, parameters: nil)
+                    HermesAnalytics.shared.logEvent(AnalyticsEventRefund, parameters: nil)
                     
                     self.presentSuccess(title: "Success", message: "Your refund was successfully sent. It may take 5-10 business days for funds to settle.") {
                         self.navigationController?.popViewController(animated: true)

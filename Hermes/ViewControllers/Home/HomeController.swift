@@ -96,7 +96,7 @@ class HomeController: BaseViewController {
         // Set the user first login to false so the next time we hit home it's changed
         UserDefaults.standard.set(false, forKey: Constants.UserDefaults.userFirstLogin)
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "home_screen"])
+        HermesAnalytics.shared.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "home_screen"])
 
         fetchData()
     }
@@ -205,7 +205,7 @@ class HomeController: BaseViewController {
     
     @objc func schedulePressed() {
 
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterContentType: "schedule_button_tapped"])
+        HermesAnalytics.shared.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterContentType: "schedule_button_tapped"])
         let vc = CarController(inFillUpProcess: true)
         navigationController?.pushViewController(vc, animated: true)
     }

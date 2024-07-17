@@ -25,6 +25,8 @@
 		343F430D2B9CCAED00AF9F5D /* FirebaseFunctions+PaymentMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343F430C2B9CCAED00AF9F5D /* FirebaseFunctions+PaymentMethods.swift */; };
 		344E886D2BF5A53100B4D855 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E886C2BF5A53100B4D855 /* AppSettings.swift */; };
 		344E88732BF5B92500B4D855 /* BebasKai.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 344E88722BF5B92500B4D855 /* BebasKai.ttf */; };
+		34523FB22BFFBBAC008EA3B8 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34523FB12BFFBBAC008EA3B8 /* Promotion.swift */; };
+		34523FB42BFFC033008EA3B8 /* HermesAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34523FB32BFFC033008EA3B8 /* HermesAnalytics.swift */; };
 		3464D6AC2BA9013000AAE7AD /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464D6AB2BA9013000AAE7AD /* Calculations.swift */; };
 		3464D6AE2BAA0DDB00AAE7AD /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */; };
 		348D876B2B90F25D00F98745 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D876A2B90F25D00F98745 /* AppDelegate.swift */; };
@@ -109,6 +111,7 @@
 		34BEA2712BA290A20038698A /* FillUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BEA2702BA290A20038698A /* FillUpController.swift */; };
 		34BEA27B2BA35C830038698A /* Geocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BEA27A2BA35C830038698A /* Geocode.swift */; };
 		34BEA27D2BA3E1BE0038698A /* SuccessPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BEA27C2BA3E1BE0038698A /* SuccessPopup.swift */; };
+		34CB04492C000FA4001BB169 /* GenericPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CB04482C000FA4001BB169 /* GenericPopup.swift */; };
 		34E3EFF82B9125840085A239 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E3EFF72B9125840085A239 /* UIViewController+Keyboard.swift */; };
 		34E3EFFB2B913C1B0085A239 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E3EFFA2B913C1B0085A239 /* User.swift */; };
 		34E3EFFD2B913C300085A239 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E3EFFC2B913C300085A239 /* UserManager.swift */; };
@@ -173,6 +176,8 @@
 		343F430C2B9CCAED00AF9F5D /* FirebaseFunctions+PaymentMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseFunctions+PaymentMethods.swift"; sourceTree = "<group>"; };
 		344E886C2BF5A53100B4D855 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		344E88722BF5B92500B4D855 /* BebasKai.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasKai.ttf; sourceTree = "<group>"; };
+		34523FB12BFFBBAC008EA3B8 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
+		34523FB32BFFC033008EA3B8 /* HermesAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HermesAnalytics.swift; sourceTree = "<group>"; };
 		3464D6AB2BA9013000AAE7AD /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
 		3464D6AD2BAA0DDB00AAE7AD /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		348D87672B90F25D00F98745 /* Hermes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hermes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +244,7 @@
 		34BEA2702BA290A20038698A /* FillUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillUpController.swift; sourceTree = "<group>"; };
 		34BEA27A2BA35C830038698A /* Geocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocode.swift; sourceTree = "<group>"; };
 		34BEA27C2BA3E1BE0038698A /* SuccessPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPopup.swift; sourceTree = "<group>"; };
+		34CB04482C000FA4001BB169 /* GenericPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPopup.swift; sourceTree = "<group>"; };
 		34E3EFF72B9125840085A239 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		34E3EFFA2B913C1B0085A239 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		34E3EFFC2B913C300085A239 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -371,6 +377,7 @@
 		3409EFBA2BEAB68A002360A7 /* Popups */ = {
 			isa = PBXGroup;
 			children = (
+				34CB04482C000FA4001BB169 /* GenericPopup.swift */,
 				34BEA2332BA160A60038698A /* SpeedbumpPopup.swift */,
 				34E3F0552B915BF10085A239 /* Popup.swift */,
 				34E3F0662B927DE50085A239 /* ErrorPopup.swift */,
@@ -690,6 +697,8 @@
 				34E3F07B2B93BAC60085A239 /* Location.swift */,
 				34B754922BABBAE0001459BD /* Notice.swift */,
 				343F42FD2B9AC50B00AF9F5D /* Settings.swift */,
+				34523FB12BFFBBAC008EA3B8 /* Promotion.swift */,
+				34523FB32BFFC033008EA3B8 /* HermesAnalytics.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -893,6 +902,7 @@
 				343F43062B9AE65A00AF9F5D /* EditInfoController.swift in Sources */,
 				3409F0352BEAD42C002360A7 /* CustomError.swift in Sources */,
 				34E3F0832B94ED800085A239 /* AddressCell.swift in Sources */,
+				34523FB42BFFC033008EA3B8 /* HermesAnalytics.swift in Sources */,
 				34B754BF2BB21D1A001459BD /* MessageCell.swift in Sources */,
 				34E3F0532B9154F70085A239 /* TextFieldValidation.swift in Sources */,
 				34BDC8992B96C51C00B17351 /* Calendar.swift in Sources */,
@@ -935,9 +945,11 @@
 				34B754BB2BB1EB85001459BD /* SupportManager.swift in Sources */,
 				343F430B2B9CCAC900AF9F5D /* FirebaseFunctions+Customer.swift in Sources */,
 				34E3F0702B938BEA0085A239 /* LoadingPopup.swift in Sources */,
+				34CB04492C000FA4001BB169 /* GenericPopup.swift in Sources */,
 				34A227582BD883B2009A742D /* GasEstimateCarCell.swift in Sources */,
 				34E3F0652B924AF40085A239 /* CarApiManager.swift in Sources */,
 				348D87C12B90F5E200F98745 /* HermesTextField.swift in Sources */,
+				34523FB22BFFBBAC008EA3B8 /* Promotion.swift in Sources */,
 				3464D6AC2BA9013000AAE7AD /* Calculations.swift in Sources */,
 				348D87D32B9109BE00F98745 /* CheckZipController.swift in Sources */,
 				34BDC8972B96A2A800B17351 /* AddressButton.swift in Sources */,

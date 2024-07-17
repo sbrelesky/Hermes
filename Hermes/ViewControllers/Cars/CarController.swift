@@ -91,7 +91,7 @@ class CarController: BaseViewController {
         super.viewDidLoad()
         title = "Cars"
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "cars_screen", "in_fill_up_process": inFillUpProcess])
+        HermesAnalytics.shared.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "cars_screen", "in_fill_up_process": inFillUpProcess])
         
         setupViews()
         

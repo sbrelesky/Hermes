@@ -46,3 +46,28 @@ extension FirestoreManager {
         }
     }
 }
+
+// MARK: - Promotion Methods
+
+extension FirestoreManager {
+    
+    func fetchPromotions(for type: PromotionType, completion: @escaping (Result<[Promotion],Error>)->()) {
+        db.collection(Constants.FirestoreKeys.promos)
+            .whereField("type", isEqualTo: type.rawValue)
+            .order(by: "discountPercentage", descending: true)
+            .getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                do {
+                    let promos  = try snapshot?.documents.compactMap({ try $0.data(as: Promotion.self )})
+                    completion(.success(promos ?? []))
+                } catch (let error) {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+}
+
+

@@ -62,4 +62,10 @@ extension UIViewController {
         self.present(popup, animated: true)
     }
     
+    func presentPopup(title: String, buttonTitle: String, description: String, completion: (() -> Void)?) {
+        let popup = GenericPopup(title: title, description: description, buttonTitle: buttonTitle, buttonCompletion: completion)
+        popup.modalPresentationStyle = .overCurrentContext
+        popup.modalTransitionStyle = .crossDissolve
+        self.present(popup, animated: true)
+    }
 }

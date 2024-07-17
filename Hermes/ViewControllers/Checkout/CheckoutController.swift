@@ -11,7 +11,23 @@ import SnapKit
 import StripePaymentSheet
 import FirebaseAnalytics
 
-class CheckoutController: BaseViewController {
+
+@resultBuilder
+public class NSAttributedStringBuilder {
+    public static func buildBlock(_ components: NSAttributedString...) -> NSAttributedString {
+        let result = NSMutableAttributedString(string: "")
+
+        return components.reduce(into: result) { (result, current) in result.append(current) }
+    }
+}
+
+extension NSAttributedString {
+    public class func composing(@NSAttributedStringBuilder _ parts: () -> NSAttributedString) -> NSAttributedString {
+        return parts()
+    }
+}
+
+class CheckoutController: BaseViewController, PaymentMethodsDelegate {
     
     let disclaimerLabel: UILabel = {
         let l = UILabel()
@@ -46,7 +62,9 @@ class CheckoutController: BaseViewController {
         return v
     }()
 
-    var paymentSheet: PaymentSheet?    
+    var serviceFeeAmount = SettingsManager.shared.settings.serviceFee
+    
+    var paymentSheet: PaymentSheet?
     
     let fillUp: FillUp
     
@@ -63,12 +81,18 @@ class CheckoutController: BaseViewController {
         super.viewDidLoad()
         setupForKeyboard()
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "checkout_screen"])
-        Analytics.logEvent(AnalyticsEventBeginCheckout, parameters: nil)
+        HermesAnalytics.shared.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "checkout_screen"])
+        HermesAnalytics.shared.logEvent(AnalyticsEventBeginCheckout, parameters: nil)
 
         title = "Checkout"
         
-        setupViews()        
+        UserManager.shared.fetchPromotions { error in
+            if let error = error {
+                self.presentError(error: error)
+            } else {
+                self.setupViews()
+            }
+        }
     }
     
     private func setupViews() {
@@ -90,7 +114,22 @@ class CheckoutController: BaseViewController {
         }
         
         if let serviceFee = SettingsManager.shared.settings.serviceFee.formatCurrency() {
-            totalView.feeAmountLabel.text = "\(serviceFee)"
+            
+            if let promo = UserManager.shared.promotions.first {
+                
+                var discountedPrice = promo.discountPercentage == 1.0 ? "Free" : "\((SettingsManager.shared.settings.serviceFee * promo.discountPercentage).formatCurrency() ?? serviceFee)"
+                
+                serviceFeeAmount = promo.discountPercentage == 1.0 ? 0.0 : (SettingsManager.shared.settings.serviceFee * promo.discountPercentage)
+                
+                let attributedString = NSAttributedString.composing {
+                    NSAttributedString(string: "\(serviceFee)", attributes: [.strikethroughStyle : NSUnderlineStyle.single.rawValue])
+                    NSAttributedString(string: " \(discountedPrice)")
+                }
+                
+                totalView.feeAmountLabel.attributedText = attributedString
+            } else {
+                totalView.feeAmountLabel.text = "\(serviceFee)"
+            }
         }
         
 
@@ -139,7 +178,16 @@ class CheckoutController: BaseViewController {
     }
     
     private func createPaymentIntent() {
-        let amount = Int(SettingsManager.shared.settings.serviceFee * 100.0)
+        let amount = Int(serviceFeeAmount * 100.0)
+        
+        guard amount != 0 else {
+            self.presentPopup(title: "Please add a payment method", buttonTitle: "Okay", description: "We need a card to charge for just the gas after your fill up is complete.") {
+                print("Go to payment method controller")
+                self.handlePaymentMethods()
+            }
+            
+            return
+        }
         
         FirebaseFunctionManager.shared.createPaymentIntent(amount: amount) { result in
             self.checkoutButton.setLoading(false)
@@ -156,7 +204,7 @@ class CheckoutController: BaseViewController {
     private func configurePaymentSheet(paymentIntent: PaymentIntent) {
         // MARK: Create a PaymentSheet instance
         var configuration = PaymentSheet.Configuration()
-        configuration.merchantDisplayName = "Example, Inc."
+        configuration.merchantDisplayName = "Hermes"
         configuration.customer = .init(id: paymentIntent.customerId, ephemeralKeySecret: paymentIntent.ephemeralKey)
         configuration.allowsDelayedPaymentMethods = false
         
@@ -198,7 +246,7 @@ class CheckoutController: BaseViewController {
                         self.presentError(error: error)
                     } else {
                         print("Fill Up Successfully Scheduled")
-                        Analytics.logEvent(AnalyticsEventPurchase, parameters: [
+                        HermesAnalytics.shared.logEvent(AnalyticsEventPurchase, parameters: [
                           AnalyticsParameterPrice: paymentIntent.amount,
                         ])
                         
